@@ -1121,6 +1121,128 @@
             gap: 5px;
         }
 
+        /* LOCATION INFO PANEL - NEW */
+        .location-info-panel {
+            background: rgba(26, 26, 26, 0.95);
+            border: 2px solid #c8a87f;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(200, 168, 127, 0.2);
+        }
+
+        .location-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #c8a87f;
+            padding-bottom: 15px;
+        }
+
+        .location-header h3 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 20px;
+            color: #c8a87f;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .coordinates {
+            font-family: 'IBM Plex Mono', monospace;
+            color: #4CAF50;
+            font-size: 14px;
+            background: rgba(76, 175, 80, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .location-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .location-section {
+            background: rgba(200, 168, 127, 0.05);
+            border: 1px solid rgba(200, 168, 127, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .location-section:hover {
+            background: rgba(200, 168, 127, 0.1);
+            border-color: rgba(200, 168, 127, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .location-section h4 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 16px;
+            color: #c8a87f;
+            margin: 0 0 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .location-section p {
+            font-size: 14px;
+            color: #cccccc;
+            line-height: 1.6;
+            margin: 0 0 10px 0;
+        }
+
+        .location-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .location-section li {
+            padding: 8px 0;
+            border-left: 3px solid #c8a87f;
+            padding-left: 12px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #cccccc;
+            position: relative;
+        }
+
+        .location-section li::before {
+            content: '▶';
+            position: absolute;
+            left: -8px;
+            color: #c8a87f;
+            font-size: 8px;
+        }
+
+        .tactical-advantage {
+            color: #4CAF50;
+            font-weight: 600;
+        }
+
+        .tactical-caution {
+            color: #FF9800;
+            font-weight: 600;
+        }
+
+        .elevation-data {
+            font-family: 'IBM Plex Mono', monospace;
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 6px;
+            padding: 6px 10px;
+            font-size: 12px;
+            color: #4CAF50;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
         .loading-weather {
             text-align: center;
             color: #c8a87f;
@@ -1257,6 +1379,11 @@
                 grid-template-columns: repeat(3, 1fr);
                 gap: 10px;
             }
+
+            .location-details {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1333,6 +1460,27 @@
             .gps-apps {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .location-info-panel {
+                padding: 20px;
+                margin-top: 15px;
+            }
+
+            .location-details {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .location-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .coordinates {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1387,6 +1535,32 @@
 
             .gps-actions {
                 flex-direction: column;
+            }
+
+            .location-info-panel {
+                padding: 15px;
+                margin-top: 10px;
+            }
+
+            .location-section {
+                padding: 15px;
+            }
+
+            .location-section h4 {
+                font-size: 14px;
+            }
+
+            .location-section p,
+            .location-section li {
+                font-size: 13px;
+            }
+
+            .weather-title {
+                font-size: 28px;
+            }
+
+            .weather-subtitle {
+                font-size: 14px;
             }
         }
     </style>
@@ -1584,6 +1758,43 @@
                     <span class="material-icons">navigation</span>
                     Navigație
                 </button>
+            </div>
+            
+            <!-- NEW: Location Information Panel -->
+            <div class="location-info-panel">
+                <div class="location-header">
+                    <h3>🎯 Informații Zonă Operațională</h3>
+                    <span class="coordinates">44.5770°N, 27.5031°E</span>
+                </div>
+                
+                <div class="location-details">
+                    <div class="location-section">
+                        <h4>📍 Regiunea Mărculești</h4>
+                        <p><strong>Centrul Bărăganului</strong> • Zonă Agricolă Strategică</p>
+                        <p>SCDA Mărculești - Stațiune de Cercetare din 1929</p>
+                        <p>Prima unitate de cercetări agricole din România</p>
+                        <div class="elevation-data">Elevație: ~85m • Teren plat</div>
+                    </div>
+                    
+                    <div class="location-section">
+                        <h4>⚡ Specificații Tactice</h4>
+                        <ul>
+                            <li class="tactical-advantage">Teren deschis, vizibilitate excelentă</li>
+                            <li class="tactical-advantage">Acces rutier prin DN3A și drumuri comunale</li>
+                            <li class="tactical-advantage">Zonă rurală, densitate populațională redusă</li>
+                            <li class="tactical-advantage">Fără restricții majore de acces</li>
+                            <li>Coordonate GPS verificate pentru navigație</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="location-section">
+                        <h4>🔍 Note Operaționale</h4>
+                        <p><span class="tactical-advantage">Avantaje:</span> Teren plat ideal pentru antrenamente, infrastructură de cercetare în zonă</p>
+                        <p><span class="tactical-caution">Atenție:</span> Activitate agricolă sezonieră, respectați proprietățile private</p>
+                        <p><strong>Context istoric:</strong> Zonă cu tradiție în cercetarea agricolă de peste 90 de ani</p>
+                        <p><strong>Contact local:</strong> Primăria Mărculești pentru informații suplimentare</p>
+                    </div>
+                </div>
             </div>
             
             <div class="weather-panel">
@@ -2014,6 +2225,7 @@
                 
                 // Convert weather code to description
                 const weatherDesc = this.getWeatherDescription(current.weather_code, precipitation > 0);
+                const weatherDescColor = this.getWeatherDescriptionColor(current.weather_code, precipitation);
                 
                 // Calculate visibility based on weather conditions
                 const visibility = this.calculateVisibility(current.weather_code, precipitation);
@@ -2024,7 +2236,7 @@
                     const tempColor = this.getTemperatureColor(temp);
                     currentWeather.innerHTML = `
                         <div class="weather-temp" style="color: ${tempColor};">${temp}°C</div>
-                        <div class="weather-desc">${weatherDesc}</div>
+                        <div class="weather-desc" style="color: ${weatherDescColor};">${weatherDesc}</div>
                     `;
                 }
 
@@ -2161,39 +2373,87 @@
                 }
             }
 
-            // Enhanced Color Logic Functions
+            // Enhanced Color Logic Functions - MODERN SEMANTIC SYSTEM
             getTemperatureColor(temp) {
-                if (temp < 10) return '#4FC3F7'; // Cold - Light Blue
-                if (temp < 18) return '#81C784'; // Cool - Light Green
-                if (temp <= 25) return '#C8A87F'; // Optimal - Gold
-                if (temp <= 30) return '#FFB74D'; // Warm - Orange
-                return '#E57373'; // Hot - Red
+                if (temp < 5) return '#4FC3F7'; // Ice Blue - Dangerous Cold
+                if (temp < 10) return '#81C784'; // Cool Green - Cold but Safe  
+                if (temp <= 25) return '#C8A87F'; // Tactical Gold - Optimal Range
+                if (temp <= 30) return '#FFB74D'; // Warning Orange - Getting Hot
+                return '#E57373'; // Alert Red - Dangerous Heat
             }
 
             getHumidityColor(humidity) {
-                if (humidity < 40) return '#FFCC80'; // Low - Light Orange
-                if (humidity <= 60) return '#C8A87F'; // Optimal - Gold
-                if (humidity <= 80) return '#81C784'; // High - Green
-                return '#64B5F6'; // Very High - Blue
+                if (humidity < 40) return '#FFC107'; // Amber - Low humidity
+                if (humidity <= 60) return '#4CAF50'; // Success Green - Optimal
+                if (humidity <= 80) return '#FF9800'; // Orange Warning - High
+                return '#F44336'; // Red Danger - Very High (health risk)
             }
 
             getWindColor(wind) {
-                if (wind < 5) return '#C8A87F'; // Calm - Gold
-                if (wind <= 15) return '#81C784'; // Light - Green
-                if (wind <= 25) return '#FFB74D'; // Moderate - Orange
-                return '#E57373'; // Strong - Red
+                if (wind < 10) return '#4CAF50'; // Safe Green - Calm
+                if (wind <= 20) return '#8BC34A'; // Light Green - Good conditions
+                if (wind <= 30) return '#FF9800'; // Orange Warning - Moderate
+                return '#F44336'; // Red Danger - Strong winds (projectile risk)
             }
 
             getPressureColor(pressure) {
-                if (pressure < 1010) return '#E57373'; // Low - Red
-                if (pressure <= 1020) return '#C8A87F'; // Normal - Gold
-                return '#81C784'; // High - Green
+                if (pressure < 1000) return '#F44336'; // Red - Low pressure (bad weather coming)
+                if (pressure < 1010) return '#FF9800'; // Orange - Low but acceptable
+                if (pressure <= 1025) return '#4CAF50'; // Green - Normal/stable
+                return '#8BC34A'; // Light Green - High pressure (very stable)
             }
 
             getVisibilityColor(visibility) {
-                if (visibility < 5) return '#E57373'; // Poor - Red
-                if (visibility < 8) return '#FFB74D'; // Limited - Orange
-                return '#C8A87F'; // Good - Gold
+                if (visibility < 3) return '#F44336'; // Red - Poor/dangerous
+                if (visibility < 6) return '#FF9800'; // Orange - Limited
+                if (visibility < 10) return '#8BC34A'; // Light Green - Good
+                return '#4CAF50'; // Green - Excellent visibility
+            }
+
+            getWeatherDescription(weatherCode, hasRain) {
+                // Enhanced descriptions with tactical context
+                const weatherCodes = {
+                    0: 'Cer Senin - Operațiuni Optime',
+                    1: 'Predominant Senin - Condiții Excelente', 
+                    2: 'Parțial Înnorat - Vizibilitate Perfectă',
+                    3: 'Înnorat - Avantaj Stealth',
+                    45: 'Ceață - Vizibilitate Redusă',
+                    48: 'Ceață Înghețată - Condiții Extreme',
+                    51: 'Burnița Ușoară - Precauție Moderată',
+                    53: 'Burnița Moderată - Echipament Impermeabil',
+                    55: 'Burnița Intensă - Vizibilitate Afectată',
+                    56: 'Burnița Înghețată - Risc Alunecare',
+                    57: 'Burnița Înghețată Intensă - Pericol Maxim',
+                    61: 'Ploaie Ușoară - Precauție Standard',
+                    63: 'Ploaie Moderată - Echipament Complet',
+                    65: 'Ploaie Intensă - Operațiuni Suspendate',
+                    66: 'Ploaie Înghețată - Risc Extrem',
+                    67: 'Ploaie Înghețată Intensă - Evacuare',
+                    71: 'Zăpadă Ușoară - Tactici de Iarnă',
+                    73: 'Zăpadă Moderată - Echipament Arctic',
+                    75: 'Zăpadă Intensă - Misiune Anulată',
+                    77: 'Granule de Zăpadă - Imprevizibil',
+                    80: 'Averse Ușoare - Alertă Meteo',
+                    81: 'Averse Moderate - Proceduri Urgență',
+                    82: 'Averse Violente - Cod Roșu',
+                    85: 'Averse Zăpadă Ușoare - Pregătire Iarnă',
+                    86: 'Averse Zăpadă Intense - Blocaj Total',
+                    95: 'Furtună - Evacuare Imediată',
+                    96: 'Furtună cu Grindină - Risc Maxim',
+                    99: 'Furtună Severă - Cod Negru'
+                };
+                
+                return weatherCodes[weatherCode] || `Condiții Necunoscute (${weatherCode})`;
+            }
+
+            getWeatherDescriptionColor(weatherCode, precipitation) {
+                // Color coding for weather descriptions
+                if (weatherCode >= 95) return '#8E0000'; // Dark Red - Critical danger
+                if (weatherCode >= 80) return '#F44336'; // Red - Danger
+                if (weatherCode >= 61) return '#FF9800'; // Orange - Warning
+                if (weatherCode >= 45) return '#FFC107'; // Amber - Caution
+                if (weatherCode >= 3) return '#8BC34A'; // Light Green - Good
+                return '#4CAF50'; // Green - Excellent
             }
 
             // Ground Conditions Assessment - ENHANCED FOR REAL SAFETY DATA
@@ -2216,28 +2476,28 @@
                 if (isCurrentlyRaining) {
                     if (weather.precipitation > 5) {
                         wetness = 'FOARTE UMED';
-                        wetnessColor = '#E57373';
+                        wetnessColor = '#F44336'; // Red Danger
                         wetnessIcon = '🌊';
                     } else {
                         wetness = 'UMED';
-                        wetnessColor = '#FFB74D';
+                        wetnessColor = '#FF9800'; // Orange Warning
                         wetnessIcon = '🌧️';
                     }
                 } else if (hasRecentRain) {
                     wetness = 'UȘOR UMED';
-                    wetnessColor = '#81C784';
+                    wetnessColor = '#8BC34A'; // Light Green
                     wetnessIcon = '🌤️';
                 } else if (weather.temp > 15 && weather.humidity < 70) {
                     wetness = 'USCAT';
-                    wetnessColor = '#C8A87F';
+                    wetnessColor = '#4CAF50'; // Success Green
                     wetnessIcon = '☀️';
                 } else if (weather.humidity > 85) {
                     wetness = 'UȘOR UMED';
-                    wetnessColor = '#81C784';
+                    wetnessColor = '#8BC34A'; // Light Green
                     wetnessIcon = '💧';
                 } else {
                     wetness = 'USCAT';
-                    wetnessColor = '#C8A87F';
+                    wetnessColor = '#4CAF50'; // Success Green
                     wetnessIcon = '☀️';
                 }
 
@@ -2245,27 +2505,27 @@
                 let grip, gripColor, gripIcon;
                 if (isCurrentlyRaining || weather.temp < 5) {
                     grip = 'RISC ALUNECARE';
-                    gripColor = '#E57373';
+                    gripColor = '#F44336'; // Red Danger
                     gripIcon = '⚠️';
                 } else if (wetness === 'FOARTE UMED' || (weather.wind > 25 && wetness !== 'USCAT')) {
                     grip = 'RISC ALUNECARE';
-                    gripColor = '#E57373';
+                    gripColor = '#F44336'; // Red Danger
                     gripIcon = '⚠️';
                 } else if (wetness === 'UMED' || weather.wind > 20) {
                     grip = 'MODERAT';
-                    gripColor = '#FFB74D';
+                    gripColor = '#FF9800'; // Orange Warning
                     gripIcon = '⚠️';
                 } else if (wetness === 'UȘOR UMED' && weather.wind < 15) {
                     grip = 'BUN';
-                    gripColor = '#81C784';
+                    gripColor = '#8BC34A'; // Light Green
                     gripIcon = '✅';
                 } else if (wetness === 'USCAT' && weather.wind < 20) {
                     grip = 'EXCELENT';
-                    gripColor = '#C8A87F';
+                    gripColor = '#4CAF50'; // Success Green
                     gripIcon = '🔒';
                 } else {
                     grip = 'BUN';
-                    gripColor = '#81C784';
+                    gripColor = '#8BC34A'; // Light Green
                     gripIcon = '✅';
                 }
 
@@ -2273,23 +2533,23 @@
                 let visCondition, visColor, visIcon;
                 if (weather.visibility >= 12) {
                     visCondition = 'PERFECTĂ';
-                    visColor = '#C8A87F';
+                    visColor = '#4CAF50'; // Success Green
                     visIcon = '👁️';
                 } else if (weather.visibility >= 8) {
                     visCondition = 'BUNĂ';
-                    visColor = '#81C784';
+                    visColor = '#8BC34A'; // Light Green
                     visIcon = '🔍';
                 } else if (weather.visibility >= 5) {
                     visCondition = 'LIMITATĂ';
-                    visColor = '#FFB74D';
+                    visColor = '#FF9800'; // Orange Warning
                     visIcon = '🌫️';
                 } else if (weather.visibility >= 2) {
                     visCondition = 'SLABĂ';
-                    visColor = '#E57373';
+                    visColor = '#F44336'; // Red Danger
                     visIcon = '⚡';
                 } else {
                     visCondition = 'CRITICĂ';
-                    visColor = '#E57373';
+                    visColor = '#8E0000'; // Dark Red Critical
                     visIcon = '❌';
                 }
 
@@ -2299,51 +2559,51 @@
                 // Critical conditions - immediate danger
                 if (isCurrentlyRaining && weather.precipitation > 2) {
                     opStatus = 'NERECOMANDAT';
-                    opColor = '#E57373';
+                    opColor = '#F44336'; // Red Danger
                     opIcon = '❌';
                     opDesc = 'Ploaie intensă - STOP operațiuni';
                 } else if (weather.temp < 2 || weather.temp > 35) {
                     opStatus = 'NERECOMANDAT';
-                    opColor = '#E57373';
+                    opColor = '#F44336'; // Red Danger
                     opIcon = '❌';
-                    opDesc = 'Temperature extreme - risc pentru sănătate';
+                    opDesc = 'Temperature extreme - risc sănătate';
                 } else if (weather.wind > 30) {
                     opStatus = 'NERECOMANDAT';
-                    opColor = '#E57373';
+                    opColor = '#F44336'; // Red Danger
                     opIcon = '❌';
                     opDesc = 'Vânt puternic - pericol proiectile';
                 } else if (weather.visibility < 3) {
                     opStatus = 'NERECOMANDAT';
-                    opColor = '#E57373';
+                    opColor = '#F44336'; // Red Danger
                     opIcon = '❌';
                     opDesc = 'Vizibilitate critică - risc accident';
                 } else if (grip === 'RISC ALUNECARE' && wetness === 'FOARTE UMED') {
                     opStatus = 'NERECOMANDAT';
-                    opColor = '#E57373';
+                    opColor = '#F44336'; // Red Danger
                     opIcon = '❌';
-                    opDesc = 'Teren foarte alunecos - risc cădereSERIOS';
+                    opDesc = 'Teren alunecos - risc cădere SERIOS';
                 }
                 // Conditional operations - proceed with caution
                 else if (isCurrentlyRaining || weather.wind > 20 || grip === 'RISC ALUNECARE') {
                     opStatus = 'CONDIȚIONAT';
-                    opColor = '#FFB74D';
+                    opColor = '#FF9800'; // Orange Warning
                     opIcon = '⚠️';
                     opDesc = 'Precauție maximă - monitorizare continuă';
                 } else if (wetness === 'UMED' || weather.visibility < 8 || grip === 'MODERAT') {
                     opStatus = 'CONDIȚIONAT';
-                    opColor = '#FFB74D';
+                    opColor = '#FF9800'; // Orange Warning
                     opIcon = '⚠️';
                     opDesc = 'Condiții acceptabile - atenție sporită';
                 }
                 // Good conditions
                 else if (wetness === 'USCAT' && grip === 'EXCELENT' && weather.visibility >= 10) {
                     opStatus = 'OPERAȚIONAL';
-                    opColor = '#C8A87F';
+                    opColor = '#4CAF50'; // Success Green
                     opIcon = '✅';
                     opDesc = 'Condiții optime pentru airsoft';
                 } else {
                     opStatus = 'OPERAȚIONAL';
-                    opColor = '#81C784';
+                    opColor = '#8BC34A'; // Light Green
                     opIcon = '✅';
                     opDesc = 'Condiții bune pentru activități';
                 }
@@ -2351,12 +2611,12 @@
                 // Add temperature considerations
                 if (weather.temp < 5 && opStatus === 'OPERAȚIONAL') {
                     opStatus = 'CONDIȚIONAT';
-                    opColor = '#FFB74D';
+                    opColor = '#FF9800'; // Orange Warning
                     opIcon = '⚠️';
                     opDesc = 'Temperaturi scăzute - echipament termic necesar';
                 } else if (weather.temp > 30 && opStatus === 'OPERAȚIONAL') {
                     opStatus = 'CONDIȚIONAT';
-                    opColor = '#FFB74D';
+                    opColor = '#FF9800'; // Orange Warning
                     opIcon = '⚠️';
                     opDesc = 'Temperaturi ridicate - hidratare frecventă';
                 }
