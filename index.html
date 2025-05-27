@@ -272,75 +272,6 @@
             to { width: 150px; opacity: 1; }
         }
 
-        /* TRANSITION SPACE - FIXED BACKGROUND MATCH */
-        .transition-space {
-            height: 200px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
-            overflow: hidden;
-        }
-
-        .wolf-howl-container {
-            position: relative;
-            text-align: center;
-        }
-
-        .wolf-howl {
-            width: 72px;
-            height: 72px;
-            animation: howlAnimation 6s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px #c8a87f);
-            position: relative;
-        }
-
-        .wolf-howl img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        @keyframes howlAnimation {
-            0%, 100% { 
-                transform: scale(1) rotate(-2deg); 
-                filter: drop-shadow(0 0 20px #c8a87f);
-            }
-            25% { 
-                transform: scale(1.1) rotate(2deg); 
-                filter: drop-shadow(0 0 30px #aa1f12);
-            }
-            50% { 
-                transform: scale(1.2) rotate(-1deg); 
-                filter: drop-shadow(0 0 40px #c8a87f);
-            }
-            75% { 
-                transform: scale(1.1) rotate(1deg); 
-                filter: drop-shadow(0 0 30px #aa1f12);
-            }
-        }
-
-        /* Sound wave animation */
-        .wolf-howl::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 200px;
-            height: 200px;
-            border: 2px solid #c8a87f;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            animation: soundWave 3s ease-out infinite;
-            opacity: 0;
-        }
-
-        @keyframes soundWave {
-            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
-        }
-
         /* SLIDESHOW SECTION - CONTENT MOVED TO TOP-LEFT */
         .slideshow-section {
             width: 100vw;
@@ -532,6 +463,75 @@
             font-size: 32px;
         }
 
+        /* TRANSITION SPACE - FIXED BACKGROUND MATCH */
+        .transition-space {
+            height: 200px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            overflow: hidden;
+        }
+
+        .wolf-howl-container {
+            position: relative;
+            text-align: center;
+        }
+
+        .wolf-howl {
+            width: 72px;
+            height: 72px;
+            animation: howlAnimation 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px #c8a87f);
+            position: relative;
+        }
+
+        .wolf-howl img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes howlAnimation {
+            0%, 100% { 
+                transform: scale(1) rotate(-2deg); 
+                filter: drop-shadow(0 0 20px #c8a87f);
+            }
+            25% { 
+                transform: scale(1.1) rotate(2deg); 
+                filter: drop-shadow(0 0 30px #aa1f12);
+            }
+            50% { 
+                transform: scale(1.2) rotate(-1deg); 
+                filter: drop-shadow(0 0 40px #c8a87f);
+            }
+            75% { 
+                transform: scale(1.1) rotate(1deg); 
+                filter: drop-shadow(0 0 30px #aa1f12);
+            }
+        }
+
+        /* Sound wave animation */
+        .wolf-howl::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            border: 2px solid #c8a87f;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: soundWave 3s ease-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes soundWave {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+
         /* CONTACT AREA */
         .contact-section {
             padding: 100px 60px;
@@ -629,7 +629,160 @@
             font-family: 'IBM Plex Sans', sans-serif;
         }
 
-        /* WEATHER API SECTION - REAL FUNCTIONALITY */
+        /* GPS MODAL STYLES */
+        .gps-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        .gps-modal.active {
+            display: flex;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .gps-modal-content {
+            background: rgba(26, 26, 26, 0.95);
+            border: 3px solid #c8a87f;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90vw;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 0 50px rgba(200, 168, 127, 0.3);
+        }
+
+        .gps-modal-content::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #c8a87f, #aa1f12, #c8a87f);
+            border-radius: 20px;
+            z-index: -1;
+            animation: borderPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes borderPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .gps-modal-title {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 24px;
+            color: #c8a87f;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .gps-coordinates {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .gps-apps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .gps-app-btn {
+            background: rgba(200, 168, 127, 0.1);
+            border: 2px solid #c8a87f;
+            border-radius: 12px;
+            padding: 20px 15px;
+            color: #c8a87f;
+            text-decoration: none;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gps-app-btn:hover {
+            background: rgba(170, 31, 18, 0.2);
+            border-color: #aa1f12;
+            color: #aa1f12;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(200, 168, 127, 0.3);
+        }
+
+        .gps-app-btn .material-icons {
+            font-size: 32px;
+        }
+
+        .gps-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .gps-action-btn {
+            background: rgba(170, 31, 18, 0.2);
+            border: 2px solid #aa1f12;
+            border-radius: 8px;
+            padding: 12px 20px;
+            color: #aa1f12;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gps-action-btn:hover {
+            background: rgba(200, 168, 127, 0.2);
+            border-color: #c8a87f;
+            color: #c8a87f;
+        }
+
+        .gps-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #6b7280;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .gps-close:hover {
+            color: #aa1f12;
+        }
+
+        /* WEATHER API SECTION - ENHANCED WITH COLORS AND GROUND ASSESSMENT */
         .weather-section {
             padding: 100px 60px;
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
@@ -671,6 +824,33 @@
             border-radius: 17px;
         }
 
+        .map-nav-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #c8a87f, #aa1f12);
+            border: none;
+            border-radius: 12px;
+            padding: 15px 20px;
+            color: #ffffff;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .map-nav-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(200, 168, 127, 0.4);
+        }
+
         .weather-panel {
             background: rgba(26, 26, 26, 0.9);
             border: 3px solid #aa1f12;
@@ -693,9 +873,9 @@
             font-family: 'IBM Plex Mono', monospace;
             font-size: 56px;
             font-weight: 700;
-            color: #c8a87f;
             margin-bottom: 15px;
             text-shadow: 0 0 20px rgba(200, 168, 127, 0.5);
+            transition: color 0.5s ease;
         }
 
         .weather-desc {
@@ -721,6 +901,7 @@
             background: rgba(170, 31, 18, 0.1);
             border: 1px solid #aa1f12;
             border-radius: 10px;
+            transition: all 0.5s ease;
         }
 
         .weather-detail-label {
@@ -735,7 +916,90 @@
             font-family: 'IBM Plex Mono', monospace;
             font-size: 18px;
             font-weight: 700;
+            transition: color 0.5s ease;
+        }
+
+        /* GROUND CONDITIONS SECTION */
+        .ground-conditions {
+            background: rgba(170, 31, 18, 0.1);
+            border: 2px solid #aa1f12;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .ground-title {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 20px;
+            font-weight: 700;
             color: #c8a87f;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .ground-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .ground-metric {
+            text-align: center;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            transition: all 0.5s ease;
+        }
+
+        .ground-metric-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+            transition: all 0.5s ease;
+        }
+
+        .ground-metric-label {
+            font-size: 10px;
+            color: #6b7280;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .ground-metric-value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            font-weight: 700;
+            transition: color 0.5s ease;
+        }
+
+        .operational-status {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid;
+            transition: all 0.5s ease;
+        }
+
+        .operational-status-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .operational-status-text {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .operational-status-desc {
+            font-size: 12px;
+            margin-top: 8px;
+            opacity: 0.8;
         }
 
         .forecast-container {
@@ -914,6 +1178,11 @@
                 left: 40px;
                 padding: 30px;
             }
+
+            .ground-metrics {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -981,6 +1250,15 @@
                 grid-template-columns: 1fr;
                 gap: 15px;
             }
+
+            .ground-metrics {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .gps-apps {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 480px) {
@@ -1028,6 +1306,14 @@
             .slide-arrow.next {
                 right: 20px;
             }
+
+            .gps-apps {
+                grid-template-columns: 1fr;
+            }
+
+            .gps-actions {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -1039,6 +1325,54 @@
             <img src="./images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22 opacity=%220.7%22/%3E%3Cpath d=%22M30 30h40v40h-40z%22 fill=%22%23ffffff%22/%3E%3C/svg%3E'">
         </div>
         <div class="loading-text">Inițializare Sisteme Tactice...</div>
+    </div>
+
+    <!-- GPS Navigation Modal -->
+    <div class="gps-modal" id="gpsModal">
+        <div class="gps-modal-content">
+            <button class="gps-close" onclick="closeGpsModal()">
+                <span class="material-icons">close</span>
+            </button>
+            
+            <div class="gps-modal-title">
+                🎯 Navigație către Baza Principală
+            </div>
+            
+            <div class="gps-coordinates">
+                📍 Coordonate: 44.5770°N, 27.5031°E<br>
+                📍 Adresă: Mărculești, Ialomița
+            </div>
+            
+            <div class="gps-apps">
+                <a href="#" class="gps-app-btn" onclick="openGoogleMaps()">
+                    <span class="material-icons">map</span>
+                    Google Maps
+                </a>
+                <a href="#" class="gps-app-btn" onclick="openWaze()">
+                    <span class="material-icons">navigation</span>
+                    Waze
+                </a>
+                <a href="#" class="gps-app-btn" onclick="openAppleMaps()" id="appleMapsBtn" style="display: none;">
+                    <span class="material-icons">place</span>
+                    Apple Maps
+                </a>
+                <a href="#" class="gps-app-btn" onclick="openMapsMe()">
+                    <span class="material-icons">explore</span>
+                    Maps.me
+                </a>
+            </div>
+            
+            <div class="gps-actions">
+                <button class="gps-action-btn" onclick="copyCoordinates()">
+                    <span class="material-icons">content_copy</span>
+                    Copiază Coordonate
+                </button>
+                <button class="gps-action-btn" onclick="window.open('tel:0765037584')">
+                    <span class="material-icons">phone</span>
+                    Sună pentru Ghidare
+                </button>
+            </div>
+        </div>
     </div>
 
     <!-- HERO SPACE SECTION -->
@@ -1057,16 +1391,6 @@
             <h1 class="main-subtitle">ȘACALII PE INTERNET</h1>
             <p class="sub-subtitle">EXCELENȚĂ TACTICĂ • FRĂȚIE • PRECIZIE</p>
             <div class="accent-line"></div>
-        </div>
-    </section>
-
-    <!-- TRANSITION SPACE -->
-    <section class="transition-space">
-        <div class="wolf-howl-container">
-            <div class="wolf-howl">
-                <img src="./images/wolf.png" alt="Wolf" 
-                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22 opacity=%220.7%22/%3E%3Ctext x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%23ffffff%22 font-size=%2240%22%3E🐺%3C/text%3E%3C/svg%3E'">
-            </div>
         </div>
     </section>
 
@@ -1139,6 +1463,16 @@
         </div>
     </section>
 
+    <!-- TRANSITION SPACE - MOVED AFTER SLIDESHOW -->
+    <section class="transition-space">
+        <div class="wolf-howl-container">
+            <div class="wolf-howl">
+                <img src="./images/wolf.png" alt="Wolf" 
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22 opacity=%220.7%22/%3E%3Ctext x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%23ffffff%22 font-size=%2240%22%3E🐺%3C/text%3E%3C/svg%3E'">
+            </div>
+        </div>
+    </section>
+
     <!-- CONTACT AREA -->
     <section class="contact-section" id="contact">
         <div class="contact-container">
@@ -1164,13 +1498,17 @@
         </div>
     </section>
 
-    <!-- WEATHER API SECTION - REAL FUNCTIONALITY -->
+    <!-- WEATHER API SECTION - ENHANCED WITH COLORS AND GROUND ASSESSMENT -->
     <section class="weather-section" id="weather">
         <div class="weather-container">
             <h2 class="weather-title">Informații Meteorologice Teren Bază</h2>
             
             <div class="map-container">
                 <div id="map"></div>
+                <button class="map-nav-button" onclick="openGpsModal()">
+                    <span class="material-icons">navigation</span>
+                    Navigație
+                </button>
             </div>
             
             <div class="weather-panel">
@@ -1179,21 +1517,50 @@
                 </div>
                 
                 <div class="weather-details" id="weatherDetails" style="display: none;">
-                    <div class="weather-detail">
+                    <div class="weather-detail" id="humidityDetail">
                         <div class="weather-detail-label">Umiditate</div>
                         <div class="weather-detail-value" id="humidity">--%</div>
                     </div>
-                    <div class="weather-detail">
+                    <div class="weather-detail" id="pressureDetail">
                         <div class="weather-detail-label">Presiune</div>
                         <div class="weather-detail-value" id="pressure">-- hPa</div>
                     </div>
-                    <div class="weather-detail">
+                    <div class="weather-detail" id="windDetail">
                         <div class="weather-detail-label">Vânt</div>
                         <div class="weather-detail-value" id="windSpeed">-- km/h</div>
                     </div>
-                    <div class="weather-detail">
+                    <div class="weather-detail" id="visibilityDetail">
                         <div class="weather-detail-label">Vizibilitate</div>
                         <div class="weather-detail-value" id="visibility">-- km</div>
+                    </div>
+                </div>
+                
+                <!-- NEW: Ground Conditions Assessment -->
+                <div class="ground-conditions" id="groundConditions" style="display: none;">
+                    <div class="ground-title">🎯 Evaluare Condiții Teren</div>
+                    
+                    <div class="ground-metrics">
+                        <div class="ground-metric" id="groundWetness">
+                            <div class="ground-metric-icon">💧</div>
+                            <div class="ground-metric-label">Umiditate Teren</div>
+                            <div class="ground-metric-value" id="wetnessValue">Se evaluează...</div>
+                        </div>
+                        <div class="ground-metric" id="groundGrip">
+                            <div class="ground-metric-icon">👟</div>
+                            <div class="ground-metric-label">Aderență</div>
+                            <div class="ground-metric-value" id="gripValue">Se evaluează...</div>
+                        </div>
+                        <div class="ground-metric" id="groundVisibility">
+                            <div class="ground-metric-icon">👁️</div>
+                            <div class="ground-metric-label">Condiții Vizuale</div>
+                            <div class="ground-metric-value" id="visibilityCondition">Se evaluează...</div>
+                        </div>
+                    </div>
+                    
+                    <div class="operational-status" id="operationalStatus">
+                        <div class="operational-status-icon">⏳</div>
+                        <div class="operational-status-text">Se evaluează...</div>
+                        <div class="operational-status-desc">Analizează condițiile...</div>
                     </div>
                 </div>
                 
@@ -1254,6 +1621,10 @@
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <span class="material-icons">keyboard_arrow_up</span>
+    </button>
 
     <!-- Leaflet.js for maps -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
@@ -1275,6 +1646,56 @@
                 }
             }, 1000);
         });
+
+        // GPS Modal Functions
+        function openGpsModal() {
+            const modal = document.getElementById('gpsModal');
+            if (modal) {
+                modal.classList.add('active');
+                
+                // Show Apple Maps button only on iOS
+                const appleMapsBtn = document.getElementById('appleMapsBtn');
+                if (appleMapsBtn && /iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                    appleMapsBtn.style.display = 'flex';
+                }
+            }
+        }
+
+        function closeGpsModal() {
+            const modal = document.getElementById('gpsModal');
+            if (modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        function openGoogleMaps() {
+            window.open('https://maps.google.com/?q=44.5770,27.5031', '_blank');
+            closeGpsModal();
+        }
+
+        function openWaze() {
+            window.open('https://waze.com/ul?ll=44.5770,27.5031', '_blank');
+            closeGpsModal();
+        }
+
+        function openAppleMaps() {
+            window.open('maps://maps.apple.com/?q=44.5770,27.5031', '_blank');
+            closeGpsModal();
+        }
+
+        function openMapsMe() {
+            window.open('https://maps.me/geo-url/?lat=44.5770&lon=27.5031', '_blank');
+            closeGpsModal();
+        }
+
+        function copyCoordinates() {
+            const coords = '44.5770, 27.5031';
+            navigator.clipboard.writeText(coords).then(() => {
+                alert('Coordonate copiate: ' + coords);
+            }).catch(() => {
+                prompt('Copiază coordonatele:', coords);
+            });
+        }
 
         // Main Tactical System Class
         class SacaliiTacticalSystem {
@@ -1436,9 +1857,9 @@
                         iconAnchor: [13, 13]
                     });
 
-                    L.marker([this.baseLocation.lat, this.baseLocation.lng], { icon: tacticalIcon })
+                    const marker = L.marker([this.baseLocation.lat, this.baseLocation.lng], { icon: tacticalIcon })
                         .addTo(this.map)
-                        .bindPopup('<strong>🐺 Șacalii ACS - Baza Principală</strong><br>Mărculești, Ialomița<br>Coordonate Tactice Verificate')
+                        .bindPopup('<strong>🐺 Șacalii ACS - Baza Principală</strong><br>Mărculești, Ialomița<br>Coordonate Tactice Verificate<br><br><button onclick="openGpsModal()" style="background: #c8a87f; border: none; color: #000; padding: 8px 16px; border-radius: 5px; cursor: pointer; font-weight: 600;">📍 Navigație</button>')
                         .openPopup();
 
                     // Add custom CSS for tactical map styling
@@ -1465,7 +1886,7 @@
                 }
             }
 
-            // Initialize Real Weather System
+            // Initialize Enhanced Weather System with Colors and Ground Assessment
             async initializeWeatherSystem() {
                 try {
                     await this.updateWeatherData();
@@ -1480,10 +1901,7 @@
 
             async updateWeatherData() {
                 try {
-                    // Using OpenWeatherMap API with coordinates
-                    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${this.baseLocation.lat}&lon=${this.baseLocation.lng}&appid=YOUR_API_KEY&units=metric&lang=ro`);
-                    
-                    // Since we don't have API key, we'll simulate the data
+                    // Using simulated realistic weather data for enhanced system
                     this.simulateWeatherData();
                     
                 } catch (error) {
@@ -1493,37 +1911,219 @@
             }
 
             simulateWeatherData() {
-                // Simulate realistic weather data for Slobozia
+                // Enhanced realistic weather simulation with seasonal variation
                 const conditions = [
-                    { temp: 22, desc: 'Cer Senin - Operațiuni Optime', humidity: 65, pressure: 1013, wind: 12, visibility: 10 },
-                    { temp: 25, desc: 'Parțial Înnorat - Vizibilitate Perfectă', humidity: 58, pressure: 1018, wind: 8, visibility: 10 },
-                    { temp: 18, desc: 'Înnorat - Avantaj Stealth', humidity: 72, pressure: 1008, wind: 15, visibility: 8 },
-                    { temp: 20, desc: 'Briză Ușoară - Condiții Ideale', humidity: 60, pressure: 1015, wind: 10, visibility: 10 }
+                    { temp: 22, desc: 'Cer Senin - Operațiuni Optime', humidity: 65, pressure: 1013, wind: 12, visibility: 10, rain: false },
+                    { temp: 25, desc: 'Parțial Înnorat - Vizibilitate Perfectă', humidity: 58, pressure: 1018, wind: 8, visibility: 10, rain: false },
+                    { temp: 18, desc: 'Înnorat - Avantaj Stealth', humidity: 72, pressure: 1008, wind: 15, visibility: 8, rain: false },
+                    { temp: 20, desc: 'Briză Ușoară - Condiții Ideale', humidity: 60, pressure: 1015, wind: 10, visibility: 10, rain: false },
+                    { temp: 15, desc: 'Ploaie Ușoară - Precauție', humidity: 85, pressure: 1005, wind: 18, visibility: 6, rain: true },
+                    { temp: 28, desc: 'Căldură - Hidratare Intensă', humidity: 45, pressure: 1020, wind: 5, visibility: 10, rain: false }
                 ];
                 
                 const current = conditions[Math.floor(Math.random() * conditions.length)];
                 
-                // Update current weather
+                // Update current weather with dynamic colors
                 const currentWeather = document.getElementById('currentWeather');
                 if (currentWeather) {
+                    const tempColor = this.getTemperatureColor(current.temp);
                     currentWeather.innerHTML = `
-                        <div class="weather-temp">${current.temp}°C</div>
+                        <div class="weather-temp" style="color: ${tempColor};">${current.temp}°C</div>
                         <div class="weather-desc">${current.desc}</div>
                     `;
                 }
 
-                // Update weather details
+                // Update weather details with smart colors
                 const weatherDetails = document.getElementById('weatherDetails');
                 if (weatherDetails) {
                     weatherDetails.style.display = 'grid';
-                    document.getElementById('humidity').textContent = current.humidity + '%';
-                    document.getElementById('pressure').textContent = current.pressure + ' hPa';
-                    document.getElementById('windSpeed').textContent = current.wind + ' km/h';
-                    document.getElementById('visibility').textContent = current.visibility + ' km';
+                    this.updateWeatherDetail('humidity', current.humidity, '%', this.getHumidityColor(current.humidity));
+                    this.updateWeatherDetail('pressure', current.pressure, ' hPa', this.getPressureColor(current.pressure));
+                    this.updateWeatherDetail('windSpeed', current.wind, ' km/h', this.getWindColor(current.wind));
+                    this.updateWeatherDetail('visibility', current.visibility, ' km', this.getVisibilityColor(current.visibility));
                 }
+
+                // Update ground conditions assessment
+                this.updateGroundConditions(current);
 
                 // Update 5-day forecast
                 this.updateForecast();
+            }
+
+            updateWeatherDetail(id, value, unit, color) {
+                const element = document.getElementById(id);
+                const detailElement = document.getElementById(id + 'Detail');
+                if (element) {
+                    element.textContent = value + unit;
+                    element.style.color = color;
+                }
+                if (detailElement) {
+                    detailElement.style.borderColor = color;
+                    detailElement.style.backgroundColor = color + '20';
+                }
+            }
+
+            // Enhanced Color Logic Functions
+            getTemperatureColor(temp) {
+                if (temp < 10) return '#4FC3F7'; // Cold - Light Blue
+                if (temp < 18) return '#81C784'; // Cool - Light Green
+                if (temp <= 25) return '#C8A87F'; // Optimal - Gold
+                if (temp <= 30) return '#FFB74D'; // Warm - Orange
+                return '#E57373'; // Hot - Red
+            }
+
+            getHumidityColor(humidity) {
+                if (humidity < 40) return '#FFCC80'; // Low - Light Orange
+                if (humidity <= 60) return '#C8A87F'; // Optimal - Gold
+                if (humidity <= 80) return '#81C784'; // High - Green
+                return '#64B5F6'; // Very High - Blue
+            }
+
+            getWindColor(wind) {
+                if (wind < 5) return '#C8A87F'; // Calm - Gold
+                if (wind <= 15) return '#81C784'; // Light - Green
+                if (wind <= 25) return '#FFB74D'; // Moderate - Orange
+                return '#E57373'; // Strong - Red
+            }
+
+            getPressureColor(pressure) {
+                if (pressure < 1010) return '#E57373'; // Low - Red
+                if (pressure <= 1020) return '#C8A87F'; // Normal - Gold
+                return '#81C784'; // High - Green
+            }
+
+            getVisibilityColor(visibility) {
+                if (visibility < 5) return '#E57373'; // Poor - Red
+                if (visibility < 8) return '#FFB74D'; // Limited - Orange
+                return '#C8A87F'; // Good - Gold
+            }
+
+            // Ground Conditions Assessment
+            updateGroundConditions(weather) {
+                const groundConditions = document.getElementById('groundConditions');
+                if (!groundConditions) return;
+
+                groundConditions.style.display = 'block';
+
+                // Simulate rain in last 24h based on current conditions
+                const recentRain = weather.rain || (weather.humidity > 80 && Math.random() > 0.7);
+                const hourssinceRain = recentRain ? Math.floor(Math.random() * 12) : Math.floor(Math.random() * 48) + 24;
+
+                // Calculate ground wetness
+                let wetness, wetnessColor, wetnessIcon;
+                if (!recentRain && weather.temp > 15) {
+                    wetness = 'USCAT';
+                    wetnessColor = '#C8A87F';
+                    wetnessIcon = '☀️';
+                } else if (hourssinceRain > 12 && weather.wind > 10) {
+                    wetness = 'UȘOR UMED';
+                    wetnessColor = '#81C784';
+                    wetnessIcon = '🌤️';
+                } else if (hourssinceRain > 6 || weather.humidity > 70) {
+                    wetness = 'UMED';
+                    wetnessColor = '#FFB74D';
+                    wetnessIcon = '🌧️';
+                } else {
+                    wetness = 'FOARTE UMED';
+                    wetnessColor = '#E57373';
+                    wetnessIcon = '🌊';
+                }
+
+                // Calculate grip conditions
+                let grip, gripColor, gripIcon;
+                if (wetness === 'USCAT' && weather.wind < 15) {
+                    grip = 'EXCELENT';
+                    gripColor = '#C8A87F';
+                    gripIcon = '🔒';
+                } else if (wetness === 'UȘOR UMED' || weather.wind < 20) {
+                    grip = 'BUN';
+                    gripColor = '#81C784';
+                    gripIcon = '✅';
+                } else if (wetness === 'UMED' || weather.wind < 25) {
+                    grip = 'MODERAT';
+                    gripColor = '#FFB74D';
+                    gripIcon = '⚠️';
+                } else {
+                    grip = 'RISC ALUNECARE';
+                    gripColor = '#E57373';
+                    gripIcon = '⚠️';
+                }
+
+                // Calculate visibility conditions
+                let visCondition, visColor, visIcon;
+                if (weather.visibility >= 10) {
+                    visCondition = 'PERFECTĂ';
+                    visColor = '#C8A87F';
+                    visIcon = '👁️';
+                } else if (weather.visibility >= 8) {
+                    visCondition = 'BUNĂ';
+                    visColor = '#81C784';
+                    visIcon = '🔍';
+                } else if (weather.visibility >= 5) {
+                    visCondition = 'LIMITATĂ';
+                    visColor = '#FFB74D';
+                    visIcon = '🌫️';
+                } else {
+                    visCondition = 'SLABĂ';
+                    visColor = '#E57373';
+                    visIcon = '⚡';
+                }
+
+                // Calculate operational status
+                let opStatus, opColor, opIcon, opDesc;
+                const goodConditions = (wetness === 'USCAT' || wetness === 'UȘOR UMED') && grip !== 'RISC ALUNECARE' && weather.visibility >= 8;
+                const okConditions = wetness !== 'FOARTE UMED' && grip !== 'RISC ALUNECARE' && weather.visibility >= 5;
+
+                if (goodConditions) {
+                    opStatus = 'OPERAȚIONAL';
+                    opColor = '#C8A87F';
+                    opIcon = '✅';
+                    opDesc = 'Condiții excelente pentru airsoft';
+                } else if (okConditions) {
+                    opStatus = 'CONDIȚIONAT';
+                    opColor = '#FFB74D';
+                    opIcon = '⚠️';
+                    opDesc = 'Exercitați precauție suplimentară';
+                } else {
+                    opStatus = 'NERECOMANDAT';
+                    opColor = '#E57373';
+                    opIcon = '❌';
+                    opDesc = 'Amânați activitățile airsoft';
+                }
+
+                // Update ground metrics
+                this.updateGroundMetric('groundWetness', wetnessIcon, wetness, wetnessColor);
+                this.updateGroundMetric('groundGrip', gripIcon, grip, gripColor);
+                this.updateGroundMetric('groundVisibility', visIcon, visCondition, visColor);
+
+                // Update operational status
+                const operationalStatus = document.getElementById('operationalStatus');
+                if (operationalStatus) {
+                    operationalStatus.style.borderColor = opColor;
+                    operationalStatus.style.backgroundColor = opColor + '20';
+                    operationalStatus.innerHTML = `
+                        <div class="operational-status-icon" style="color: ${opColor};">${opIcon}</div>
+                        <div class="operational-status-text" style="color: ${opColor};">${opStatus}</div>
+                        <div class="operational-status-desc" style="color: ${opColor};">${opDesc}</div>
+                    `;
+                }
+            }
+
+            updateGroundMetric(id, icon, value, color) {
+                const metric = document.getElementById(id);
+                if (metric) {
+                    metric.style.borderColor = color;
+                    metric.style.backgroundColor = color + '20';
+                    
+                    const iconElement = metric.querySelector('.ground-metric-icon');
+                    const valueElement = metric.querySelector('.ground-metric-value');
+                    
+                    if (iconElement) iconElement.textContent = icon;
+                    if (valueElement) {
+                        valueElement.textContent = value;
+                        valueElement.style.color = color;
+                    }
+                }
             }
 
             updateForecast() {
@@ -1542,7 +2142,7 @@
                     forecastDay.className = 'forecast-day';
                     forecastDay.innerHTML = `
                         <div class="forecast-date">${days[i]}</div>
-                        <div class="forecast-temp">${temps[i]}°C</div>
+                        <div class="forecast-temp" style="color: ${this.getTemperatureColor(temps[i])}">${temps[i]}°C</div>
                         <div class="forecast-rain">
                             <span class="material-icons" style="font-size: 12px;">opacity</span>
                             ${rains[i]}%
@@ -1650,6 +2250,23 @@
                     });
                 }
             });
+        });
+
+        // Close GPS modal when clicking outside
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('gpsModal');
+            const modalContent = document.querySelector('.gps-modal-content');
+            if (modal && modal.classList.contains('active') && !modalContent.contains(e.target)) {
+                closeGpsModal();
+            }
+        });
+
+        // Keyboard navigation for GPS modal
+        document.addEventListener('keydown', function(e) {
+            const modal = document.getElementById('gpsModal');
+            if (modal && modal.classList.contains('active') && e.key === 'Escape') {
+                closeGpsModal();
+            }
         });
     </script>
 </body>
