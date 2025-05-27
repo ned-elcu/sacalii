@@ -1602,6 +1602,7 @@
         <div class="contact-container">
             <div class="contact-info">
                 <h2 class="contact-title">ALĂTURĂ-TE HAITEI</h2>
+                <p class="contact-description">Pentru membrii cu echipament propriu care doresc să se alăture clubului nostru de elită și să participe la antrenamente și competiții profesionale.</p>
                 <div class="contact-item" onclick="window.open('tel:0765037584')">
                     <span class="material-icons">phone</span>
                     <span class="contact-text">0765037584</span>
@@ -1612,12 +1613,17 @@
                 </div>
                 <div class="contact-item">
                     <span class="material-icons">place</span>
-                    <span class="contact-text">Slobozia, Județul Ialomița</span>
+                    <span class="contact-text">Slobozia, Județul Ialomița<br><small style="opacity: 0.7;">centru operare</small></span>
+                </div>
+                <div class="contact-item">
+                    <span class="material-icons">terrain</span>
+                    <span class="contact-text">Mărculești, Ialomița<br><small style="opacity: 0.7;">teren pentru jocuri</small></span>
                 </div>
             </div>
             
             <div class="rental-info">
                 <h2 class="rental-title">ÎNCHIRIAZĂ ȘI JOACĂ</h2>
+                <p class="rental-description">Pentru începători sau jucători ocazionali care vor să încerce airsoft-ul fără să investească în echipament profesional.</p>
                 <div class="rental-item">
                     <span class="material-icons">sports_esports</span>
                     <span class="contact-text">Armă Airsoft: 75 RON</span>
@@ -1637,7 +1643,7 @@
     <!-- WEATHER API SECTION - ENHANCED WITH COLORS AND GROUND ASSESSMENT -->
     <section class="weather-section" id="weather">
         <div class="weather-container">
-            <h2 class="weather-title">Informații Meteorologice Teren Bază</h2>
+            <h2 class="weather-title">Informații Teren Bază</h2>
             <p class="weather-subtitle"><span class="material-icons">language</span> Date meteorologice LIVE de la Open-Meteo • Actualizare în timp real</p>
             
             <div class="map-container">
@@ -2089,6 +2095,7 @@
                 // Convert weather code to description
                 const weatherDesc = this.getWeatherDescription(current.weather_code, precipitation > 0);
                 const weatherDescColor = this.getWeatherDescriptionColor(current.weather_code, precipitation);
+                const weatherIcon = this.getWeatherIcon(current.weather_code, precipitation);
                 
                 // Calculate visibility based on weather conditions
                 const visibility = this.calculateVisibility(current.weather_code, precipitation);
@@ -2098,7 +2105,10 @@
                 if (currentWeather) {
                     const tempColor = this.getTemperatureColor(temp);
                     currentWeather.innerHTML = `
-                        <div class="weather-temp" style="color: ${tempColor};">${temp}°C</div>
+                        <div class="weather-temp" style="color: ${tempColor};">
+                            <span class="material-icons" style="font-size: 48px; vertical-align: middle; margin-right: 15px;">${weatherIcon}</span>
+                            ${temp}°C
+                        </div>
                         <div class="weather-desc" style="color: ${weatherDescColor};">${weatherDesc}</div>
                     `;
                 }
@@ -2129,6 +2139,23 @@
 
                 // Update 5-day forecast with real data
                 this.updateRealForecast(daily);
+            }
+
+            getWeatherIcon(weatherCode, precipitation) {
+                // Map weather codes to Material Icons
+                if (weatherCode === 0) return 'wb_sunny'; // Clear sky
+                if (weatherCode === 1) return 'wb_sunny'; // Mainly clear
+                if (weatherCode === 2) return 'partly_cloudy_day'; // Partly cloudy
+                if (weatherCode === 3) return 'cloud'; // Overcast
+                if (weatherCode === 45 || weatherCode === 48) return 'foggy'; // Fog
+                if (weatherCode >= 51 && weatherCode <= 57) return 'grain'; // Drizzle
+                if (weatherCode >= 61 && weatherCode <= 67) return 'water_drop'; // Rain
+                if (weatherCode >= 71 && weatherCode <= 77) return 'ac_unit'; // Snow
+                if (weatherCode >= 80 && weatherCode <= 86) return 'water_drop'; // Showers
+                if (weatherCode >= 95) return 'thunderstorm'; // Thunderstorm
+                
+                // Default icon for unknown weather
+                return 'help_outline';
             }
 
             getWeatherDescription(weatherCode, hasRain) {
