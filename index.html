@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Șacalii ACS - Asociația Club Sportiv</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&family=Exo+2:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         * {
@@ -14,12 +14,12 @@
         }
 
         body {
-            font-family: 'Exo 2', sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             background: #0a0a0a;
             color: #ffffff;
             overflow-x: hidden;
             scroll-behavior: smooth;
-            cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2" fill="%2300d4ff"/><circle cx="12" cy="12" r="8" fill="none" stroke="%2300d4ff" stroke-width="1"/><line x1="12" y1="4" x2="12" y2="8" stroke="%2300d4ff" stroke-width="1"/><line x1="12" y1="16" x2="12" y2="20" stroke="%2300d4ff" stroke-width="1"/><line x1="4" y1="12" x2="8" y2="12" stroke="%2300d4ff" stroke-width="1"/><line x1="16" y1="12" x2="20" y2="12" stroke="%2300d4ff" stroke-width="1"/></svg>') 12 12, crosshair;
+            cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2" fill="%23c8a87f"/><circle cx="12" cy="12" r="8" fill="none" stroke="%23c8a87f" stroke-width="1"/><line x1="12" y1="4" x2="12" y2="8" stroke="%23c8a87f" stroke-width="1"/><line x1="12" y1="16" x2="12" y2="20" stroke="%23c8a87f" stroke-width="1"/><line x1="4" y1="12" x2="8" y2="12" stroke="%23c8a87f" stroke-width="1"/><line x1="16" y1="12" x2="20" y2="12" stroke="%23c8a87f" stroke-width="1"/></svg>') 12 12, crosshair;
         }
 
         /* HERO SPACE SECTION */
@@ -43,8 +43,8 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+                linear-gradient(rgba(200, 168, 127, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(200, 168, 127, 0.1) 1px, transparent 1px);
             background-size: 50px 50px;
             animation: gridPulse 4s ease-in-out infinite;
             z-index: 1;
@@ -69,7 +69,7 @@
             position: absolute;
             width: 20px;
             height: 20px;
-            background: rgba(0, 212, 255, 0.4);
+            background: rgba(200, 168, 127, 0.4);
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
             animation: tacticalFloat 8s linear infinite;
         }
@@ -87,7 +87,7 @@
             }
         }
 
-        /* Wolf Pack Parallax */
+        /* Wolf Pack Parallax - FIXED */
         .wolf-pack-parallax {
             position: absolute;
             top: 30%;
@@ -97,15 +97,16 @@
             background: url('./images/silueta.png') repeat-x;
             background-size: 300px auto;
             background-position: center;
-            filter: sepia(100%) saturate(1000%) hue-rotate(180deg) brightness(0.8);
+            filter: brightness(0) sepia(1) saturate(10000%) hue-rotate(25deg) brightness(0.8);
             opacity: 0.4;
             animation: wolfPackMove 25s linear infinite;
             z-index: 1;
+            transform: scaleX(-1); /* Flip horizontally to correct direction */
         }
 
         @keyframes wolfPackMove {
-            0% { transform: translateX(-200px); }
-            100% { transform: translateX(200px); }
+            0% { transform: scaleX(-1) translateX(-200px); }
+            100% { transform: scaleX(-1) translateX(200px); }
         }
 
         /* BIG LOGO SECTION */
@@ -120,22 +121,22 @@
             width: 400px;
             height: auto;
             max-width: 80vw;
-            filter: drop-shadow(0 0 30px #00d4ff) drop-shadow(0 0 60px rgba(0, 212, 255, 0.5));
+            filter: drop-shadow(0 0 30px #c8a87f) drop-shadow(0 0 60px rgba(200, 168, 127, 0.5));
             animation: logoPulse 3s ease-in-out infinite;
             transition: all 0.5s ease;
         }
 
         .main-logo:hover {
             transform: scale(1.1);
-            filter: drop-shadow(0 0 40px #ff6b35) drop-shadow(0 0 80px rgba(255, 107, 53, 0.6));
+            filter: drop-shadow(0 0 40px #aa1f12) drop-shadow(0 0 80px rgba(170, 31, 18, 0.6));
         }
 
         @keyframes logoPulse {
             0%, 100% { 
-                filter: drop-shadow(0 0 30px #00d4ff) drop-shadow(0 0 60px rgba(0, 212, 255, 0.5));
+                filter: drop-shadow(0 0 30px #c8a87f) drop-shadow(0 0 60px rgba(200, 168, 127, 0.5));
             }
             50% { 
-                filter: drop-shadow(0 0 50px #00d4ff) drop-shadow(0 0 100px rgba(0, 212, 255, 0.8));
+                filter: drop-shadow(0 0 50px #c8a87f) drop-shadow(0 0 100px rgba(200, 168, 127, 0.8));
             }
         }
 
@@ -148,7 +149,7 @@
             width: 300px;
             height: 300px;
             transform: translate(-50%, -50%);
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><circle cx="150" cy="150" r="140" fill="none" stroke="%2300d4ff" stroke-width="2" opacity="0.3"/><circle cx="150" cy="150" r="100" fill="none" stroke="%2300d4ff" stroke-width="1" opacity="0.5"/><circle cx="150" cy="150" r="60" fill="none" stroke="%2300d4ff" stroke-width="1" opacity="0.7"/><line x1="150" y1="10" x2="150" y2="50" stroke="%2300d4ff" stroke-width="2" opacity="0.6"/><line x1="150" y1="250" x2="150" y2="290" stroke="%2300d4ff" stroke-width="2" opacity="0.6"/><line x1="10" y1="150" x2="50" y2="150" stroke="%2300d4ff" stroke-width="2" opacity="0.6"/><line x1="250" y1="150" x2="290" y2="150" stroke="%2300d4ff" stroke-width="2" opacity="0.6"/></svg>');
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><circle cx="150" cy="150" r="140" fill="none" stroke="%23c8a87f" stroke-width="2" opacity="0.3"/><circle cx="150" cy="150" r="100" fill="none" stroke="%23c8a87f" stroke-width="1" opacity="0.5"/><circle cx="150" cy="150" r="60" fill="none" stroke="%23c8a87f" stroke-width="1" opacity="0.7"/><line x1="150" y1="10" x2="150" y2="50" stroke="%23c8a87f" stroke-width="2" opacity="0.6"/><line x1="150" y1="250" x2="150" y2="290" stroke="%23c8a87f" stroke-width="2" opacity="0.6"/><line x1="10" y1="150" x2="50" y2="150" stroke="%23c8a87f" stroke-width="2" opacity="0.6"/><line x1="250" y1="150" x2="290" y2="150" stroke="%23c8a87f" stroke-width="2" opacity="0.6"/></svg>');
             animation: crosshairRotate 8s linear infinite;
             z-index: -1;
         }
@@ -167,7 +168,7 @@
         }
 
         .main-subtitle {
-            font-family: 'Quantico', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 32px;
             font-weight: 700;
             letter-spacing: 4px;
@@ -178,7 +179,7 @@
         }
 
         .sub-subtitle {
-            font-family: 'Exo 2', sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
             font-size: 20px;
             font-weight: 600;
             letter-spacing: 3px;
@@ -190,7 +191,7 @@
         .accent-line {
             width: 150px;
             height: 4px;
-            background: #00d4ff;
+            background: #c8a87f;
             margin: 25px auto;
             opacity: 0;
             animation: lineGrow 1.5s ease-out 3.5s forwards;
@@ -230,7 +231,7 @@
             width: 72px;
             height: 72px;
             animation: howlAnimation 6s ease-in-out infinite;
-            filter: drop-shadow(0 0 20px #00d4ff);
+            filter: drop-shadow(0 0 20px #c8a87f);
             position: relative;
         }
 
@@ -243,19 +244,19 @@
         @keyframes howlAnimation {
             0%, 100% { 
                 transform: scale(1) rotate(-2deg); 
-                filter: drop-shadow(0 0 20px #00d4ff);
+                filter: drop-shadow(0 0 20px #c8a87f);
             }
             25% { 
                 transform: scale(1.1) rotate(2deg); 
-                filter: drop-shadow(0 0 30px #ff6b35);
+                filter: drop-shadow(0 0 30px #aa1f12);
             }
             50% { 
                 transform: scale(1.2) rotate(-1deg); 
-                filter: drop-shadow(0 0 40px #22c55e);
+                filter: drop-shadow(0 0 40px #c8a87f);
             }
             75% { 
                 transform: scale(1.1) rotate(1deg); 
-                filter: drop-shadow(0 0 30px #ff6b35);
+                filter: drop-shadow(0 0 30px #aa1f12);
             }
         }
 
@@ -267,7 +268,7 @@
             left: 50%;
             width: 200px;
             height: 200px;
-            border: 2px solid #00d4ff;
+            border: 2px solid #c8a87f;
             border-radius: 50%;
             transform: translate(-50%, -50%);
             animation: soundWave 3s ease-out infinite;
@@ -279,25 +280,21 @@
             100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
         }
 
-        /* SLIDESHOW SECTION - FIXED */
+        /* SLIDESHOW SECTION - COMPLETELY REBUILT */
         .slideshow-section {
             width: 100vw;
             height: 100vh;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            background: #0a0a0a;
             margin: 0;
             padding: 0;
-            left: 50%;
-            transform: translateX(-50%);
         }
 
         .slideshow-container {
             position: relative;
             width: 100%;
             height: 100%;
-            margin: 0;
-            padding: 0;
         }
 
         .slide {
@@ -307,11 +304,11 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transition: opacity 2s ease-in-out;
+            transition: opacity 1.5s ease-in-out;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-color: #2a2a2a;
+            background-attachment: fixed;
         }
 
         .slide.active {
@@ -319,99 +316,167 @@
         }
 
         .slide:nth-child(1) {
-            background-image: url('./images/training.jpg');
-            background-color: #1a2a3a;
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('./images/training.jpg');
         }
 
         .slide:nth-child(2) {
-            background-image: url('./images/brotherhood.jpg');
-            background-color: #2a3a1a;
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('./images/brotherhood.jpg');
         }
 
         .slide:nth-child(3) {
-            background-image: url('./images/equipment.jpg');
-            background-color: #3a1a2a;
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('./images/equipment.jpg');
         }
 
         .slide:nth-child(4) {
-            background-image: url('./images/competitions.jpg');
-            background-color: #3a2a1a;
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('./images/competitions.jpg');
         }
 
-        /* Dark overlay for better text readability */
-        .slide::before {
-            content: '';
+        /* Slide Content */
+        .slide-content {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 40%;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-            z-index: 1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 3;
+            width: 90%;
+            max-width: 800px;
         }
 
-        /* Minimal content overlay */
-        .slide-info {
-            position: absolute;
-            bottom: 60px;
-            left: 60px;
-            z-index: 2;
+        .slide-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            background: rgba(200, 168, 127, 0.2);
+            border: 3px solid #c8a87f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: slideIconPulse 3s ease-in-out infinite;
+        }
+
+        .slide-icon img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            filter: brightness(0) sepia(1) saturate(10000%) hue-rotate(25deg) brightness(1.2);
+        }
+
+        @keyframes slideIconPulse {
+            0%, 100% { 
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(200, 168, 127, 0.3);
+            }
+            50% { 
+                transform: scale(1.1);
+                box-shadow: 0 0 40px rgba(200, 168, 127, 0.6);
+            }
         }
 
         .slide-title {
-            font-family: 'Quantico', monospace;
-            font-size: 24px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 48px;
             font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 12px;
+            color: #c8a87f;
+            margin-bottom: 20px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
         }
 
-        .slide-text {
-            font-family: 'Exo 2', sans-serif;
+        .slide-description {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 24px;
+            color: #ffffff;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+        }
+
+        .slide-details {
+            font-family: 'IBM Plex Sans', sans-serif;
             font-size: 16px;
-            color: #e5e7eb;
-            max-width: 400px;
-            line-height: 1.4;
+            color: #cccccc;
+            line-height: 1.5;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
         }
 
         /* Navigation */
-        .slide-nav {
+        .slideshow-nav {
             position: absolute;
-            bottom: 60px;
-            right: 60px;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            gap: 15px;
+            gap: 20px;
             z-index: 10;
         }
 
         .nav-dot {
-            width: 15px;
-            height: 15px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.3);
             cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            position: relative;
         }
 
         .nav-dot.active {
-            background: #00d4ff;
-            border-color: #00d4ff;
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+            background: #c8a87f;
+            border-color: #c8a87f;
+            box-shadow: 0 0 20px rgba(200, 168, 127, 0.6);
         }
 
-        .nav-dot:hover {
+        .nav-dot:hover:not(.active) {
             background: rgba(255, 255, 255, 0.6);
             transform: scale(1.2);
         }
 
-        /* CONTACT AREA */
+        /* Arrow Controls */
+        .slide-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(200, 168, 127, 0.2);
+            border: 2px solid #c8a87f;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .slide-arrow:hover {
+            background: rgba(200, 168, 127, 0.4);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slide-arrow.prev {
+            left: 40px;
+        }
+
+        .slide-arrow.next {
+            right: 40px;
+        }
+
+        .slide-arrow .material-icons {
+            color: #c8a87f;
+            font-size: 32px;
+        }
+
+        /* CONTACT AREA - FIXED BACKGROUND */
         .contact-section {
             padding: 100px 60px;
             background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
             position: relative;
+            overflow: hidden;
         }
 
         .contact-section::before {
@@ -421,16 +486,24 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(255, 107, 53, 0.1) 0%, transparent 50%);
-            background-size: 400px 400px;
-            animation: backgroundShift 10s ease-in-out infinite;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(200, 168, 127, 0.15) 0%, transparent 60%),
+                radial-gradient(circle at 80% 20%, rgba(170, 31, 18, 0.1) 0%, transparent 60%),
+                radial-gradient(circle at 40% 80%, rgba(200, 168, 127, 0.1) 0%, transparent 60%);
+            background-size: 600px 600px, 800px 800px, 700px 700px;
+            animation: contactBackgroundFloat 20s ease-in-out infinite;
         }
 
-        @keyframes backgroundShift {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(50px, 50px); }
+        @keyframes contactBackgroundFloat {
+            0%, 100% { 
+                background-position: 0% 50%, 100% 20%, 40% 80%;
+            }
+            33% { 
+                background-position: 30% 60%, 70% 30%, 60% 70%;
+            }
+            66% { 
+                background-position: 70% 40%, 30% 70%, 20% 90%;
+            }
         }
 
         .contact-container {
@@ -443,18 +516,18 @@
         .contact-info {
             padding: 50px;
             background: rgba(26, 26, 26, 0.9);
-            border: 2px solid #00d4ff;
+            border: 2px solid #c8a87f;
             border-radius: 20px;
             backdrop-filter: blur(20px);
-            box-shadow: 0 0 40px rgba(0, 212, 255, 0.2);
+            box-shadow: 0 0 40px rgba(200, 168, 127, 0.2);
         }
 
         .contact-title {
-            font-family: 'Quantico', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 42px;
-            font-weight: 900;
+            font-weight: 700;
             margin-bottom: 40px;
-            color: #00d4ff;
+            color: #c8a87f;
             text-align: center;
         }
 
@@ -463,7 +536,7 @@
             align-items: center;
             margin-bottom: 30px;
             padding: 20px;
-            background: rgba(0, 212, 255, 0.1);
+            background: rgba(200, 168, 127, 0.1);
             border-radius: 12px;
             transition: all 0.4s ease;
             cursor: pointer;
@@ -471,28 +544,28 @@
         }
 
         .contact-item:hover {
-            background: rgba(255, 107, 53, 0.2);
+            background: rgba(170, 31, 18, 0.2);
             transform: translateX(15px);
-            border-color: #ff6b35;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+            border-color: #aa1f12;
+            box-shadow: 0 10px 30px rgba(170, 31, 18, 0.3);
         }
 
         .contact-item .material-icons {
             font-size: 36px;
-            color: #00d4ff;
+            color: #c8a87f;
             margin-right: 25px;
             transition: all 0.4s ease;
         }
 
         .contact-item:hover .material-icons {
-            color: #ff6b35;
+            color: #aa1f12;
             transform: scale(1.3) rotate(15deg);
         }
 
         .contact-text {
             font-size: 22px;
             font-weight: 600;
-            font-family: 'Exo 2', sans-serif;
+            font-family: 'IBM Plex Sans', sans-serif;
         }
 
         /* WEATHER API SECTION */
@@ -511,12 +584,12 @@
 
         .weather-title {
             grid-column: 1 / -1;
-            font-family: 'Quantico', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 48px;
-            font-weight: 900;
+            font-weight: 700;
             text-align: center;
             margin-bottom: 60px;
-            color: #00d4ff;
+            color: #c8a87f;
             text-transform: uppercase;
             letter-spacing: 3px;
         }
@@ -524,11 +597,11 @@
         .map-container {
             height: 500px;
             background: rgba(26, 26, 26, 0.9);
-            border: 3px solid #00d4ff;
+            border: 3px solid #c8a87f;
             border-radius: 20px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 50px rgba(0, 212, 255, 0.3);
+            box-shadow: 0 0 50px rgba(200, 168, 127, 0.3);
         }
 
         .map-placeholder {
@@ -538,7 +611,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(45deg, rgba(0, 212, 255, 0.1), rgba(34, 197, 94, 0.1));
+            background: linear-gradient(45deg, rgba(200, 168, 127, 0.1), rgba(170, 31, 18, 0.1));
             position: relative;
         }
 
@@ -550,8 +623,8 @@
             width: 100%;
             height: 100%;
             background-image: 
-                radial-gradient(circle at 30% 30%, rgba(0, 212, 255, 0.2) 0%, transparent 50%),
-                radial-gradient(circle at 70% 70%, rgba(34, 197, 94, 0.2) 0%, transparent 50%);
+                radial-gradient(circle at 30% 30%, rgba(200, 168, 127, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(170, 31, 18, 0.2) 0%, transparent 50%);
             animation: mapPulse 4s ease-in-out infinite;
         }
 
@@ -562,7 +635,7 @@
 
         .map-icon {
             font-size: 64px !important;
-            color: #00d4ff;
+            color: #c8a87f;
             margin-bottom: 20px;
             animation: mapIconFloat 3s ease-in-out infinite;
         }
@@ -579,49 +652,49 @@
 
         .map-label {
             font-size: 24px;
-            color: #00d4ff;
+            color: #c8a87f;
             margin-bottom: 10px;
-            font-family: 'Quantico', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-weight: 700;
         }
 
         .map-coords {
             font-size: 16px;
-            color: #22c55e;
-            font-family: 'Exo 2', sans-serif;
+            color: #aa1f12;
+            font-family: 'IBM Plex Sans', sans-serif;
             font-weight: 600;
         }
 
         .weather-panel {
             background: rgba(26, 26, 26, 0.9);
-            border: 3px solid #22c55e;
+            border: 3px solid #aa1f12;
             border-radius: 20px;
             padding: 40px;
             backdrop-filter: blur(20px);
-            box-shadow: 0 0 50px rgba(34, 197, 94, 0.3);
+            box-shadow: 0 0 50px rgba(170, 31, 18, 0.3);
         }
 
         .current-weather {
             text-align: center;
             margin-bottom: 40px;
             padding: 30px;
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid #00d4ff;
+            background: rgba(200, 168, 127, 0.1);
+            border: 1px solid #c8a87f;
             border-radius: 15px;
         }
 
         .weather-temp {
-            font-family: 'Quantico', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 56px;
-            font-weight: 900;
-            color: #00d4ff;
+            font-weight: 700;
+            color: #c8a87f;
             margin-bottom: 15px;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            text-shadow: 0 0 20px rgba(200, 168, 127, 0.5);
         }
 
         .weather-desc {
             font-size: 20px;
-            color: #22c55e;
+            color: #aa1f12;
             text-transform: uppercase;
             font-weight: 600;
             letter-spacing: 1px;
@@ -636,18 +709,18 @@
         .forecast-day {
             text-align: center;
             padding: 20px 12px;
-            background: rgba(34, 197, 94, 0.1);
-            border: 2px solid #22c55e;
+            background: rgba(170, 31, 18, 0.1);
+            border: 2px solid #aa1f12;
             border-radius: 12px;
             transition: all 0.4s ease;
             cursor: pointer;
         }
 
         .forecast-day:hover {
-            background: rgba(255, 107, 53, 0.2);
-            border-color: #ff6b35;
+            background: rgba(200, 168, 127, 0.2);
+            border-color: #c8a87f;
             transform: translateY(-8px);
-            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 10px 25px rgba(200, 168, 127, 0.3);
         }
 
         .forecast-date {
@@ -659,16 +732,16 @@
         }
 
         .forecast-temp {
-            font-family: 'Quantico', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 18px;
             font-weight: 700;
-            color: #22c55e;
+            color: #aa1f12;
             margin-bottom: 8px;
         }
 
         .forecast-rain {
             font-size: 12px;
-            color: #00d4ff;
+            color: #c8a87f;
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -676,7 +749,7 @@
             gap: 5px;
         }
 
-        /* FOOTER */
+        /* FOOTER - SEAMLESS WAVE ANIMATION */
         .footer {
             background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
             padding: 80px 60px 40px;
@@ -688,18 +761,19 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
+            width: 200%;
             height: 100%;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200"><g fill="%23333" opacity="0.2"><path d="M0 100c60-25 120-15 180 0s120 25 180 0 120-25 180 0 120 25 180 0 120-25 180 0 120 25 180 0 120-25 180 0v100H0z"/></g></svg>');
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 200"><g fill="%23333" opacity="0.2"><path d="M0 100c60-25 120-15 180 0s120 25 180 0 120-25 180 0 120 25 180 0 120-25 180 0 120 25 180 0 120-25 180 0s120 25 180 0 120-25 180 0 120 25 180 0 120-25 180 0 120 25 180 0 120-25 180 0v100H0z"/></g></svg>');
             background-repeat: repeat-x;
             background-position: bottom;
-            animation: waveMove 20s linear infinite;
+            background-size: 1200px 200px;
+            animation: seamlessWaveMove 30s linear infinite;
             z-index: 1;
         }
 
-        @keyframes waveMove {
+        @keyframes seamlessWaveMove {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-180px); }
+            100% { transform: translateX(-1200px); }
         }
 
         .footer-content {
@@ -713,11 +787,11 @@
         }
 
         .footer-section h3 {
-            font-family: 'Quantico', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 25px;
-            color: #00d4ff;
+            color: #c8a87f;
         }
 
         .footer-section p {
@@ -736,24 +810,24 @@
         .social-link {
             width: 60px;
             height: 60px;
-            background: rgba(0, 212, 255, 0.1);
-            border: 2px solid #00d4ff;
+            background: rgba(200, 168, 127, 0.1);
+            border: 2px solid #c8a87f;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #00d4ff;
+            color: #c8a87f;
             text-decoration: none;
             font-size: 24px;
             transition: all 0.4s ease;
         }
 
         .social-link:hover {
-            background: rgba(255, 107, 53, 0.2);
-            border-color: #ff6b35;
-            color: #ff6b35;
+            background: rgba(170, 31, 18, 0.2);
+            border-color: #aa1f12;
+            color: #aa1f12;
             transform: scale(1.2) rotate(15deg);
-            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+            box-shadow: 0 10px 25px rgba(170, 31, 18, 0.3);
         }
 
         .footer-bottom {
@@ -772,7 +846,7 @@
             right: 40px;
             width: 70px;
             height: 70px;
-            background: linear-gradient(45deg, #00d4ff, #ff6b35);
+            background: linear-gradient(45deg, #c8a87f, #aa1f12);
             border: none;
             border-radius: 50%;
             cursor: pointer;
@@ -780,7 +854,7 @@
             visibility: hidden;
             transition: all 0.4s ease;
             z-index: 1000;
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+            box-shadow: 0 0 30px rgba(200, 168, 127, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -799,7 +873,7 @@
 
         .back-to-top:hover {
             transform: scale(1.2) rotate(360deg);
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.6);
+            box-shadow: 0 15px 40px rgba(200, 168, 127, 0.6);
         }
 
         /* RESPONSIVE DESIGN */
@@ -824,23 +898,21 @@
                 font-size: 16px;
             }
 
-            .slide-info {
-                bottom: 30px;
-                left: 30px;
-            }
-
             .slide-title {
-                font-size: 16px;
+                font-size: 32px;
             }
 
-            .slide-text {
-                font-size: 13px;
-                max-width: 250px;
+            .slide-description {
+                font-size: 18px;
             }
 
-            .slide-nav {
-                bottom: 20px;
-                right: 30px;
+            .slide-arrow {
+                width: 50px;
+                height: 50px;
+            }
+
+            .slide-arrow .material-icons {
+                font-size: 24px;
             }
 
             .contact-section,
@@ -877,29 +949,35 @@
                 height: 56px;
             }
 
-            .slide-info {
-                bottom: 20px;
-                left: 20px;
-            }
-
             .slide-title {
-                font-size: 14px;
+                font-size: 24px;
             }
 
-            .slide-text {
-                font-size: 12px;
-                max-width: 200px;
+            .slide-description {
+                font-size: 16px;
             }
 
-            .slide-nav {
-                bottom: 15px;
-                right: 20px;
-                gap: 8px;
+            .slideshow-nav {
+                bottom: 20px;
+                gap: 10px;
             }
 
             .nav-dot {
-                width: 10px;
-                height: 10px;
+                width: 15px;
+                height: 15px;
+            }
+
+            .slide-arrow {
+                width: 40px;
+                height: 40px;
+            }
+
+            .slide-arrow.prev {
+                left: 20px;
+            }
+
+            .slide-arrow.next {
+                right: 20px;
             }
         }
 
@@ -938,9 +1016,9 @@
         }
 
         .loading-text {
-            font-family: 'Quantico', monospace;
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 24px;
-            color: #00d4ff;
+            color: #c8a87f;
             text-transform: uppercase;
             letter-spacing: 3px;
             animation: loadingText 2s ease-in-out infinite;
@@ -949,11 +1027,11 @@
         @keyframes loadingPulse {
             0%, 100% { 
                 transform: scale(1); 
-                filter: drop-shadow(0 0 20px #00d4ff);
+                filter: drop-shadow(0 0 20px #c8a87f);
             }
             50% { 
                 transform: scale(1.3); 
-                filter: drop-shadow(0 0 40px #ff6b35);
+                filter: drop-shadow(0 0 40px #aa1f12);
             }
         }
 
@@ -967,7 +1045,7 @@
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-wolf">
-            <img src="./images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%2300d4ff%22 opacity=%220.7%22/><path d=%22M30 30h40v40h-40z%22 fill=%22%23ffffff%22/></svg>'">
+            <img src="./images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22 opacity=%220.7%22/><path d=%22M30 30h40v40h-40z%22 fill=%22%23ffffff%22/></svg>'">
         </div>
         <div class="loading-text">Inițializare Sisteme Tactice...</div>
     </div>
@@ -979,7 +1057,7 @@
         
         <!-- BIG LOGO SECTION -->
         <div class="logo-section">
-            <img src="./images/logo.png" alt="Șacalii ACS Logo" class="main-logo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 200%22><defs><filter id=%22glow%22><feGaussianBlur stdDeviation=%223%22 result=%22coloredBlur%22/><feMerge><feMergeNode in=%22coloredBlur%22/><feMergeNode in=%22SourceGraphic%22/></feMerge></filter></defs><rect width=%22400%22 height=%22200%22 fill=%22%23001122%22 stroke=%22%2300d4ff%22 stroke-width=%222%22/><circle cx=%22200%22 cy=%22100%22 r=%2260%22 fill=%22none%22 stroke=%22%2300d4ff%22 stroke-width=%223%22 filter=%22url(%23glow)%22/><text x=%22200%22 y=%2290%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%2300d4ff%22 font-family=%22Quantico%22 font-size=%2228%22 font-weight=%22bold%22 filter=%22url(%23glow)%22>ȘACALII</text><text x=%22200%22 y=%22115%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23ff6b35%22 font-family=%22Quantico%22 font-size=%2220%22 font-weight=%22bold%22>ACS</text><text x=%22200%22 y=%22135%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%2322c55e%22 font-family=%22Exo+2%22 font-size=%2212%22>ASOCIAȚIA CLUB SPORTIV</text></svg>'">
+            <img src="./images/logo.png" alt="Șacalii ACS Logo" class="main-logo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 200%22><defs><filter id=%22glow%22><feGaussianBlur stdDeviation=%223%22 result=%22coloredBlur%22/><feMerge><feMergeNode in=%22coloredBlur%22/><feMergeNode in=%22SourceGraphic%22/></feMerge></filter></defs><rect width=%22400%22 height=%22200%22 fill=%22%23001122%22 stroke=%22%23c8a87f%22 stroke-width=%222%22/><circle cx=%22200%22 cy=%22100%22 r=%2260%22 fill=%22none%22 stroke=%22%23c8a87f%22 stroke-width=%223%22 filter=%22url(%23glow)%22/><text x=%22200%22 y=%2290%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23c8a87f%22 font-family=%22IBM+Plex+Mono%22 font-size=%2228%22 font-weight=%22bold%22 filter=%22url(%23glow)%22>ȘACALII</text><text x=%22200%22 y=%22115%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23aa1f12%22 font-family=%22IBM+Plex+Mono%22 font-size=%2220%22 font-weight=%22bold%22>ACS</text><text x=%22200%22 y=%22135%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23c8a87f%22 font-family=%22IBM+Plex+Sans%22 font-size=%2212%22>ASOCIAȚIA CLUB SPORTIV</text></svg>'">
         </div>
 
         <!-- SUBTITLE SECTION -->
@@ -994,48 +1072,73 @@
     <section class="transition-space">
         <div class="wolf-howl-container">
             <div class="wolf-howl">
-                <img src="./images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%2300d4ff%22 opacity=%220.7%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%23ffffff%22 font-size=%2240%22>🐺</text></svg>'>
+                <img src="./images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22 opacity=%220.7%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%23ffffff%22 font-size=%2240%22>🐺</text></svg>'>
             </div>
         </div>
     </section>
 
-    <!-- SLIDESHOW SECTION -->
+    <!-- SLIDESHOW SECTION - COMPLETELY REBUILT -->
     <section class="slideshow-section">
         <div class="slideshow-container">
             <div class="slide active">
-                <div class="slide-info">
-                    <h3 class="slide-title">Antrenament</h3>
-                    <p class="slide-text">Sesiuni intensive de pregătire tactică</p>
+                <div class="slide-content">
+                    <div class="slide-icon">
+                        <img src="./images/wolf.png" alt="Training Icon" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22/></svg>'">
+                    </div>
+                    <h2 class="slide-title">Antrenament</h2>
+                    <p class="slide-description">Sesiuni intensive de pregătire tactică pentru dezvoltarea abilităților de combat</p>
+                    <p class="slide-details">Antrenamente regulate cu echipament profesional, exerciții de team building și tactici avansate de luptă în teren variat.</p>
                 </div>
             </div>
             
             <div class="slide">
-                <div class="slide-info">
-                    <h3 class="slide-title">Frăție</h3>
-                    <p class="slide-text">Spiritul de echipă și loialitate</p>
+                <div class="slide-content">
+                    <div class="slide-icon">
+                        <img src="./images/wolf.png" alt="Brotherhood Icon" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22/></svg>'">
+                    </div>
+                    <h2 class="slide-title">Frăție</h2>
+                    <p class="slide-description">Spiritul de echipă și loialitatea ce ne definește ca haită</p>
+                    <p class="slide-details">Legături puternice între membrii echipei, suport mutual și respectul pentru colegii de arme în toate misiunile.</p>
                 </div>
             </div>
             
             <div class="slide">
-                <div class="slide-info">
-                    <h3 class="slide-title">Echipament</h3>
-                    <p class="slide-text">Tehnologie avansată și gear profesional</p>
+                <div class="slide-content">
+                    <div class="slide-icon">
+                        <img src="./images/wolf.png" alt="Equipment Icon" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22/></svg>'">
+                    </div>
+                    <h2 class="slide-title">Echipament</h2>
+                    <p class="slide-description">Tehnologie avansată și gear profesional pentru performanță maximă</p>
+                    <p class="slide-details">Armament de ultimă generație, echipament de protecție premium și accesorii tactice pentru toate tipurile de misiuni.</p>
                 </div>
             </div>
             
             <div class="slide">
-                <div class="slide-info">
-                    <h3 class="slide-title">Competiții</h3>
-                    <p class="slide-text">Victorii și performanțe de elită</p>
+                <div class="slide-content">
+                    <div class="slide-icon">
+                        <img src="./images/wolf.png" alt="Competition Icon" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22/></svg>'">
+                    </div>
+                    <h2 class="slide-title">Competiții</h2>
+                    <p class="slide-description">Victorii și performanțe de elită în competițiile naționale și internaționale</p>
+                    <p class="slide-details">Participare activă la turnee, concursuri tactice și demonstrații de forță în cadrul comunității airsoft.</p>
                 </div>
             </div>
         </div>
         
-        <div class="slide-nav">
+        <!-- Navigation -->
+        <div class="slideshow-nav">
             <div class="nav-dot active" data-slide="0"></div>
             <div class="nav-dot" data-slide="1"></div>
             <div class="nav-dot" data-slide="2"></div>
             <div class="nav-dot" data-slide="3"></div>
+        </div>
+
+        <!-- Arrow Controls -->
+        <div class="slide-arrow prev" id="prevSlide">
+            <span class="material-icons">chevron_left</span>
+        </div>
+        <div class="slide-arrow next" id="nextSlide">
+            <span class="material-icons">chevron_right</span>
         </div>
     </section>
 
@@ -1179,10 +1282,10 @@
             
             <div class="footer-section">
                 <h3>Centru de Comandă</h3>
-                <p><span class="material-icons" style="vertical-align: middle; margin-right: 8px; color: #00d4ff;">phone</span> 0765037584</p>
-                <p><span class="material-icons" style="vertical-align: middle; margin-right: 8px; color: #00d4ff;">email</span> contact@sacalii-acs.ro</p>
-                <p><span class="material-icons" style="vertical-align: middle; margin-right: 8px; color: #00d4ff;">place</span> Slobozia, Județul Ialomița</p>
-                <p><span class="material-icons" style="vertical-align: middle; margin-right: 8px; color: #00d4ff;">schedule</span> Suport Frăție 24/7</p>
+                <p><span class="material-icons" style="vertical-align: middle; margin-right: 8px; color: #c8a87f;">phone</span> 0765037584</p>
+                <p><span class="material-icons" style="vertical-align: middle; margin-right: 8px; color: #c8a87f;">email</span> contact@sacalii-acs.ro</p>
+                <p><span class="material-icons" style="vertical-align: middle; margin-right: 8px; color: #c8a87f;">place</span> Slobozia, Județul Ialomița</p>
+                <p><span class="material-icons" style="vertical-align: middle; margin-right: 8px; color: #c8a87f;">schedule</span> Suport Frăție 24/7</p>
             </div>
         </div>
         
@@ -1203,6 +1306,7 @@
                 this.currentSlide = 0;
                 this.slides = document.querySelectorAll('.slide');
                 this.navDots = document.querySelectorAll('.nav-dot');
+                this.slideInterval = null;
                 this.init();
             }
 
@@ -1245,9 +1349,7 @@
 
             initializeSlideshow() {
                 // Auto-advance slides
-                setInterval(() => {
-                    this.nextSlide();
-                }, 5000);
+                this.startSlideshow();
 
                 // Navigation dots
                 this.navDots.forEach((dot, index) => {
@@ -1255,6 +1357,39 @@
                         this.goToSlide(index);
                     });
                 });
+
+                // Arrow controls
+                document.getElementById('prevSlide').addEventListener('click', () => {
+                    this.prevSlide();
+                });
+
+                document.getElementById('nextSlide').addEventListener('click', () => {
+                    this.nextSlide();
+                });
+
+                // Pause on hover
+                const slideshowSection = document.querySelector('.slideshow-section');
+                slideshowSection.addEventListener('mouseenter', () => {
+                    this.pauseSlideshow();
+                });
+
+                slideshowSection.addEventListener('mouseleave', () => {
+                    this.startSlideshow();
+                });
+            }
+
+            startSlideshow() {
+                this.pauseSlideshow(); // Clear any existing interval
+                this.slideInterval = setInterval(() => {
+                    this.nextSlide();
+                }, 5000);
+            }
+
+            pauseSlideshow() {
+                if (this.slideInterval) {
+                    clearInterval(this.slideInterval);
+                    this.slideInterval = null;
+                }
             }
 
             nextSlide() {
@@ -1262,9 +1397,15 @@
                 this.updateSlideshow();
             }
 
+            prevSlide() {
+                this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+                this.updateSlideshow();
+            }
+
             goToSlide(index) {
                 this.currentSlide = index;
                 this.updateSlideshow();
+                this.startSlideshow(); // Restart auto-advance
             }
 
             updateSlideshow() {
@@ -1305,7 +1446,7 @@
                 const tacticalParticles = document.querySelector('.tactical-particles');
                 
                 if (wolfParallax) {
-                    wolfParallax.style.transform = `translateY(${scrolled * 0.3}px)`;
+                    wolfParallax.style.transform = `scaleX(-1) translateY(${scrolled * 0.3}px)`;
                 }
                 
                 if (tacticalParticles) {
@@ -1368,7 +1509,11 @@
                         const speed = 0.03;
                         const x = mouseX * speed * 50;
                         const y = mouseY * speed * 50;
-                        element.style.transform += ` translate(${x}px, ${y}px)`;
+                        if (element.classList.contains('wolf-pack-parallax')) {
+                            element.style.transform += ` translate(${x}px, ${y}px)`;
+                        } else {
+                            element.style.transform += ` translate(${x}px, ${y}px)`;
+                        }
                     });
                 });
 
