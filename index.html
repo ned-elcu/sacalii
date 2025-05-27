@@ -851,11 +851,9 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto auto;
             gap: 30px;
             grid-template-areas: 
-                "map weather"
-                "info weather";
+                "map weather";
         }
 
         .weather-title {
@@ -1074,6 +1072,21 @@
             font-size: 12px;
             margin-top: 8px;
             opacity: 0.8;
+        }
+
+        .weather-detail-label {
+            font-size: 12px;
+            color: #90A4AE;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .weather-detail-value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 18px;
+            font-weight: 700;
+            transition: color 0.5s ease;
         }
 
         .forecast-container {
@@ -1389,7 +1402,6 @@
                 grid-template-columns: 1fr;
                 grid-template-areas: 
                     "map"
-                    "info" 
                     "weather";
                 gap: 30px;
             }
@@ -1403,11 +1415,6 @@
             .ground-metrics {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 10px;
-            }
-
-            .location-details {
-                grid-template-columns: 1fr;
-                gap: 20px;
             }
         }
 
@@ -1485,27 +1492,6 @@
             .gps-apps {
                 grid-template-columns: repeat(2, 1fr);
             }
-
-            .location-info-panel {
-                padding: 20px;
-                margin-top: 15px;
-            }
-
-            .location-details {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .location-header {
-                flex-direction: column;
-                gap: 10px;
-                align-items: flex-start;
-            }
-
-            .coordinates {
-                font-size: 12px;
-                padding: 6px 10px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -1560,24 +1546,6 @@
 
             .gps-actions {
                 flex-direction: column;
-            }
-
-            .location-info-panel {
-                padding: 15px;
-                margin-top: 10px;
-            }
-
-            .location-section {
-                padding: 15px;
-            }
-
-            .location-section h4 {
-                font-size: 14px;
-            }
-
-            .location-section p,
-            .location-section li {
-                font-size: 13px;
             }
 
             .weather-title {
@@ -1783,43 +1751,6 @@
                     <span class="material-icons">navigation</span>
                     Navigație
                 </button>
-            </div>
-            
-            <!-- Location Information Panel -->
-            <div class="location-info-panel">
-                <div class="location-header">
-                    <h3>🎯 Informații Zonă Operațională</h3>
-                    <span class="coordinates">44.5770°N, 27.5031°E</span>
-                </div>
-                
-                <div class="location-details">
-                    <div class="location-section">
-                        <h4>📍 Regiunea Mărculești</h4>
-                        <p><strong>Centrul Bărăganului</strong> • Zonă Agricolă Strategică</p>
-                        <p>SCDA Mărculești - Stațiune de Cercetare din 1929</p>
-                        <p>Prima unitate de cercetări agricole din România</p>
-                        <div class="elevation-data">Elevație: ~85m • Teren plat</div>
-                    </div>
-                    
-                    <div class="location-section">
-                        <h4>⚡ Specificații Tactice</h4>
-                        <ul>
-                            <li class="tactical-advantage">Teren deschis, vizibilitate excelentă</li>
-                            <li class="tactical-advantage">Acces rutier prin DN3A și drumuri comunale</li>
-                            <li class="tactical-advantage">Zonă rurală, densitate populațională redusă</li>
-                            <li class="tactical-advantage">Fără restricții majore de acces</li>
-                            <li>Coordonate GPS verificate pentru navigație</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="location-section">
-                        <h4>🔍 Note Operaționale</h4>
-                        <p><span class="tactical-advantage">Avantaje:</span> Teren plat ideal pentru antrenamente, infrastructură de cercetare în zonă</p>
-                        <p><span class="tactical-caution">Atenție:</span> Activitate agricolă sezonieră, respectați proprietățile private</p>
-                        <p><strong>Context istoric:</strong> Zonă cu tradiție în cercetarea agricolă de peste 90 de ani</p>
-                        <p><strong>Contact local:</strong> Primăria Mărculești pentru informații suplimentare</p>
-                    </div>
-                </div>
             </div>
             
             <div class="weather-panel">
