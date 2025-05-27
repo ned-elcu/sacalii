@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Șacalii ACS - Asociația Club Sportiv</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&family=Exo+2:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         * {
@@ -14,7 +14,7 @@
         }
 
         body {
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Exo 2', sans-serif;
             background: #0a0a0a;
             color: #ffffff;
             overflow-x: hidden;
@@ -94,8 +94,11 @@
             left: -200px;
             width: calc(100% + 400px);
             height: 200px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 200"><g fill="%2300d4ff" opacity="0.2"><path d="M100 150c0-20 15-35 35-35s35 15 35 35c0 10-5 18-12 23l8 12c3 5 2 11-3 14s-11 2-14-3l-6-9c-3 1-6 2-9 2s-6-1-9-2l-6 9c-3 5-9 6-14 3s-6-9-3-14l8-12c-7-5-12-13-12-23zm25-25c-8 0-15 7-15 15s7 15 15 15 15-7 15-15-7-15-15-15z"/><path d="M300 140c0-25 20-45 45-45s45 20 45 45c0 12-5 23-13 30l10 15c4 6 2 14-4 18s-14 2-18-4l-8-12c-4 2-8 3-12 3s-8-1-12-3l-8 12c-4 6-12 8-18 4s-8-12-4-18l10-15c-8-7-13-18-13-30zm30-30c-10 0-18 8-18 18s8 18 18 18 18-8 18-18-8-18-18-18z"/><path d="M500 145c0-22 18-40 40-40s40 18 40 40c0 11-4 21-11 28l9 14c3 5 2 12-3 15s-12 2-15-3l-7-11c-4 2-8 3-13 3s-9-1-13-3l-7 11c-3 5-10 6-15 3s-6-10-3-15l9-14c-7-7-11-17-11-28zm25-25c-9 0-16 7-16 16s7 16 16 16 16-7 16-16-7-16-16-16z"/><path d="M700 135c0-28 22-50 50-50s50 22 50 50c0 14-6 26-15 35l12 18c4 7 2 16-5 20s-16 2-20-5l-9-14c-5 3-10 4-16 4s-11-1-16-4l-9 14c-4 7-13 9-20 5s-9-13-5-20l12-18c-9-9-15-21-15-35zm35-35c-12 0-22 10-22 22s10 22 22 22 22-10 22-22-10-22-22-22z"/><path d="M900 140c0-25 20-45 45-45s45 20 45 45c0 12-5 23-13 30l10 15c4 6 2 14-4 18s-14 2-18-4l-8-12c-4 2-8 3-12 3s-8-1-12-3l-8 12c-4 6-12 8-18 4s-8-12-4-18l10-15c-8-7-13-18-13-30zm30-30c-10 0-18 8-18 18s8 18 18 18 18-8 18-18-8-18-18-18z"/></g></svg>') repeat-x;
-            background-size: auto 100%;
+            background: url('./images/silueta.png') repeat-x;
+            background-size: 300px auto;
+            background-position: center;
+            filter: sepia(100%) saturate(1000%) hue-rotate(180deg) brightness(0.8);
+            opacity: 0.4;
             animation: wolfPackMove 25s linear infinite;
             z-index: 1;
         }
@@ -164,7 +167,7 @@
         }
 
         .main-subtitle {
-            font-family: 'Orbitron', monospace;
+            font-family: 'Quantico', monospace;
             font-size: 32px;
             font-weight: 700;
             letter-spacing: 4px;
@@ -175,7 +178,7 @@
         }
 
         .sub-subtitle {
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Exo 2', sans-serif;
             font-size: 20px;
             font-weight: 600;
             letter-spacing: 3px;
@@ -276,18 +279,25 @@
             100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
         }
 
-        /* SLIDESHOW SECTION */
+        /* SLIDESHOW SECTION - FIXED */
         .slideshow-section {
+            width: 100vw;
             height: 100vh;
             position: relative;
             overflow: hidden;
             background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            margin: 0;
+            padding: 0;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .slideshow-container {
             position: relative;
             width: 100%;
             height: 100%;
+            margin: 0;
+            padding: 0;
         }
 
         .slide {
@@ -301,7 +311,6 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            /* Visible background when no image is loaded */
             background-color: #2a2a2a;
         }
 
@@ -310,22 +319,22 @@
         }
 
         .slide:nth-child(1) {
-            background-image: url('/images/training.jpg');
+            background-image: url('./images/training.jpg');
             background-color: #1a2a3a;
         }
 
         .slide:nth-child(2) {
-            background-image: url('/images/brotherhood.jpg');
+            background-image: url('./images/brotherhood.jpg');
             background-color: #2a3a1a;
         }
 
         .slide:nth-child(3) {
-            background-image: url('/images/equipment.jpg');
+            background-image: url('./images/equipment.jpg');
             background-color: #3a1a2a;
         }
 
         .slide:nth-child(4) {
-            background-image: url('/images/competitions.jpg');
+            background-image: url('./images/competitions.jpg');
             background-color: #3a2a1a;
         }
 
@@ -350,7 +359,7 @@
         }
 
         .slide-title {
-            font-family: 'Orbitron', monospace;
+            font-family: 'Quantico', monospace;
             font-size: 24px;
             font-weight: 700;
             color: #ffffff;
@@ -360,7 +369,7 @@
         }
 
         .slide-text {
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Exo 2', sans-serif;
             font-size: 16px;
             color: #e5e7eb;
             max-width: 400px;
@@ -441,7 +450,7 @@
         }
 
         .contact-title {
-            font-family: 'Orbitron', monospace;
+            font-family: 'Quantico', monospace;
             font-size: 42px;
             font-weight: 900;
             margin-bottom: 40px;
@@ -483,7 +492,7 @@
         .contact-text {
             font-size: 22px;
             font-weight: 600;
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Exo 2', sans-serif;
         }
 
         /* WEATHER API SECTION */
@@ -502,7 +511,7 @@
 
         .weather-title {
             grid-column: 1 / -1;
-            font-family: 'Orbitron', monospace;
+            font-family: 'Quantico', monospace;
             font-size: 48px;
             font-weight: 900;
             text-align: center;
@@ -572,14 +581,14 @@
             font-size: 24px;
             color: #00d4ff;
             margin-bottom: 10px;
-            font-family: 'Orbitron', monospace;
+            font-family: 'Quantico', monospace;
             font-weight: 700;
         }
 
         .map-coords {
             font-size: 16px;
             color: #22c55e;
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Exo 2', sans-serif;
             font-weight: 600;
         }
 
@@ -602,7 +611,7 @@
         }
 
         .weather-temp {
-            font-family: 'Orbitron', monospace;
+            font-family: 'Quantico', monospace;
             font-size: 56px;
             font-weight: 900;
             color: #00d4ff;
@@ -650,7 +659,7 @@
         }
 
         .forecast-temp {
-            font-family: 'Orbitron', monospace;
+            font-family: 'Quantico', monospace;
             font-size: 18px;
             font-weight: 700;
             color: #22c55e;
@@ -704,7 +713,7 @@
         }
 
         .footer-section h3 {
-            font-family: 'Orbitron', monospace;
+            font-family: 'Quantico', monospace;
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 25px;
@@ -929,7 +938,7 @@
         }
 
         .loading-text {
-            font-family: 'Orbitron', monospace;
+            font-family: 'Quantico', monospace;
             font-size: 24px;
             color: #00d4ff;
             text-transform: uppercase;
@@ -958,7 +967,7 @@
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-wolf">
-            <img src="/images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%2300d4ff%22 opacity=%220.7%22/><path d=%22M30 30h40v40h-40z%22 fill=%22%23ffffff%22/></svg>'">
+            <img src="./images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%2300d4ff%22 opacity=%220.7%22/><path d=%22M30 30h40v40h-40z%22 fill=%22%23ffffff%22/></svg>'">
         </div>
         <div class="loading-text">Inițializare Sisteme Tactice...</div>
     </div>
@@ -970,7 +979,7 @@
         
         <!-- BIG LOGO SECTION -->
         <div class="logo-section">
-            <img src="/images/logo.png" alt="Șacalii ACS Logo" class="main-logo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 200%22><defs><filter id=%22glow%22><feGaussianBlur stdDeviation=%223%22 result=%22coloredBlur%22/><feMerge><feMergeNode in=%22coloredBlur%22/><feMergeNode in=%22SourceGraphic%22/></feMerge></filter></defs><rect width=%22400%22 height=%22200%22 fill=%22%23001122%22 stroke=%22%2300d4ff%22 stroke-width=%222%22/><circle cx=%22200%22 cy=%22100%22 r=%2260%22 fill=%22none%22 stroke=%22%2300d4ff%22 stroke-width=%223%22 filter=%22url(%23glow)%22/><text x=%22200%22 y=%2290%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%2300d4ff%22 font-family=%22Orbitron%22 font-size=%2228%22 font-weight=%22bold%22 filter=%22url(%23glow)%22>ȘACALII</text><text x=%22200%22 y=%22115%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23ff6b35%22 font-family=%22Orbitron%22 font-size=%2220%22 font-weight=%22bold%22>ACS</text><text x=%22200%22 y=%22135%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%2322c55e%22 font-family=%22Rajdhani%22 font-size=%2212%22>ASOCIAȚIA CLUB SPORTIV</text></svg>'">
+            <img src="./images/logo.png" alt="Șacalii ACS Logo" class="main-logo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 200%22><defs><filter id=%22glow%22><feGaussianBlur stdDeviation=%223%22 result=%22coloredBlur%22/><feMerge><feMergeNode in=%22coloredBlur%22/><feMergeNode in=%22SourceGraphic%22/></feMerge></filter></defs><rect width=%22400%22 height=%22200%22 fill=%22%23001122%22 stroke=%22%2300d4ff%22 stroke-width=%222%22/><circle cx=%22200%22 cy=%22100%22 r=%2260%22 fill=%22none%22 stroke=%22%2300d4ff%22 stroke-width=%223%22 filter=%22url(%23glow)%22/><text x=%22200%22 y=%2290%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%2300d4ff%22 font-family=%22Quantico%22 font-size=%2228%22 font-weight=%22bold%22 filter=%22url(%23glow)%22>ȘACALII</text><text x=%22200%22 y=%22115%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23ff6b35%22 font-family=%22Quantico%22 font-size=%2220%22 font-weight=%22bold%22>ACS</text><text x=%22200%22 y=%22135%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%2322c55e%22 font-family=%22Exo+2%22 font-size=%2212%22>ASOCIAȚIA CLUB SPORTIV</text></svg>'">
         </div>
 
         <!-- SUBTITLE SECTION -->
@@ -985,7 +994,7 @@
     <section class="transition-space">
         <div class="wolf-howl-container">
             <div class="wolf-howl">
-                <img src="/images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%2300d4ff%22 opacity=%220.7%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%23ffffff%22 font-size=%2240%22>🐺</text></svg>'>
+                <img src="./images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%2300d4ff%22 opacity=%220.7%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%23ffffff%22 font-size=%2240%22>🐺</text></svg>'>
             </div>
         </div>
     </section>
@@ -1184,7 +1193,7 @@
 
     <!-- Back to Top -->
     <button class="back-to-top" id="backToTop">
-        <img src="/images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23ffffff%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%23000000%22 font-size=%2240%22>🐺</text></svg>">
+        <img src="./images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23ffffff%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%23000000%22 font-size=%2240%22>🐺</text></svg>">
     </button>
 
     <script>
