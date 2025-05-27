@@ -802,10 +802,20 @@
             font-size: 48px;
             font-weight: 700;
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 20px;
             color: #c8a87f;
             text-transform: uppercase;
             letter-spacing: 3px;
+        }
+
+        .weather-subtitle {
+            grid-column: 1 / -1;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #81C784;
+            font-weight: 600;
         }
 
         .map-container {
@@ -1502,6 +1512,7 @@
     <section class="weather-section" id="weather">
         <div class="weather-container">
             <h2 class="weather-title">Informații Meteorologice Teren Bază</h2>
+            <p class="weather-subtitle">🌐 Date meteorologice LIVE de la Open-Meteo • Actualizare în timp real</p>
             
             <div class="map-container">
                 <div id="map"></div>
@@ -1632,7 +1643,9 @@
     <script>
         // Initialize Șacalii ACS tactical system
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Initializing Șacalii ACS tactical systems...');
+            console.log('🐺 Initializing Șacalii ACS tactical systems...');
+            console.log('🌐 Real-time weather data: Open-Meteo API');
+            console.log('📍 Location: Slobozia, Ialomița County, Romania');
             
             // Initialize the main tactical components
             const sacaliiSystem = new SacaliiTacticalSystem();
@@ -1901,35 +1914,53 @@
 
             async updateWeatherData() {
                 try {
-                    // Using simulated realistic weather data for enhanced system
-                    this.simulateWeatherData();
+                    // Using Open-Meteo API - Free, no API key required, real weather data
+                    const response = await fetch(
+                        `https://api.open-meteo.com/v1/forecast?latitude=${this.baseLocation.lat}&longitude=${this.baseLocation.lng}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,surface_pressure,wind_speed_10m,wind_direction_10m&hourly=temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max&timezone=Europe/Bucharest`
+                    );
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    console.log('Real weather data received:', data);
+                    
+                    // Process real weather data
+                    this.processRealWeatherData(data);
                     
                 } catch (error) {
-                    console.log('Using simulated weather data');
-                    this.simulateWeatherData();
+                    console.error('Error fetching real weather data:', error);
+                    // Fallback to show error and retry
+                    this.showWeatherError();
                 }
             }
 
-            simulateWeatherData() {
-                // Enhanced realistic weather simulation with seasonal variation
-                const conditions = [
-                    { temp: 22, desc: 'Cer Senin - Operațiuni Optime', humidity: 65, pressure: 1013, wind: 12, visibility: 10, rain: false },
-                    { temp: 25, desc: 'Parțial Înnorat - Vizibilitate Perfectă', humidity: 58, pressure: 1018, wind: 8, visibility: 10, rain: false },
-                    { temp: 18, desc: 'Înnorat - Avantaj Stealth', humidity: 72, pressure: 1008, wind: 15, visibility: 8, rain: false },
-                    { temp: 20, desc: 'Briză Ușoară - Condiții Ideale', humidity: 60, pressure: 1015, wind: 10, visibility: 10, rain: false },
-                    { temp: 15, desc: 'Ploaie Ușoară - Precauție', humidity: 85, pressure: 1005, wind: 18, visibility: 6, rain: true },
-                    { temp: 28, desc: 'Căldură - Hidratare Intensă', humidity: 45, pressure: 1020, wind: 5, visibility: 10, rain: false }
-                ];
+            processRealWeatherData(data) {
+                const current = data.current;
+                const daily = data.daily;
+                const hourly = data.hourly;
                 
-                const current = conditions[Math.floor(Math.random() * conditions.length)];
+                // Convert temperature from Celsius and round
+                const temp = Math.round(current.temperature_2m);
+                const humidity = current.relative_humidity_2m;
+                const pressure = Math.round(current.surface_pressure);
+                const windSpeed = Math.round(current.wind_speed_10m);
+                const precipitation = current.precipitation || 0;
+                
+                // Convert weather code to description
+                const weatherDesc = this.getWeatherDescription(current.weather_code, precipitation > 0);
+                
+                // Calculate visibility based on weather conditions
+                const visibility = this.calculateVisibility(current.weather_code, precipitation);
                 
                 // Update current weather with dynamic colors
                 const currentWeather = document.getElementById('currentWeather');
                 if (currentWeather) {
-                    const tempColor = this.getTemperatureColor(current.temp);
+                    const tempColor = this.getTemperatureColor(temp);
                     currentWeather.innerHTML = `
-                        <div class="weather-temp" style="color: ${tempColor};">${current.temp}°C</div>
-                        <div class="weather-desc">${current.desc}</div>
+                        <div class="weather-temp" style="color: ${tempColor};">${temp}°C</div>
+                        <div class="weather-desc">${weatherDesc}</div>
                     `;
                 }
 
@@ -1937,17 +1968,120 @@
                 const weatherDetails = document.getElementById('weatherDetails');
                 if (weatherDetails) {
                     weatherDetails.style.display = 'grid';
-                    this.updateWeatherDetail('humidity', current.humidity, '%', this.getHumidityColor(current.humidity));
-                    this.updateWeatherDetail('pressure', current.pressure, ' hPa', this.getPressureColor(current.pressure));
-                    this.updateWeatherDetail('windSpeed', current.wind, ' km/h', this.getWindColor(current.wind));
-                    this.updateWeatherDetail('visibility', current.visibility, ' km', this.getVisibilityColor(current.visibility));
+                    this.updateWeatherDetail('humidity', humidity, '%', this.getHumidityColor(humidity));
+                    this.updateWeatherDetail('pressure', pressure, ' hPa', this.getPressureColor(pressure));
+                    this.updateWeatherDetail('windSpeed', windSpeed, ' km/h', this.getWindColor(windSpeed));
+                    this.updateWeatherDetail('visibility', visibility, ' km', this.getVisibilityColor(visibility));
                 }
 
-                // Update ground conditions assessment
-                this.updateGroundConditions(current);
+                // Create current conditions object for ground assessment
+                const currentConditions = {
+                    temp: temp,
+                    humidity: humidity,
+                    pressure: pressure,
+                    wind: windSpeed,
+                    visibility: visibility,
+                    rain: precipitation > 0,
+                    precipitation: precipitation
+                };
 
-                // Update 5-day forecast
-                this.updateForecast();
+                // Update ground conditions assessment with real data
+                this.updateGroundConditions(currentConditions);
+
+                // Update 5-day forecast with real data
+                this.updateRealForecast(daily);
+            }
+
+            getWeatherDescription(weatherCode, hasRain) {
+                // WMO Weather interpretation codes (WW)
+                const weatherCodes = {
+                    0: 'Cer Senin - Operațiuni Optime',
+                    1: 'Predominant Senin - Condiții Excelente', 
+                    2: 'Parțial Înnorat - Vizibilitate Perfectă',
+                    3: 'Înnorat - Avantaj Stealth',
+                    45: 'Ceață - Vizibilitate Redusă',
+                    48: 'Ceață Înghețată - Condiții Extreme',
+                    51: 'Burnință Ușoară - Precauție Moderată',
+                    53: 'Burnință Moderată - Echipament Impermeabil',
+                    55: 'Burnință Intensă - Vizibilitate Afectată',
+                    56: 'Burnință Înghețată Ușoară - Risc Alunecare',
+                    57: 'Burnință Înghețată Intensă - Pericol Maxim',
+                    61: 'Ploaie Ușoară - Precauție Standard',
+                    63: 'Ploaie Moderată - Echipament Complet',
+                    65: 'Ploaie Intensă - Operațiuni Suspendate',
+                    66: 'Ploaie Înghețată Ușoară - Risc Extrem',
+                    67: 'Ploaie Înghețată Intensă - Evacuare Imediată',
+                    71: 'Zăpadă Ușoară - Tactici de Iarnă',
+                    73: 'Zăpadă Moderată - Echipament Arctic',
+                    75: 'Zăpadă Intensă - Misiune Anulată',
+                    77: 'Granule de Zăpadă - Condiții Imprevizibile',
+                    80: 'Averse Ușoare - Alertă Meteorologică',
+                    81: 'Averse Moderate - Proceduri de Urgență',
+                    82: 'Averse Violente - Cod Roșu Operațional',
+                    85: 'Averse de Zăpadă Ușoare - Pregătire Iarnă',
+                    86: 'Averse de Zăpadă Intense - Blocaj Complet',
+                    95: 'Furtună - Evacuare Imediată',
+                    96: 'Furtună cu Grindină Ușoară - Risc Maxim',
+                    99: 'Furtună cu Grindină Intensă - Cod Negru'
+                };
+                
+                return weatherCodes[weatherCode] || `Condiții Necunoscute (${weatherCode})`;
+            }
+
+            calculateVisibility(weatherCode, precipitation) {
+                // Calculate visibility based on weather conditions
+                if (weatherCode === 45 || weatherCode === 48) return 1; // Fog
+                if (weatherCode >= 95) return 2; // Thunderstorms
+                if (weatherCode >= 80) return 4; // Heavy showers
+                if (weatherCode >= 61 && precipitation > 2) return 6; // Heavy rain
+                if (weatherCode >= 51) return 8; // Light rain/drizzle
+                if (weatherCode >= 3) return 10; // Cloudy but clear
+                return 15; // Clear conditions
+            }
+
+            updateRealForecast(dailyData) {
+                const forecastContainer = document.getElementById('forecastContainer');
+                if (!forecastContainer || !dailyData) return;
+
+                const days = ['Azi', 'Mâine', 'Poimâine', 'Joi', 'Vineri'];
+                
+                forecastContainer.style.display = 'grid';
+                forecastContainer.innerHTML = '';
+
+                for (let i = 0; i < Math.min(5, dailyData.time.length); i++) {
+                    const maxTemp = Math.round(dailyData.temperature_2m_max[i]);
+                    const minTemp = Math.round(dailyData.temperature_2m_min[i]);
+                    const rainProb = dailyData.precipitation_probability_max[i] || 0;
+
+                    const forecastDay = document.createElement('div');
+                    forecastDay.className = 'forecast-day';
+                    forecastDay.innerHTML = `
+                        <div class="forecast-date">${days[i]}</div>
+                        <div class="forecast-temp" style="color: ${this.getTemperatureColor(maxTemp)}">${minTemp}°/${maxTemp}°C</div>
+                        <div class="forecast-rain">
+                            <span class="material-icons" style="font-size: 12px;">opacity</span>
+                            ${rainProb}%
+                        </div>
+                    `;
+                    forecastContainer.appendChild(forecastDay);
+                }
+            }
+
+            showWeatherError() {
+                const currentWeather = document.getElementById('currentWeather');
+                if (currentWeather) {
+                    currentWeather.innerHTML = `
+                        <div class="loading-weather" style="color: #E57373;">
+                            ⚠️ Eroare la încărcarea datelor meteo<br>
+                            <small>Se reîncearcă în 5 minute...</small>
+                        </div>
+                    `;
+                }
+                
+                // Retry after 5 minutes
+                setTimeout(() => {
+                    this.updateWeatherData();
+                }, 300000);
             }
 
             updateWeatherDetail(id, value, unit, color) {
@@ -1998,60 +2132,82 @@
                 return '#C8A87F'; // Good - Gold
             }
 
-            // Ground Conditions Assessment
+            // Ground Conditions Assessment - ENHANCED FOR REAL SAFETY DATA
             updateGroundConditions(weather) {
                 const groundConditions = document.getElementById('groundConditions');
                 if (!groundConditions) return;
 
                 groundConditions.style.display = 'block';
 
-                // Simulate rain in last 24h based on current conditions
-                const recentRain = weather.rain || (weather.humidity > 80 && Math.random() > 0.7);
-                const hourssinceRain = recentRain ? Math.floor(Math.random() * 12) : Math.floor(Math.random() * 48) + 24;
-
-                // Calculate ground wetness
+                // Real-time ground analysis based on actual weather data
+                const currentTime = new Date();
+                const currentHour = currentTime.getHours();
+                
+                // Assess recent precipitation impact (real data)
+                const hasRecentRain = weather.precipitation > 0 || weather.rain;
+                const isCurrentlyRaining = weather.precipitation > 0;
+                
+                // Calculate ground wetness based on real conditions
                 let wetness, wetnessColor, wetnessIcon;
-                if (!recentRain && weather.temp > 15) {
-                    wetness = 'USCAT';
-                    wetnessColor = '#C8A87F';
-                    wetnessIcon = '☀️';
-                } else if (hourssinceRain > 12 && weather.wind > 10) {
+                if (isCurrentlyRaining) {
+                    if (weather.precipitation > 5) {
+                        wetness = 'FOARTE UMED';
+                        wetnessColor = '#E57373';
+                        wetnessIcon = '🌊';
+                    } else {
+                        wetness = 'UMED';
+                        wetnessColor = '#FFB74D';
+                        wetnessIcon = '🌧️';
+                    }
+                } else if (hasRecentRain) {
                     wetness = 'UȘOR UMED';
                     wetnessColor = '#81C784';
                     wetnessIcon = '🌤️';
-                } else if (hourssinceRain > 6 || weather.humidity > 70) {
-                    wetness = 'UMED';
-                    wetnessColor = '#FFB74D';
-                    wetnessIcon = '🌧️';
+                } else if (weather.temp > 15 && weather.humidity < 70) {
+                    wetness = 'USCAT';
+                    wetnessColor = '#C8A87F';
+                    wetnessIcon = '☀️';
+                } else if (weather.humidity > 85) {
+                    wetness = 'UȘOR UMED';
+                    wetnessColor = '#81C784';
+                    wetnessIcon = '💧';
                 } else {
-                    wetness = 'FOARTE UMED';
-                    wetnessColor = '#E57373';
-                    wetnessIcon = '🌊';
+                    wetness = 'USCAT';
+                    wetnessColor = '#C8A87F';
+                    wetnessIcon = '☀️';
                 }
 
-                // Calculate grip conditions
+                // Calculate grip conditions based on multiple real factors
                 let grip, gripColor, gripIcon;
-                if (wetness === 'USCAT' && weather.wind < 15) {
-                    grip = 'EXCELENT';
-                    gripColor = '#C8A87F';
-                    gripIcon = '🔒';
-                } else if (wetness === 'UȘOR UMED' || weather.wind < 20) {
-                    grip = 'BUN';
-                    gripColor = '#81C784';
-                    gripIcon = '✅';
-                } else if (wetness === 'UMED' || weather.wind < 25) {
-                    grip = 'MODERAT';
-                    gripColor = '#FFB74D';
-                    gripIcon = '⚠️';
-                } else {
+                if (isCurrentlyRaining || weather.temp < 5) {
                     grip = 'RISC ALUNECARE';
                     gripColor = '#E57373';
                     gripIcon = '⚠️';
+                } else if (wetness === 'FOARTE UMED' || (weather.wind > 25 && wetness !== 'USCAT')) {
+                    grip = 'RISC ALUNECARE';
+                    gripColor = '#E57373';
+                    gripIcon = '⚠️';
+                } else if (wetness === 'UMED' || weather.wind > 20) {
+                    grip = 'MODERAT';
+                    gripColor = '#FFB74D';
+                    gripIcon = '⚠️';
+                } else if (wetness === 'UȘOR UMED' && weather.wind < 15) {
+                    grip = 'BUN';
+                    gripColor = '#81C784';
+                    gripIcon = '✅';
+                } else if (wetness === 'USCAT' && weather.wind < 20) {
+                    grip = 'EXCELENT';
+                    gripColor = '#C8A87F';
+                    gripIcon = '🔒';
+                } else {
+                    grip = 'BUN';
+                    gripColor = '#81C784';
+                    gripIcon = '✅';
                 }
 
-                // Calculate visibility conditions
+                // Calculate visibility conditions based on real weather
                 let visCondition, visColor, visIcon;
-                if (weather.visibility >= 10) {
+                if (weather.visibility >= 12) {
                     visCondition = 'PERFECTĂ';
                     visColor = '#C8A87F';
                     visIcon = '👁️';
@@ -2063,35 +2219,85 @@
                     visCondition = 'LIMITATĂ';
                     visColor = '#FFB74D';
                     visIcon = '🌫️';
-                } else {
+                } else if (weather.visibility >= 2) {
                     visCondition = 'SLABĂ';
                     visColor = '#E57373';
                     visIcon = '⚡';
+                } else {
+                    visCondition = 'CRITICĂ';
+                    visColor = '#E57373';
+                    visIcon = '❌';
                 }
 
-                // Calculate operational status
+                // Calculate operational status - ENHANCED SAFETY LOGIC
                 let opStatus, opColor, opIcon, opDesc;
-                const goodConditions = (wetness === 'USCAT' || wetness === 'UȘOR UMED') && grip !== 'RISC ALUNECARE' && weather.visibility >= 8;
-                const okConditions = wetness !== 'FOARTE UMED' && grip !== 'RISC ALUNECARE' && weather.visibility >= 5;
-
-                if (goodConditions) {
-                    opStatus = 'OPERAȚIONAL';
-                    opColor = '#C8A87F';
-                    opIcon = '✅';
-                    opDesc = 'Condiții excelente pentru airsoft';
-                } else if (okConditions) {
-                    opStatus = 'CONDIȚIONAT';
-                    opColor = '#FFB74D';
-                    opIcon = '⚠️';
-                    opDesc = 'Exercitați precauție suplimentară';
-                } else {
+                
+                // Critical conditions - immediate danger
+                if (isCurrentlyRaining && weather.precipitation > 2) {
                     opStatus = 'NERECOMANDAT';
                     opColor = '#E57373';
                     opIcon = '❌';
-                    opDesc = 'Amânați activitățile airsoft';
+                    opDesc = 'Ploaie intensă - STOP operațiuni';
+                } else if (weather.temp < 2 || weather.temp > 35) {
+                    opStatus = 'NERECOMANDAT';
+                    opColor = '#E57373';
+                    opIcon = '❌';
+                    opDesc = 'Temperature extreme - risc pentru sănătate';
+                } else if (weather.wind > 30) {
+                    opStatus = 'NERECOMANDAT';
+                    opColor = '#E57373';
+                    opIcon = '❌';
+                    opDesc = 'Vânt puternic - pericol proiectile';
+                } else if (weather.visibility < 3) {
+                    opStatus = 'NERECOMANDAT';
+                    opColor = '#E57373';
+                    opIcon = '❌';
+                    opDesc = 'Vizibilitate critică - risc accident';
+                } else if (grip === 'RISC ALUNECARE' && wetness === 'FOARTE UMED') {
+                    opStatus = 'NERECOMANDAT';
+                    opColor = '#E57373';
+                    opIcon = '❌';
+                    opDesc = 'Teren foarte alunecos - risc cădereSERIOS';
+                }
+                // Conditional operations - proceed with caution
+                else if (isCurrentlyRaining || weather.wind > 20 || grip === 'RISC ALUNECARE') {
+                    opStatus = 'CONDIȚIONAT';
+                    opColor = '#FFB74D';
+                    opIcon = '⚠️';
+                    opDesc = 'Precauție maximă - monitorizare continuă';
+                } else if (wetness === 'UMED' || weather.visibility < 8 || grip === 'MODERAT') {
+                    opStatus = 'CONDIȚIONAT';
+                    opColor = '#FFB74D';
+                    opIcon = '⚠️';
+                    opDesc = 'Condiții acceptabile - atenție sporită';
+                }
+                // Good conditions
+                else if (wetness === 'USCAT' && grip === 'EXCELENT' && weather.visibility >= 10) {
+                    opStatus = 'OPERAȚIONAL';
+                    opColor = '#C8A87F';
+                    opIcon = '✅';
+                    opDesc = 'Condiții optime pentru airsoft';
+                } else {
+                    opStatus = 'OPERAȚIONAL';
+                    opColor = '#81C784';
+                    opIcon = '✅';
+                    opDesc = 'Condiții bune pentru activități';
                 }
 
-                // Update ground metrics
+                // Add temperature considerations
+                if (weather.temp < 5 && opStatus === 'OPERAȚIONAL') {
+                    opStatus = 'CONDIȚIONAT';
+                    opColor = '#FFB74D';
+                    opIcon = '⚠️';
+                    opDesc = 'Temperaturi scăzute - echipament termic necesar';
+                } else if (weather.temp > 30 && opStatus === 'OPERAȚIONAL') {
+                    opStatus = 'CONDIȚIONAT';
+                    opColor = '#FFB74D';
+                    opIcon = '⚠️';
+                    opDesc = 'Temperaturi ridicate - hidratare frecventă';
+                }
+
+                // Update ground metrics with real assessments
                 this.updateGroundMetric('groundWetness', wetnessIcon, wetness, wetnessColor);
                 this.updateGroundMetric('groundGrip', gripIcon, grip, gripColor);
                 this.updateGroundMetric('groundVisibility', visIcon, visCondition, visColor);
@@ -2107,6 +2313,21 @@
                         <div class="operational-status-desc" style="color: ${opColor};">${opDesc}</div>
                     `;
                 }
+
+                // Add safety recommendations based on conditions
+                this.addSafetyRecommendations(weather, opStatus);
+            }
+
+            addSafetyRecommendations(weather, opStatus) {
+                // This could be expanded to show specific safety recommendations
+                // based on current weather conditions
+                console.log(`Safety Status: ${opStatus} for conditions:`, {
+                    temp: weather.temp,
+                    humidity: weather.humidity,
+                    wind: weather.wind,
+                    visibility: weather.visibility,
+                    precipitation: weather.precipitation
+                });
             }
 
             updateGroundMetric(id, icon, value, color) {
@@ -2123,32 +2344,6 @@
                         valueElement.textContent = value;
                         valueElement.style.color = color;
                     }
-                }
-            }
-
-            updateForecast() {
-                const forecastContainer = document.getElementById('forecastContainer');
-                if (!forecastContainer) return;
-
-                const days = ['Azi', 'Mâine', 'Joi', 'Vin', 'Sâm'];
-                const temps = [22, 25, 24, 21, 23];
-                const rains = [10, 5, 15, 40, 20];
-
-                forecastContainer.style.display = 'grid';
-                forecastContainer.innerHTML = '';
-
-                for (let i = 0; i < 5; i++) {
-                    const forecastDay = document.createElement('div');
-                    forecastDay.className = 'forecast-day';
-                    forecastDay.innerHTML = `
-                        <div class="forecast-date">${days[i]}</div>
-                        <div class="forecast-temp" style="color: ${this.getTemperatureColor(temps[i])}">${temps[i]}°C</div>
-                        <div class="forecast-rain">
-                            <span class="material-icons" style="font-size: 12px;">opacity</span>
-                            ${rains[i]}%
-                        </div>
-                    `;
-                    forecastContainer.appendChild(forecastDay);
                 }
             }
 
