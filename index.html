@@ -19,7 +19,67 @@
             color: #ffffff;
             overflow-x: hidden;
             scroll-behavior: smooth;
-            cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2" fill="%23c8a87f"/><circle cx="12" cy="12" r="8" fill="none" stroke="%23c8a87f" stroke-width="1"/><line x1="12" y1="4" x2="12" y2="8" stroke="%23c8a87f" stroke-width="1"/><line x1="12" y1="16" x2="12" y2="20" stroke="%23c8a87f" stroke-width="1"/><line x1="4" y1="12" x2="8" y2="12" stroke="%23c8a87f" stroke-width="1"/><line x1="16" y1="12" x2="20" y2="12" stroke="%23c8a87f" stroke-width="1"/></svg>') 12 12, crosshair;
+        }
+
+        /* Loading Screen - FIXED */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: all 0.5s ease-out;
+        }
+
+        .loading-screen.hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loading-wolf {
+            width: 96px;
+            height: 96px;
+            animation: loadingPulse 1.5s ease-in-out infinite;
+            margin-bottom: 30px;
+        }
+
+        .loading-wolf img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px #c8a87f);
+        }
+
+        .loading-text {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 24px;
+            color: #c8a87f;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: loadingText 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loadingPulse {
+            0%, 100% { 
+                transform: scale(1); 
+                filter: drop-shadow(0 0 20px #c8a87f);
+            }
+            50% { 
+                transform: scale(1.2); 
+                filter: drop-shadow(0 0 40px #aa1f12);
+            }
+        }
+
+        @keyframes loadingText {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
         }
 
         /* HERO SPACE SECTION */
@@ -87,7 +147,7 @@
             }
         }
 
-        /* Wolf Pack Parallax - FIXED */
+        /* Wolf Pack Parallax */
         .wolf-pack-parallax {
             position: absolute;
             top: 30%;
@@ -101,7 +161,7 @@
             opacity: 0.4;
             animation: wolfPackMove 25s linear infinite;
             z-index: 1;
-            transform: scaleX(-1); /* Flip horizontally to correct direction */
+            transform: scaleX(-1);
         }
 
         @keyframes wolfPackMove {
@@ -149,7 +209,7 @@
             width: 300px;
             height: 300px;
             transform: translate(-50%, -50%);
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><circle cx="150" cy="150" r="140" fill="none" stroke="%23c8a87f" stroke-width="2" opacity="0.3"/><circle cx="150" cy="150" r="100" fill="none" stroke="%23c8a87f" stroke-width="1" opacity="0.5"/><circle cx="150" cy="150" r="60" fill="none" stroke="%23c8a87f" stroke-width="1" opacity="0.7"/><line x1="150" y1="10" x2="150" y2="50" stroke="%23c8a87f" stroke-width="2" opacity="0.6"/><line x1="150" y1="250" x2="150" y2="290" stroke="%23c8a87f" stroke-width="2" opacity="0.6"/><line x1="10" y1="150" x2="50" y2="150" stroke="%23c8a87f" stroke-width="2" opacity="0.6"/><line x1="250" y1="150" x2="290" y2="150" stroke="%23c8a87f" stroke-width="2" opacity="0.6"/></svg>');
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Ccircle cx='150' cy='150' r='140' fill='none' stroke='%23c8a87f' stroke-width='2' opacity='0.3'/%3E%3Ccircle cx='150' cy='150' r='100' fill='none' stroke='%23c8a87f' stroke-width='1' opacity='0.5'/%3E%3Ccircle cx='150' cy='150' r='60' fill='none' stroke='%23c8a87f' stroke-width='1' opacity='0.7'/%3E%3Cline x1='150' y1='10' x2='150' y2='50' stroke='%23c8a87f' stroke-width='2' opacity='0.6'/%3E%3Cline x1='150' y1='250' x2='150' y2='290' stroke='%23c8a87f' stroke-width='2' opacity='0.6'/%3E%3Cline x1='10' y1='150' x2='50' y2='150' stroke='%23c8a87f' stroke-width='2' opacity='0.6'/%3E%3Cline x1='250' y1='150' x2='290' y2='150' stroke='%23c8a87f' stroke-width='2' opacity='0.6'/%3E%3C/svg%3E");
             animation: crosshairRotate 8s linear infinite;
             z-index: -1;
         }
@@ -280,7 +340,7 @@
             100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
         }
 
-        /* SLIDESHOW SECTION - COMPLETELY REBUILT */
+        /* SLIDESHOW SECTION */
         .slideshow-section {
             width: 100vw;
             height: 100vh;
@@ -471,7 +531,7 @@
             font-size: 32px;
         }
 
-        /* CONTACT AREA - FIXED BACKGROUND */
+        /* CONTACT AREA */
         .contact-section {
             padding: 100px 60px;
             background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
@@ -749,31 +809,12 @@
             gap: 5px;
         }
 
-        /* FOOTER - SEAMLESS WAVE ANIMATION */
+        /* FOOTER */
         .footer {
             background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
             padding: 80px 60px 40px;
             position: relative;
             overflow: hidden;
-        }
-
-        .footer-wolf {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 200%;
-            height: 100%;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 200"><g fill="%23333" opacity="0.2"><path d="M0 100c60-25 120-15 180 0s120 25 180 0 120-25 180 0 120 25 180 0 120-25 180 0 120 25 180 0 120-25 180 0s120 25 180 0 120-25 180 0 120 25 180 0 120-25 180 0 120 25 180 0 120-25 180 0v100H0z"/></g></svg>');
-            background-repeat: repeat-x;
-            background-position: bottom;
-            background-size: 1200px 200px;
-            animation: seamlessWaveMove 30s linear infinite;
-            z-index: 1;
-        }
-
-        @keyframes seamlessWaveMove {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-1200px); }
         }
 
         .footer-content {
@@ -980,72 +1021,14 @@
                 right: 20px;
             }
         }
-
-        /* Loading Screen */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            transition: opacity 0.8s ease;
-        }
-
-        .loading-screen.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loading-wolf {
-            width: 96px;
-            height: 96px;
-            animation: loadingPulse 2s ease-in-out infinite;
-            margin-bottom: 30px;
-        }
-
-        .loading-wolf img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .loading-text {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 24px;
-            color: #c8a87f;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            animation: loadingText 2s ease-in-out infinite;
-        }
-
-        @keyframes loadingPulse {
-            0%, 100% { 
-                transform: scale(1); 
-                filter: drop-shadow(0 0 20px #c8a87f);
-            }
-            50% { 
-                transform: scale(1.3); 
-                filter: drop-shadow(0 0 40px #aa1f12);
-            }
-        }
-
-        @keyframes loadingText {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
-        }
     </style>
 </head>
+
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-wolf">
-            <img src="./images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22 opacity=%220.7%22/><path d=%22M30 30h40v40h-40z%22 fill=%22%23ffffff%22/></svg>'">
+            <img src="./images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22 opacity=%220.7%22/%3E%3Cpath d=%22M30 30h40v40h-40z%22 fill=%22%23ffffff%22/%3E%3C/svg%3E'">
         </div>
         <div class="loading-text">Inițializare Sisteme Tactice...</div>
     </div>
@@ -1057,7 +1040,8 @@
         
         <!-- BIG LOGO SECTION -->
         <div class="logo-section">
-            <img src="./images/logo.png" alt="Șacalii ACS Logo" class="main-logo" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 200%22><defs><filter id=%22glow%22><feGaussianBlur stdDeviation=%223%22 result=%22coloredBlur%22/><feMerge><feMergeNode in=%22coloredBlur%22/><feMergeNode in=%22SourceGraphic%22/></feMerge></filter></defs><rect width=%22400%22 height=%22200%22 fill=%22%23001122%22 stroke=%22%23c8a87f%22 stroke-width=%222%22/><circle cx=%22200%22 cy=%22100%22 r=%2260%22 fill=%22none%22 stroke=%22%23c8a87f%22 stroke-width=%223%22 filter=%22url(%23glow)%22/><text x=%22200%22 y=%2290%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23c8a87f%22 font-family=%22IBM+Plex+Mono%22 font-size=%2228%22 font-weight=%22bold%22 filter=%22url(%23glow)%22>ȘACALII</text><text x=%22200%22 y=%22115%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23aa1f12%22 font-family=%22IBM+Plex+Mono%22 font-size=%2220%22 font-weight=%22bold%22>ACS</text><text x=%22200%22 y=%22135%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23c8a87f%22 font-family=%22IBM+Plex+Sans%22 font-size=%2212%22>ASOCIAȚIA CLUB SPORTIV</text></svg>'">
+            <img src="./images/logo.png" alt="Șacalii ACS Logo" class="main-logo" 
+                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 200%22%3E%3Cdefs%3E%3Cfilter id=%22glow%22%3E%3CfeGaussianBlur stdDeviation=%223%22 result=%22coloredBlur%22/%3E%3CfeMerge%3E%3CfeMergeNode in=%22coloredBlur%22/%3E%3CfeMergeNode in=%22SourceGraphic%22/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Crect width=%22400%22 height=%22200%22 fill=%22%23001122%22 stroke=%22%23c8a87f%22 stroke-width=%222%22/%3E%3Ccircle cx=%22200%22 cy=%22100%22 r=%2260%22 fill=%22none%22 stroke=%22%23c8a87f%22 stroke-width=%223%22 filter=%22url(%23glow)%22/%3E%3Ctext x=%22200%22 y=%2290%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23c8a87f%22 font-family=%22IBM+Plex+Mono%22 font-size=%2228%22 font-weight=%22bold%22 filter=%22url(%23glow)%22%3EȘACALII%3C/text%3E%3Ctext x=%22200%22 y=%22115%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23aa1f12%22 font-family=%22IBM+Plex+Mono%22 font-size=%2220%22 font-weight=%22bold%22%3EACS%3C/text%3E%3Ctext x=%22200%22 y=%22135%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23c8a87f%22 font-family=%22IBM+Plex+Sans%22 font-size=%2212%22%3EASOCIAȚIA CLUB SPORTIV%3C/text%3E%3C/svg%3E'">
         </div>
 
         <!-- SUBTITLE SECTION -->
@@ -1072,18 +1056,20 @@
     <section class="transition-space">
         <div class="wolf-howl-container">
             <div class="wolf-howl">
-                <img src="./images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22 opacity=%220.7%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%23ffffff%22 font-size=%2240%22>🐺</text></svg>'>
+                <img src="./images/wolf.png" alt="Wolf" 
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22 opacity=%220.7%22/%3E%3Ctext x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%23ffffff%22 font-size=%2240%22%3E🐺%3C/text%3E%3C/svg%3E'">
             </div>
         </div>
     </section>
 
-    <!-- SLIDESHOW SECTION - COMPLETELY REBUILT -->
+    <!-- SLIDESHOW SECTION -->
     <section class="slideshow-section">
         <div class="slideshow-container">
             <div class="slide active">
                 <div class="slide-content">
                     <div class="slide-icon">
-                        <img src="./images/wolf.png" alt="Training Icon" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22/></svg>'">
+                        <img src="./images/wolf.png" alt="Training Icon" 
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22/%3E%3C/svg%3E'">
                     </div>
                     <h2 class="slide-title">Antrenament</h2>
                     <p class="slide-description">Sesiuni intensive de pregătire tactică pentru dezvoltarea abilităților de combat</p>
@@ -1094,7 +1080,8 @@
             <div class="slide">
                 <div class="slide-content">
                     <div class="slide-icon">
-                        <img src="./images/wolf.png" alt="Brotherhood Icon" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22/></svg>'">
+                        <img src="./images/wolf.png" alt="Brotherhood Icon" 
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22/%3E%3C/svg%3E'">
                     </div>
                     <h2 class="slide-title">Frăție</h2>
                     <p class="slide-description">Spiritul de echipă și loialitatea ce ne definește ca haită</p>
@@ -1105,7 +1092,8 @@
             <div class="slide">
                 <div class="slide-content">
                     <div class="slide-icon">
-                        <img src="./images/wolf.png" alt="Equipment Icon" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22/></svg>'">
+                        <img src="./images/wolf.png" alt="Equipment Icon" 
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22/%3E%3C/svg%3E'">
                     </div>
                     <h2 class="slide-title">Echipament</h2>
                     <p class="slide-description">Tehnologie avansată și gear profesional pentru performanță maximă</p>
@@ -1116,7 +1104,8 @@
             <div class="slide">
                 <div class="slide-content">
                     <div class="slide-icon">
-                        <img src="./images/wolf.png" alt="Competition Icon" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22/></svg>'">
+                        <img src="./images/wolf.png" alt="Competition Icon" 
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22/%3E%3C/svg%3E'">
                     </div>
                     <h2 class="slide-title">Competiții</h2>
                     <p class="slide-description">Victorii și performanțe de elită în competițiile naționale și internaționale</p>
@@ -1239,7 +1228,6 @@
 
     <!-- FOOTER -->
     <footer class="footer">
-        <div class="footer-wolf"></div>
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Șacalii ACS</h3>
@@ -1296,38 +1284,57 @@
 
     <!-- Back to Top -->
     <button class="back-to-top" id="backToTop">
-        <img src="./images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23ffffff%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%23000000%22 font-size=%2240%22>🐺</text></svg>">
+        <img src="./images/wolf.png" alt="Wolf" 
+             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23ffffff%22/%3E%3Ctext x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%23000000%22 font-size=%2240%22%3E🐺%3C/text%3E%3C/svg%3E'">
     </button>
 
     <script>
-        // Initialize components functionality
-        class SacaliiComponents {
+        // Initialize Șacalii ACS tactical system
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Initializing Șacalii ACS tactical systems...');
+            
+            // Initialize the main tactical components
+            const sacaliiSystem = new SacaliiTacticalSystem();
+            
+            // Hide loading screen after 1 second
+            setTimeout(function() {
+                const loadingScreen = document.getElementById('loadingScreen');
+                if (loadingScreen) {
+                    loadingScreen.classList.add('hide');
+                    console.log('Loading screen hidden');
+                }
+            }, 1000);
+        });
+
+        // Main Tactical System Class
+        class SacaliiTacticalSystem {
             constructor() {
                 this.currentSlide = 0;
-                this.slides = document.querySelectorAll('.slide');
-                this.navDots = document.querySelectorAll('.nav-dot');
+                this.slides = [];
+                this.navDots = [];
                 this.slideInterval = null;
                 this.init();
             }
 
             init() {
-                this.createTacticalParticles();
-                this.initializeSlideshow();
-                this.initializeScrollEffects();
-                this.initializeWeatherSystem();
-                this.initializeClock();
-                this.initializeParallaxEffects();
-                
-                // Hide loading screen with tactical timing
-                setTimeout(() => {
-                    document.getElementById('loadingScreen').classList.add('hidden');
-                }, 2500);
+                try {
+                    this.createTacticalParticles();
+                    this.initializeSlideshow();
+                    this.initializeScrollEffects();
+                    this.initializeWeatherSystem();
+                    this.initializeClock();
+                    this.initializeParallaxEffects();
+                    console.log('All tactical systems initialized successfully');
+                } catch (error) {
+                    console.error('Error initializing tactical systems:', error);
+                }
             }
 
             createTacticalParticles() {
                 const container = document.getElementById('tacticalParticles');
-                const particleCount = 25;
+                if (!container) return;
 
+                const particleCount = 25;
                 for (let i = 0; i < particleCount; i++) {
                     const particle = document.createElement('div');
                     particle.className = 'tactical-particle';
@@ -1335,19 +1342,25 @@
                     particle.style.animationDelay = Math.random() * 8 + 's';
                     particle.style.animationDuration = (Math.random() * 4 + 6) + 's';
                     
-                    // Random tactical shapes
                     const shapes = [
-                        'polygon(50% 0%, 0% 100%, 100% 100%)', // Triangle
-                        'polygon(20% 0%, 80% 0%, 100% 60%, 80% 100%, 20% 100%, 0% 60%)', // Hexagon
-                        'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)', // Diamond
+                        'polygon(50% 0%, 0% 100%, 100% 100%)',
+                        'polygon(20% 0%, 80% 0%, 100% 60%, 80% 100%, 20% 100%, 0% 60%)',
+                        'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
                     ];
                     particle.style.clipPath = shapes[Math.floor(Math.random() * shapes.length)];
-                    
                     container.appendChild(particle);
                 }
             }
 
             initializeSlideshow() {
+                this.slides = document.querySelectorAll('.slide');
+                this.navDots = document.querySelectorAll('.nav-dot');
+                
+                if (this.slides.length === 0) {
+                    console.warn('No slides found');
+                    return;
+                }
+
                 // Auto-advance slides
                 this.startSlideshow();
 
@@ -1359,27 +1372,36 @@
                 });
 
                 // Arrow controls
-                document.getElementById('prevSlide').addEventListener('click', () => {
-                    this.prevSlide();
-                });
-
-                document.getElementById('nextSlide').addEventListener('click', () => {
-                    this.nextSlide();
-                });
+                const prevButton = document.getElementById('prevSlide');
+                const nextButton = document.getElementById('nextSlide');
+                
+                if (prevButton) {
+                    prevButton.addEventListener('click', () => {
+                        this.prevSlide();
+                    });
+                }
+                
+                if (nextButton) {
+                    nextButton.addEventListener('click', () => {
+                        this.nextSlide();
+                    });
+                }
 
                 // Pause on hover
                 const slideshowSection = document.querySelector('.slideshow-section');
-                slideshowSection.addEventListener('mouseenter', () => {
-                    this.pauseSlideshow();
-                });
+                if (slideshowSection) {
+                    slideshowSection.addEventListener('mouseenter', () => {
+                        this.pauseSlideshow();
+                    });
 
-                slideshowSection.addEventListener('mouseleave', () => {
-                    this.startSlideshow();
-                });
+                    slideshowSection.addEventListener('mouseleave', () => {
+                        this.startSlideshow();
+                    });
+                }
             }
 
             startSlideshow() {
-                this.pauseSlideshow(); // Clear any existing interval
+                this.pauseSlideshow();
                 this.slideInterval = setInterval(() => {
                     this.nextSlide();
                 }, 5000);
@@ -1405,7 +1427,7 @@
             goToSlide(index) {
                 this.currentSlide = index;
                 this.updateSlideshow();
-                this.startSlideshow(); // Restart auto-advance
+                this.startSlideshow();
             }
 
             updateSlideshow() {
@@ -1428,17 +1450,21 @@
                     this.updateParallaxElements(scrolled);
                     
                     // Back to top visibility
-                    if (scrolled > 400) {
-                        backToTop.classList.add('visible');
-                    } else {
-                        backToTop.classList.remove('visible');
+                    if (backToTop) {
+                        if (scrolled > 400) {
+                            backToTop.classList.add('visible');
+                        } else {
+                            backToTop.classList.remove('visible');
+                        }
                     }
                 });
 
-                // Back to top
-                backToTop.addEventListener('click', () => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
+                // Back to top functionality
+                if (backToTop) {
+                    backToTop.addEventListener('click', () => {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    });
+                }
             }
 
             updateParallaxElements(scrolled) {
@@ -1446,26 +1472,22 @@
                 const tacticalParticles = document.querySelector('.tactical-particles');
                 
                 if (wolfParallax) {
-                    wolfParallax.style.transform = `scaleX(-1) translateY(${scrolled * 0.3}px)`;
+                    wolfParallax.style.transform = 'scaleX(-1) translateY(' + (scrolled * 0.3) + 'px)';
                 }
                 
                 if (tacticalParticles) {
-                    tacticalParticles.style.transform = `translateY(${scrolled * 0.1}px)`;
+                    tacticalParticles.style.transform = 'translateY(' + (scrolled * 0.1) + 'px)';
                 }
             }
 
             initializeWeatherSystem() {
-                // Simulate weather API integration
                 this.updateWeatherData();
-                
-                // Update weather every 30 minutes
                 setInterval(() => {
                     this.updateWeatherData();
                 }, 1800000);
             }
 
             updateWeatherData() {
-                // Mock weather data with tactical descriptions
                 const conditions = [
                     { temp: '22°C', desc: 'Cer Senin - Operațiuni Optime' },
                     { temp: '25°C', desc: 'Parțial Înnorat - Vizibilitate Perfectă' },
@@ -1474,8 +1496,11 @@
                 ];
                 
                 const current = conditions[Math.floor(Math.random() * conditions.length)];
-                document.getElementById('currentTemp').textContent = current.temp;
-                document.getElementById('currentDesc').textContent = current.desc;
+                const tempElement = document.getElementById('currentTemp');
+                const descElement = document.getElementById('currentDesc');
+                
+                if (tempElement) tempElement.textContent = current.temp;
+                if (descElement) descElement.textContent = current.desc;
             }
 
             initializeClock() {
@@ -1489,7 +1514,7 @@
                     });
                     const clockElement = document.getElementById('currentTime');
                     if (clockElement) {
-                        clockElement.textContent = `${timeString} (Ora Militară)`;
+                        clockElement.textContent = timeString + ' (Ora Militară)';
                     }
                 };
                 
@@ -1498,25 +1523,6 @@
             }
 
             initializeParallaxEffects() {
-                // Mouse movement parallax
-                document.addEventListener('mousemove', (e) => {
-                    const mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-                    const mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-                    
-                    // Apply subtle parallax to wolf elements
-                    const wolfElements = document.querySelectorAll('.wolf-pack-parallax, .wolf-howl');
-                    wolfElements.forEach(element => {
-                        const speed = 0.03;
-                        const x = mouseX * speed * 50;
-                        const y = mouseY * speed * 50;
-                        if (element.classList.contains('wolf-pack-parallax')) {
-                            element.style.transform += ` translate(${x}px, ${y}px)`;
-                        } else {
-                            element.style.transform += ` translate(${x}px, ${y}px)`;
-                        }
-                    });
-                });
-
                 // Intersection Observer for scroll animations
                 const observerOptions = {
                     threshold: 0.15,
@@ -1526,7 +1532,8 @@
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            entry.target.classList.add('animate-in');
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
                         }
                     });
                 }, observerOptions);
@@ -1539,23 +1546,8 @@
                     section.style.transition = 'opacity 1s ease, transform 1s ease';
                     observer.observe(section);
                 });
-
-                // Add animate-in class styles
-                const style = document.createElement('style');
-                style.textContent = `
-                    .animate-in {
-                        opacity: 1 !important;
-                        transform: translateY(0) !important;
-                    }
-                `;
-                document.head.appendChild(style);
             }
         }
-
-        // Initialize the Șacalii ACS tactical system
-        document.addEventListener('DOMContentLoaded', () => {
-            new SacaliiComponents();
-        });
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
