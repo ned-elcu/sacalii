@@ -105,43 +105,6 @@
             100% { transform: translateX(200px); }
         }
 
-        /* Sound Toggle */
-        .sound-toggle {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            z-index: 1000;
-            width: 60px;
-            height: 60px;
-            background: rgba(0, 212, 255, 0.15);
-            border: 2px solid #00d4ff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 0 25px rgba(0, 212, 255, 0.3);
-        }
-
-        .sound-toggle:hover {
-            background: rgba(255, 107, 53, 0.2);
-            border-color: #ff6b35;
-            transform: scale(1.15) rotate(15deg);
-            box-shadow: 0 0 35px rgba(255, 107, 53, 0.4);
-        }
-
-        .sound-toggle .material-icons {
-            font-size: 28px;
-            color: #00d4ff;
-            transition: all 0.3s ease;
-        }
-
-        .sound-toggle:hover .material-icons {
-            color: #ff6b35;
-        }
-
         /* BIG LOGO SECTION */
         .logo-section {
             position: relative;
@@ -206,10 +169,7 @@
             font-weight: 700;
             letter-spacing: 4px;
             margin-bottom: 15px;
-            background: linear-gradient(45deg, #00d4ff, #ffffff, #00d4ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #ffffff;
             opacity: 0;
             animation: typewriterMain 2s ease-out 1s forwards;
         }
@@ -227,11 +187,10 @@
         .accent-line {
             width: 150px;
             height: 4px;
-            background: linear-gradient(90deg, #00d4ff, #ff6b35, #22c55e, #ff6b35, #00d4ff);
-            background-size: 300% 100%;
+            background: #00d4ff;
             margin: 25px auto;
             opacity: 0;
-            animation: lineGrow 1.5s ease-out 3.5s forwards, gradientShift 3s ease-in-out 5s infinite;
+            animation: lineGrow 1.5s ease-out 3.5s forwards;
             border-radius: 2px;
         }
 
@@ -246,11 +205,6 @@
         @keyframes lineGrow {
             from { width: 0; opacity: 0; }
             to { width: 150px; opacity: 1; }
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
         }
 
         /* TRANSITION SPACE */
@@ -270,10 +224,17 @@
         }
 
         .wolf-howl {
-            font-size: 72px;
+            width: 72px;
+            height: 72px;
             animation: howlAnimation 6s ease-in-out infinite;
             filter: drop-shadow(0 0 20px #00d4ff);
             position: relative;
+        }
+
+        .wolf-howl img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         @keyframes howlAnimation {
@@ -315,18 +276,18 @@
             100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
         }
 
-        /* GRADIENT OVERLAY SLIDESHOW */
+        /* SLIDESHOW SECTION */
         .slideshow-section {
-            min-height: 80vh;
+            height: 100vh;
             position: relative;
-            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 50%, #1a1a1a 100%);
             overflow: hidden;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
         }
 
         .slideshow-container {
             position: relative;
             width: 100%;
-            height: 80vh;
+            height: 100%;
         }
 
         .slide {
@@ -336,163 +297,105 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transition: opacity 1.5s ease-in-out;
+            transition: opacity 2s ease-in-out;
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            /* Visible background when no image is loaded */
+            background-color: #2a2a2a;
         }
 
         .slide.active {
             opacity: 1;
         }
 
-        /* Gradient overlays for each slide */
+        .slide:nth-child(1) {
+            background-image: url('/images/training.jpg');
+            background-color: #1a2a3a;
+        }
+
+        .slide:nth-child(2) {
+            background-image: url('/images/brotherhood.jpg');
+            background-color: #2a3a1a;
+        }
+
+        .slide:nth-child(3) {
+            background-image: url('/images/equipment.jpg');
+            background-color: #3a1a2a;
+        }
+
+        .slide:nth-child(4) {
+            background-image: url('/images/competitions.jpg');
+            background-color: #3a2a1a;
+        }
+
+        /* Dark overlay for better text readability */
         .slide::before {
             content: '';
             position: absolute;
-            top: 0;
+            bottom: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 40%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
             z-index: 1;
         }
 
-        .slide:nth-child(1)::before {
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.4) 0%, rgba(26, 26, 26, 0.7) 100%);
-        }
-
-        .slide:nth-child(2)::before {
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.4) 0%, rgba(26, 26, 26, 0.7) 100%);
-        }
-
-        .slide:nth-child(3)::before {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.4) 0%, rgba(26, 26, 26, 0.7) 100%);
-        }
-
-        .slide:nth-child(4)::before {
-            background: linear-gradient(135deg, rgba(255, 170, 0, 0.4) 0%, rgba(26, 26, 26, 0.7) 100%);
-        }
-
-        /* Slide Content - Positioned as overlay */
-        .slide-content {
+        /* Minimal content overlay */
+        .slide-info {
             position: absolute;
-            bottom: 80px;
+            bottom: 60px;
             left: 60px;
-            max-width: 500px;
             z-index: 2;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.7);
-            border: 1px solid #00d4ff;
-            border-radius: 15px;
-            backdrop-filter: blur(20px);
         }
 
         .slide-title {
             font-family: 'Orbitron', monospace;
-            font-size: 28px;
-            font-weight: 900;
-            margin-bottom: 15px;
-            color: #00d4ff;
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .slide-text {
+            font-family: 'Rajdhani', sans-serif;
             font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 20px;
             color: #e5e7eb;
-        }
-
-        .slide-stats {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 12px 16px;
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid #00d4ff;
-            border-radius: 8px;
-            backdrop-filter: blur(10px);
-            min-width: 80px;
-        }
-
-        .stat-number {
-            font-family: 'Orbitron', monospace;
-            font-size: 20px;
-            font-weight: 700;
-            color: #00d4ff;
-            margin-bottom: 4px;
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            max-width: 400px;
+            line-height: 1.4;
         }
 
         /* Navigation */
         .slide-nav {
             position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 60px;
+            right: 60px;
             display: flex;
-            gap: 20px;
+            gap: 15px;
             z-index: 10;
         }
 
         .nav-dot {
-            width: 20px;
-            height: 20px;
+            width: 15px;
+            height: 15px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.4);
             cursor: pointer;
-            transition: all 0.4s ease;
-            position: relative;
+            transition: all 0.3s ease;
             border: 2px solid transparent;
         }
 
         .nav-dot.active {
             background: #00d4ff;
             border-color: #00d4ff;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
         }
 
-        .nav-dot::before {
-            content: '🐺';
-            position: absolute;
-            top: -35px;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            font-size: 20px;
-        }
-
-        .nav-dot.active::before {
-            opacity: 1;
-        }
-
-        /* Default slide backgrounds */
-        .slide:nth-child(1) {
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="%23001122"/><g fill="%2300d4ff" opacity="0.3"><circle cx="200" cy="150" r="50"/><circle cx="600" cy="200" r="40"/><circle cx="400" cy="350" r="60"/><circle cx="150" cy="450" r="35"/><circle cx="650" cy="450" r="45"/></g><text x="400" y="320" text-anchor="middle" fill="%23ffffff" font-size="48" font-family="Orbitron">TRAINING</text></svg>');
-        }
-
-        .slide:nth-child(2) {
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="%23112200"/><g fill="%2322c55e" opacity="0.4"><polygon points="200,200 250,150 300,200 250,250"/><polygon points="500,180 550,130 600,180 550,230"/><polygon points="350,350 400,300 450,350 400,400"/></g><text x="400" y="320" text-anchor="middle" fill="%23ffffff" font-size="48" font-family="Orbitron">BROTHERHOOD</text></svg>');
-        }
-
-        .slide:nth-child(3) {
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="%23220011"/><g fill="%23ff6b35" opacity="0.4"><rect x="150" y="150" width="100" height="60" rx="10"/><rect x="300" y="200" width="80" height="50" rx="8"/><rect x="500" y="180" width="120" height="70" rx="12"/><circle cx="400" cy="400" r="40"/></g><text x="400" y="320" text-anchor="middle" fill="%23ffffff" font-size="48" font-family="Orbitron">EQUIPMENT</text></svg>');
-        }
-
-        .slide:nth-child(4) {
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="%23111100"/><g fill="%23ffaa00" opacity="0.5"><polygon points="400,100 420,140 460,140 430,170 440,210 400,190 360,210 370,170 340,140 380,140"/><circle cx="200" cy="300" r="30"/><circle cx="600" cy="350" r="35"/></g><text x="400" y="320" text-anchor="middle" fill="%23ffffff" font-size="48" font-family="Orbitron">VICTORIES</text></svg>');
+        .nav-dot:hover {
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(1.2);
         }
 
         /* CONTACT AREA */
@@ -522,11 +425,8 @@
         }
 
         .contact-container {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
             position: relative;
             z-index: 2;
         }
@@ -545,10 +445,8 @@
             font-size: 42px;
             font-weight: 900;
             margin-bottom: 40px;
-            background: linear-gradient(45deg, #00d4ff, #ff6b35);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #00d4ff;
+            text-align: center;
         }
 
         .contact-item {
@@ -588,75 +486,6 @@
             font-family: 'Rajdhani', sans-serif;
         }
 
-        .contact-form {
-            padding: 50px;
-            background: rgba(26, 26, 26, 0.9);
-            border: 2px solid #ff6b35;
-            border-radius: 20px;
-            backdrop-filter: blur(20px);
-            box-shadow: 0 0 40px rgba(255, 107, 53, 0.2);
-        }
-
-        .form-group {
-            margin-bottom: 30px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 700;
-            color: #00d4ff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-family: 'Orbitron', monospace;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 18px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 2px solid #333;
-            border-radius: 10px;
-            color: #fff;
-            font-size: 16px;
-            font-family: 'Rajdhani', sans-serif;
-            transition: all 0.4s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #00d4ff;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-            background: rgba(0, 0, 0, 0.8);
-        }
-
-        .form-textarea {
-            min-height: 140px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(45deg, #00d4ff, #ff6b35);
-            border: none;
-            border-radius: 10px;
-            color: #000;
-            font-family: 'Orbitron', monospace;
-            font-size: 20px;
-            font-weight: 900;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            letter-spacing: 1px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 212, 255, 0.4);
-            background: linear-gradient(45deg, #ff6b35, #22c55e);
-        }
-
         /* WEATHER API SECTION */
         .weather-section {
             padding: 100px 60px;
@@ -678,10 +507,7 @@
             font-weight: 900;
             text-align: center;
             margin-bottom: 60px;
-            background: linear-gradient(45deg, #00d4ff, #22c55e, #ff6b35);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #00d4ff;
             text-transform: uppercase;
             letter-spacing: 3px;
         }
@@ -835,6 +661,10 @@
             font-size: 12px;
             color: #00d4ff;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
         }
 
         /* FOOTER */
@@ -878,10 +708,7 @@
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 25px;
-            background: linear-gradient(45deg, #00d4ff, #ff6b35);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #00d4ff;
         }
 
         .footer-section p {
@@ -939,14 +766,21 @@
             background: linear-gradient(45deg, #00d4ff, #ff6b35);
             border: none;
             border-radius: 50%;
-            color: #000;
-            font-size: 32px;
             cursor: pointer;
             opacity: 0;
             visibility: hidden;
             transition: all 0.4s ease;
             z-index: 1000;
             box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-to-top img {
+            width: 32px;
+            height: 32px;
+            filter: brightness(0);
         }
 
         .back-to-top.visible {
@@ -961,15 +795,9 @@
 
         /* RESPONSIVE DESIGN */
         @media (max-width: 1024px) {
-            .contact-container,
             .weather-container {
                 grid-template-columns: 1fr;
                 gap: 40px;
-            }
-            
-            .slide-content {
-                left: 40px;
-                max-width: 400px;
             }
         }
 
@@ -987,20 +815,23 @@
                 font-size: 16px;
             }
 
-            .slide-content {
-                left: 20px;
-                right: 20px;
-                max-width: none;
-                bottom: 60px;
-                padding: 20px;
+            .slide-info {
+                bottom: 30px;
+                left: 30px;
             }
 
             .slide-title {
-                font-size: 22px;
+                font-size: 16px;
             }
 
             .slide-text {
-                font-size: 14px;
+                font-size: 13px;
+                max-width: 250px;
+            }
+
+            .slide-nav {
+                bottom: 20px;
+                right: 30px;
             }
 
             .contact-section,
@@ -1009,7 +840,6 @@
             }
 
             .contact-info,
-            .contact-form,
             .weather-panel {
                 padding: 30px;
             }
@@ -1034,16 +864,33 @@
             }
 
             .wolf-howl {
-                font-size: 56px;
+                width: 56px;
+                height: 56px;
             }
 
-            .slide-stats {
-                justify-content: center;
+            .slide-info {
+                bottom: 20px;
+                left: 20px;
             }
 
-            .stat-item {
-                min-width: 70px;
-                padding: 10px 12px;
+            .slide-title {
+                font-size: 14px;
+            }
+
+            .slide-text {
+                font-size: 12px;
+                max-width: 200px;
+            }
+
+            .slide-nav {
+                bottom: 15px;
+                right: 20px;
+                gap: 8px;
+            }
+
+            .nav-dot {
+                width: 10px;
+                height: 10px;
             }
         }
 
@@ -1069,9 +916,16 @@
         }
 
         .loading-wolf {
-            font-size: 96px;
+            width: 96px;
+            height: 96px;
             animation: loadingPulse 2s ease-in-out infinite;
             margin-bottom: 30px;
+        }
+
+        .loading-wolf img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .loading-text {
@@ -1103,13 +957,10 @@
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
-        <div class="loading-wolf">🐺</div>
-        <div class="loading-text">Initializing Tactical Systems...</div>
-    </div>
-
-    <!-- Sound Toggle -->
-    <div class="sound-toggle" id="soundToggle">
-        <span class="material-icons">volume_up</span>
+        <div class="loading-wolf">
+            <img src="/images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%2300d4ff%22 opacity=%220.7%22/><path d=%22M30 30h40v40h-40z%22 fill=%22%23ffffff%22/></svg>'">
+        </div>
+        <div class="loading-text">Inițializare Sisteme Tactice...</div>
     </div>
 
     <!-- HERO SPACE SECTION -->
@@ -1125,7 +976,7 @@
         <!-- SUBTITLE SECTION -->
         <div class="subtitle-section">
             <h1 class="main-subtitle">ASOCIAȚIA CLUB SPORTIV</h1>
-            <p class="sub-subtitle">TACTICAL EXCELLENCE • BROTHERHOOD • PRECISION</p>
+            <p class="sub-subtitle">EXCELENȚĂ TACTICĂ • FRĂȚIE • PRECIZIE</p>
             <div class="accent-line"></div>
         </div>
     </section>
@@ -1133,94 +984,40 @@
     <!-- TRANSITION SPACE -->
     <section class="transition-space">
         <div class="wolf-howl-container">
-            <div class="wolf-howl">🐺</div>
+            <div class="wolf-howl">
+                <img src="/images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%2300d4ff%22 opacity=%220.7%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%23ffffff%22 font-size=%2240%22>🐺</text></svg>'>
+            </div>
         </div>
     </section>
 
-    <!-- GRADIENT OVERLAY SLIDESHOW -->
+    <!-- SLIDESHOW SECTION -->
     <section class="slideshow-section">
         <div class="slideshow-container">
             <div class="slide active">
-                <div class="slide-content">
-                    <h2 class="slide-title">Training Excellence</h2>
-                    <p class="slide-text">Elite tactical training programs that forge warriors with precision, discipline, and unwavering brotherhood.</p>
-                    <div class="slide-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">150+</div>
-                            <div class="stat-label">Active Members</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">25</div>
-                            <div class="stat-label">Tournaments Won</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">98%</div>
-                            <div class="stat-label">Success Rate</div>
-                        </div>
-                    </div>
+                <div class="slide-info">
+                    <h3 class="slide-title">Antrenament</h3>
+                    <p class="slide-text">Sesiuni intensive de pregătire tactică</p>
                 </div>
             </div>
             
             <div class="slide">
-                <div class="slide-content">
-                    <h2 class="slide-title">Brotherhood & Unity</h2>
-                    <p class="slide-text">United by honor, bound by loyalty. Our brotherhood creates lifelong bonds forged in tactical excellence.</p>
-                    <div class="slide-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">10+</div>
-                            <div class="stat-label">Years Strong</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">24/7</div>
-                            <div class="stat-label">Support</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">100%</div>
-                            <div class="stat-label">Brotherhood</div>
-                        </div>
-                    </div>
+                <div class="slide-info">
+                    <h3 class="slide-title">Frăție</h3>
+                    <p class="slide-text">Spiritul de echipă și loialitate</p>
                 </div>
             </div>
             
             <div class="slide">
-                <div class="slide-content">
-                    <h2 class="slide-title">Elite Equipment</h2>
-                    <p class="slide-text">Military-grade equipment and cutting-edge technology ensure mission success in every operation.</p>
-                    <div class="slide-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">50+</div>
-                            <div class="stat-label">Weapon Systems</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">Premium</div>
-                            <div class="stat-label">Grade Gear</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">Military</div>
-                            <div class="stat-label">Standard</div>
-                        </div>
-                    </div>
+                <div class="slide-info">
+                    <h3 class="slide-title">Echipament</h3>
+                    <p class="slide-text">Tehnologie avansată și gear profesional</p>
                 </div>
             </div>
             
             <div class="slide">
-                <div class="slide-content">
-                    <h2 class="slide-title">Championship Legacy</h2>
-                    <p class="slide-text">A legacy of victories built through dedication, skill, and the unbreakable spirit of the wolf pack.</p>
-                    <div class="slide-stats">
-                        <div class="stat-item">
-                            <div class="stat-number">50+</div>
-                            <div class="stat-label">Events</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">National</div>
-                            <div class="stat-label">Recognition</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">Elite</div>
-                            <div class="stat-label">Status</div>
-                        </div>
-                    </div>
+                <div class="slide-info">
+                    <h3 class="slide-title">Competiții</h3>
+                    <p class="slide-text">Victorii și performanțe de elită</p>
                 </div>
             </div>
         </div>
@@ -1237,7 +1034,7 @@
     <section class="contact-section" id="contact">
         <div class="contact-container">
             <div class="contact-info">
-                <h2 class="contact-title">JOIN THE PACK</h2>
+                <h2 class="contact-title">ALĂTURĂ-TE HAITEI</h2>
                 <div class="contact-item" onclick="window.open('tel:0765037584')">
                     <span class="material-icons">phone</span>
                     <span class="contact-text">0765037584</span>
@@ -1248,34 +1045,12 @@
                 </div>
                 <div class="contact-item">
                     <span class="material-icons">place</span>
-                    <span class="contact-text">Slobozia, Ialomița County</span>
+                    <span class="contact-text">Slobozia, Județul Ialomița</span>
                 </div>
                 <div class="contact-item">
                     <span class="material-icons">schedule</span>
-                    <span class="contact-text" id="currentTime">Loading...</span>
+                    <span class="contact-text" id="currentTime">Se încarcă...</span>
                 </div>
-            </div>
-            
-            <div class="contact-form">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label class="form-label">Operative Name</label>
-                        <input type="text" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Communication Channel</label>
-                        <input type="email" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Direct Line</label>
-                        <input type="tel" class="form-input">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Mission Briefing</label>
-                        <textarea class="form-input form-textarea" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Transmit Message</button>
-                </form>
             </div>
         </div>
     </section>
@@ -1283,13 +1058,13 @@
     <!-- WEATHER API SECTION -->
     <section class="weather-section" id="weather">
         <div class="weather-container">
-            <h2 class="weather-title">Tactical Weather Intel</h2>
+            <h2 class="weather-title">Informații Meteorologice Tactice</h2>
             
             <div class="map-container">
                 <div class="map-placeholder">
                     <span class="material-icons map-icon">place</span>
                     <div class="map-text">
-                        <div class="map-label">HQ Coordinates</div>
+                        <div class="map-label">Coordonate Cartier General</div>
                         <div class="map-coords">
                             <div>Lat: 44.5770°N</div>
                             <div>Lon: 27.5031°E</div>
@@ -1301,34 +1076,49 @@
             <div class="weather-panel">
                 <div class="current-weather" id="currentWeather">
                     <div class="weather-temp" id="currentTemp">22°C</div>
-                    <div class="weather-desc" id="currentDesc">Partly Cloudy - Optimal Conditions</div>
+                    <div class="weather-desc" id="currentDesc">Parțial Înnorat - Condiții Optime</div>
                 </div>
                 
                 <div class="forecast-container" id="forecastContainer">
                     <div class="forecast-day">
-                        <div class="forecast-date">Today</div>
+                        <div class="forecast-date">Astăzi</div>
                         <div class="forecast-temp">22°C</div>
-                        <div class="forecast-rain">☔ 10%</div>
+                        <div class="forecast-rain">
+                            <span class="material-icons" style="font-size: 12px;">opacity</span>
+                            10%
+                        </div>
                     </div>
                     <div class="forecast-day">
-                        <div class="forecast-date">Tomorrow</div>
+                        <div class="forecast-date">Mâine</div>
                         <div class="forecast-temp">25°C</div>
-                        <div class="forecast-rain">☔ 5%</div>
+                        <div class="forecast-rain">
+                            <span class="material-icons" style="font-size: 12px;">opacity</span>
+                            5%
+                        </div>
                     </div>
                     <div class="forecast-day">
-                        <div class="forecast-date">Thu</div>
+                        <div class="forecast-date">Joi</div>
                         <div class="forecast-temp">24°C</div>
-                        <div class="forecast-rain">☔ 15%</div>
+                        <div class="forecast-rain">
+                            <span class="material-icons" style="font-size: 12px;">opacity</span>
+                            15%
+                        </div>
                     </div>
                     <div class="forecast-day">
-                        <div class="forecast-date">Fri</div>
+                        <div class="forecast-date">Vin</div>
                         <div class="forecast-temp">21°C</div>
-                        <div class="forecast-rain">☔ 40%</div>
+                        <div class="forecast-rain">
+                            <span class="material-icons" style="font-size: 12px;">opacity</span>
+                            40%
+                        </div>
                     </div>
                     <div class="forecast-day">
-                        <div class="forecast-date">Sat</div>
+                        <div class="forecast-date">Sâm</div>
                         <div class="forecast-temp">23°C</div>
-                        <div class="forecast-rain">☔ 20%</div>
+                        <div class="forecast-rain">
+                            <span class="material-icons" style="font-size: 12px;">opacity</span>
+                            20%
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1341,45 +1131,66 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Șacalii ACS</h3>
-                <p>Elite airsoft association dedicated to tactical excellence, brotherhood, and precision. Join the pack and discover what it means to be part of something greater than yourself.</p>
+                <p>Asociație de airsoft de elită dedicată excelenței tactice, frăției și preciziei. Alătură-te haitei și descoperă ce înseamnă să fii parte din ceva mai mare decât tine.</p>
                 <div class="social-links">
-                    <a href="#" class="social-link">📘</a>
-                    <a href="#" class="social-link">📷</a>
-                    <a href="#" class="social-link">🐦</a>
-                    <a href="#" class="social-link">📺</a>
+                    <a href="#" class="social-link">
+                        <span class="material-icons">facebook</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <span class="material-icons">photo_camera</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <span class="material-icons">alternate_email</span>
+                    </a>
+                    <a href="#" class="social-link">
+                        <span class="material-icons">video_library</span>
+                    </a>
                 </div>
             </div>
             
             <div class="footer-section">
-                <h3>Quick Operations</h3>
-                <p><a href="#home" style="color: #9ca3af; text-decoration: none; transition: color 0.3s;">⚡ Home Base</a></p>
-                <p><a href="#contact" style="color: #9ca3af; text-decoration: none; transition: color 0.3s;">📡 Communications</a></p>
-                <p><a href="#weather" style="color: #9ca3af; text-decoration: none; transition: color 0.3s;">🌤️ Weather Intel</a></p>
-                <p><a href="#" style="color: #9ca3af; text-decoration: none; transition: color 0.3s;">🎯 Mission Archive</a></p>
+                <h3>Operațiuni Rapide</h3>
+                <p><a href="#home" style="color: #9ca3af; text-decoration: none; transition: color 0.3s;">
+                    <span class="material-icons" style="vertical-align: middle; margin-right: 8px;">flash_on</span>
+                    Baza Principală
+                </a></p>
+                <p><a href="#contact" style="color: #9ca3af; text-decoration: none; transition: color 0.3s;">
+                    <span class="material-icons" style="vertical-align: middle; margin-right: 8px;">radio</span>
+                    Comunicații
+                </a></p>
+                <p><a href="#weather" style="color: #9ca3af; text-decoration: none; transition: color 0.3s;">
+                    <span class="material-icons" style="vertical-align: middle; margin-right: 8px;">wb_sunny</span>
+                    Informații Meteo
+                </a></p>
+                <p><a href="#" style="color: #9ca3af; text-decoration: none; transition: color 0.3s;">
+                    <span class="material-icons" style="vertical-align: middle; margin-right: 8px;">military_tech</span>
+                    Arhiva Misiuni
+                </a></p>
             </div>
             
             <div class="footer-section">
-                <h3>Command Center</h3>
+                <h3>Centru de Comandă</h3>
                 <p><span class="material-icons" style="vertical-align: middle; margin-right: 8px; color: #00d4ff;">phone</span> 0765037584</p>
                 <p><span class="material-icons" style="vertical-align: middle; margin-right: 8px; color: #00d4ff;">email</span> contact@sacalii-acs.ro</p>
-                <p><span class="material-icons" style="vertical-align: middle; margin-right: 8px; color: #00d4ff;">place</span> Slobozia, Ialomița County</p>
-                <p><span class="material-icons" style="vertical-align: middle; margin-right: 8px; color: #00d4ff;">schedule</span> 24/7 Brotherhood Support</p>
+                <p><span class="material-icons" style="vertical-align: middle; margin-right: 8px; color: #00d4ff;">place</span> Slobozia, Județul Ialomița</p>
+                <p><span class="material-icons" style="vertical-align: middle; margin-right: 8px; color: #00d4ff;">schedule</span> Suport Frăție 24/7</p>
             </div>
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2025 Șacalii ACS - Asociația Club Sportiv. All rights reserved. Built with tactical precision and brotherhood spirit.</p>
+            <p>&copy; 2025 Șacalii ACS - Asociația Club Sportiv. Toate drepturile rezervate. Construit cu precizie tactică și spirit de frăție.</p>
         </div>
     </footer>
 
     <!-- Back to Top -->
-    <button class="back-to-top" id="backToTop">🐺</button>
+    <button class="back-to-top" id="backToTop">
+        <img src="/images/wolf.png" alt="Wolf" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23ffffff%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22%23000000%22 font-size=%2240%22>🐺</text></svg>">
+    </button>
 
     <script>
-        // Initialize components.js functionality
+        // Initialize components functionality
         class SacaliiComponents {
             constructor() {
-                this.soundEnabled = true;
                 this.currentSlide = 0;
                 this.slides = document.querySelectorAll('.slide');
                 this.navDots = document.querySelectorAll('.nav-dot');
@@ -1392,8 +1203,6 @@
                 this.initializeScrollEffects();
                 this.initializeWeatherSystem();
                 this.initializeClock();
-                this.initializeContactForm();
-                this.initializeSoundSystem();
                 this.initializeParallaxEffects();
                 
                 // Hide loading screen with tactical timing
@@ -1426,16 +1235,15 @@
             }
 
             initializeSlideshow() {
-                // Auto-advance slides with tactical timing
+                // Auto-advance slides
                 setInterval(() => {
                     this.nextSlide();
-                }, 6000);
+                }, 5000);
 
-                // Navigation dots with wolf indicators
+                // Navigation dots
                 this.navDots.forEach((dot, index) => {
                     dot.addEventListener('click', () => {
                         this.goToSlide(index);
-                        this.playTacticalSound('click');
                     });
                 });
             }
@@ -1443,7 +1251,6 @@
             nextSlide() {
                 this.currentSlide = (this.currentSlide + 1) % this.slides.length;
                 this.updateSlideshow();
-                this.playTacticalSound('slide');
             }
 
             goToSlide(index) {
@@ -1478,10 +1285,9 @@
                     }
                 });
 
-                // Back to top with wolf howl
+                // Back to top
                 backToTop.addEventListener('click', () => {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
-                    this.playTacticalSound('howl');
                 });
             }
 
@@ -1502,7 +1308,7 @@
                 // Simulate weather API integration
                 this.updateWeatherData();
                 
-                // Update weather every 30 minutes in a real scenario
+                // Update weather every 30 minutes
                 setInterval(() => {
                     this.updateWeatherData();
                 }, 1800000);
@@ -1511,10 +1317,10 @@
             updateWeatherData() {
                 // Mock weather data with tactical descriptions
                 const conditions = [
-                    { temp: '22°C', desc: 'Clear Skies - Optimal Operations' },
-                    { temp: '25°C', desc: 'Partly Cloudy - Perfect Visibility' },
-                    { temp: '18°C', desc: 'Overcast - Stealth Advantage' },
-                    { temp: '20°C', desc: 'Light Breeze - Ideal Conditions' }
+                    { temp: '22°C', desc: 'Cer Senin - Operațiuni Optime' },
+                    { temp: '25°C', desc: 'Parțial Înnorat - Vizibilitate Perfectă' },
+                    { temp: '18°C', desc: 'Înnorat - Avantaj Stealth' },
+                    { temp: '20°C', desc: 'Briză Ușoară - Condiții Ideale' }
                 ];
                 
                 const current = conditions[Math.floor(Math.random() * conditions.length)];
@@ -1533,54 +1339,12 @@
                     });
                     const clockElement = document.getElementById('currentTime');
                     if (clockElement) {
-                        clockElement.textContent = `${timeString} (Military Time)`;
+                        clockElement.textContent = `${timeString} (Ora Militară)`;
                     }
                 };
                 
                 updateClock();
                 setInterval(updateClock, 1000);
-            }
-
-            initializeContactForm() {
-                const form = document.getElementById('contactForm');
-                form.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    this.handleFormSubmission(form);
-                });
-            }
-
-            handleFormSubmission(form) {
-                const submitBtn = form.querySelector('.submit-btn');
-                const originalText = submitBtn.textContent;
-                
-                // Tactical submission sequence
-                submitBtn.textContent = 'TRANSMITTING...';
-                submitBtn.style.background = 'linear-gradient(45deg, #22c55e, #00d4ff)';
-                this.playTacticalSound('transmit');
-                
-                setTimeout(() => {
-                    submitBtn.textContent = 'MESSAGE RECEIVED ✓';
-                    this.playTacticalSound('success');
-                    
-                    setTimeout(() => {
-                        submitBtn.textContent = originalText;
-                        submitBtn.style.background = 'linear-gradient(45deg, #00d4ff, #ff6b35)';
-                        form.reset();
-                    }, 2500);
-                }, 2000);
-            }
-
-            initializeSoundSystem() {
-                const soundToggle = document.getElementById('soundToggle');
-                soundToggle.addEventListener('click', () => {
-                    this.soundEnabled = !this.soundEnabled;
-                    const icon = soundToggle.querySelector('.material-icons');
-                    icon.textContent = this.soundEnabled ? 'volume_up' : 'volume_off';
-                    
-                    if (this.soundEnabled) {
-                        this.playTacticalSound('activate');
-                    }
-                });
             }
 
             initializeParallaxEffects() {
@@ -1609,7 +1373,6 @@
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             entry.target.classList.add('animate-in');
-                            this.playTacticalSound('reveal');
                         }
                     });
                 }, observerOptions);
@@ -1633,48 +1396,7 @@
                 `;
                 document.head.appendChild(style);
             }
-
-            playTacticalSound(type) {
-                if (!this.soundEnabled) return;
-                
-                // In a real implementation, you would load and play actual audio files
-                // For now, we'll use console logging and visual feedback
-                console.log(`🔊 Tactical Sound: ${type}`);
-                
-                // Add visual feedback for sound events
-                this.createSoundRipple();
-            }
-
-            createSoundRipple() {
-                const ripple = document.createElement('div');
-                ripple.style.cssText = `
-                    position: fixed;
-                    top: 30px;
-                    right: 30px;
-                    width: 60px;
-                    height: 60px;
-                    border: 2px solid #00d4ff;
-                    border-radius: 50%;
-                    pointer-events: none;
-                    z-index: 999;
-                    animation: soundRipple 0.6s ease-out forwards;
-                `;
-                
-                document.body.appendChild(ripple);
-                
-                setTimeout(() => ripple.remove(), 600);
-            }
         }
-
-        // Add sound ripple animation
-        const rippleStyle = document.createElement('style');
-        rippleStyle.textContent = `
-            @keyframes soundRipple {
-                0% { transform: scale(1); opacity: 1; }
-                100% { transform: scale(2); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(rippleStyle);
 
         // Initialize the Șacalii ACS tactical system
         document.addEventListener('DOMContentLoaded', () => {
