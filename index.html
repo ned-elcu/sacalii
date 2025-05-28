@@ -22,9 +22,64 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
             -webkit-text-size-adjust: 100%;
+            cursor: crosshair;
         }
 
-        /* Loading Screen */
+        /* Custom Crosshair Cursor */
+        body::after {
+            content: '';
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(200, 168, 127, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+            display: none;
+        }
+
+        @media (hover: hover) {
+            body::after {
+                display: block;
+            }
+        }
+
+        /* Sound Toggle Button */
+        .sound-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 44px;
+            height: 44px;
+            background: rgba(26, 26, 26, 0.9);
+            border: 2px solid #c8a87f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .sound-toggle:hover {
+            background: rgba(200, 168, 127, 0.2);
+            transform: scale(1.1);
+        }
+
+        .sound-toggle .material-icons {
+            font-size: 20px;
+            color: #c8a87f;
+        }
+
+        .sound-toggle.muted .material-icons {
+            color: #6b7280;
+        }
+
+        /* Loading Screen Enhanced */
         .loading-screen {
             position: fixed;
             top: 0;
@@ -51,6 +106,25 @@
             height: 96px;
             animation: loadingPulse 1.5s ease-in-out infinite;
             margin-bottom: 30px;
+            position: relative;
+        }
+
+        .loading-wolf::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border: 2px solid #c8a87f;
+            border-radius: 50%;
+            animation: radarSweep 2s linear infinite;
+        }
+
+        @keyframes radarSweep {
+            0% { transform: rotate(0deg); opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { transform: rotate(360deg); opacity: 0.5; }
         }
 
         .loading-wolf img {
@@ -68,6 +142,26 @@
             letter-spacing: 3px;
             animation: loadingText 1.5s ease-in-out infinite;
             text-align: center;
+            position: relative;
+        }
+
+        .loading-text::before,
+        .loading-text::after {
+            content: '[ ';
+            position: absolute;
+            left: -30px;
+            animation: bracketPulse 1s ease-in-out infinite;
+        }
+
+        .loading-text::after {
+            content: ' ]';
+            left: auto;
+            right: -30px;
+        }
+
+        @keyframes bracketPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
         }
 
         @keyframes loadingPulse {
@@ -86,7 +180,455 @@
             50% { opacity: 1; }
         }
 
-        /* Mobile Navigation */
+        /* Scanning Line Effect */
+        .scanning-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #c8a87f, transparent);
+            animation: scanning 8s linear infinite;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        @keyframes scanning {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+
+        /* Corner Brackets for Important Elements */
+        .tactical-frame {
+            position: relative;
+        }
+
+        .tactical-frame::before,
+        .tactical-frame::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #c8a87f;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .tactical-frame::before {
+            top: -5px;
+            left: -5px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .tactical-frame::after {
+            bottom: -5px;
+            right: -5px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .tactical-frame.in-view::before,
+        .tactical-frame.in-view::after {
+            opacity: 0.6;
+        }
+
+        .tactical-frame.in-view::before {
+            top: -10px;
+            left: -10px;
+        }
+
+        .tactical-frame.in-view::after {
+            bottom: -10px;
+            right: -10px;
+        }
+
+        /* Glitch Effect for Text */
+        .glitch {
+            position: relative;
+            animation: glitchAnimation 10s infinite;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+
+        .glitch::before {
+            animation: glitchBefore 0.5s infinite;
+            color: #aa1f12;
+            z-index: -1;
+        }
+
+        .glitch::after {
+            animation: glitchAfter 0.5s infinite;
+            color: #c8a87f;
+            z-index: -1;
+        }
+
+        @keyframes glitchAnimation {
+            0%, 94%, 96%, 98%, 100% {
+                opacity: 1;
+                transform: translate(0);
+            }
+            95%, 97%, 99% {
+                opacity: 0.8;
+                transform: translate(-2px, -1px);
+            }
+        }
+
+        @keyframes glitchBefore {
+            0%, 100% { 
+                opacity: 0;
+                transform: translate(0);
+            }
+            25% {
+                opacity: 0.8;
+                transform: translate(-2px, -2px);
+            }
+            50% {
+                opacity: 0;
+                transform: translate(2px, 2px);
+            }
+        }
+
+        @keyframes glitchAfter {
+            0%, 100% { 
+                opacity: 0;
+                transform: translate(0);
+            }
+            25% {
+                opacity: 0;
+                transform: translate(2px, -2px);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translate(-2px, 2px);
+            }
+        }
+
+        /* Static Noise Transition */
+        .static-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence baseFrequency="0.9" numOctaves="4" /></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.3"/></svg>');
+            opacity: 0;
+            pointer-events: none;
+            z-index: 9998;
+            mix-blend-mode: overlay;
+        }
+
+        .static-transition.active {
+            animation: staticNoise 0.3s ease-out;
+        }
+
+        @keyframes staticNoise {
+            0% { opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { opacity: 0; }
+        }
+
+        /* Tactical Section Dividers */
+        .section-divider {
+            text-align: center;
+            margin: 40px auto;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 14px;
+            color: #6b7280;
+            letter-spacing: 3px;
+            position: relative;
+            opacity: 0.6;
+        }
+
+        .section-divider::before,
+        .section-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 35%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c8a87f, transparent);
+        }
+
+        .section-divider::before {
+            left: 0;
+        }
+
+        .section-divider::after {
+            right: 0;
+        }
+
+        /* Number Calibration Effect */
+        .calibrating {
+            display: inline-block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 700;
+        }
+
+        /* Enhanced Particles with Ping Effect */
+        .tactical-particle {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: rgba(200, 168, 127, 0.4);
+            clip-path: circle(50%);
+            animation: tacticalFloat 8s linear infinite;
+        }
+
+        .tactical-particle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            border: 1px solid rgba(200, 168, 127, 0.6);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: radarPing 4s ease-out infinite;
+            animation-delay: inherit;
+        }
+
+        @keyframes radarPing {
+            0%, 90% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            95% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+        }
+
+        /* Tracer Particles */
+        .tracer-particle {
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #aa1f12, transparent);
+            animation: tracerMove 6s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes tracerMove {
+            0% { 
+                transform: translateX(-100vw);
+                opacity: 0;
+            }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { 
+                transform: translateX(100vw);
+                opacity: 0;
+            }
+        }
+
+        /* Smoke/Fog Effect */
+        .fog-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to top, rgba(200, 168, 127, 0.1), transparent);
+            animation: fogDrift 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes fogDrift {
+            0%, 100% { transform: translateX(0) scaleX(1); }
+            50% { transform: translateX(-50px) scaleX(1.2); }
+        }
+
+        /* Spark Effect on Click */
+        .spark {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: #c8a87f;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkFly 0.5s ease-out forwards;
+            z-index: 9999;
+        }
+
+        @keyframes sparkFly {
+            0% { 
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% { 
+                transform: translate(var(--dx), var(--dy)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Topographic Background Lines */
+        .topo-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            pointer-events: none;
+            background-image: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 50px,
+                #c8a87f 50px,
+                #c8a87f 51px
+            );
+            animation: topoPulse 10s ease-in-out infinite;
+        }
+
+        @keyframes topoPulse {
+            0%, 100% { opacity: 0.05; }
+            50% { opacity: 0.15; }
+        }
+
+        /* Vignette Effect */
+        .vignette-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.8) 100%);
+            z-index: 90;
+            animation: vignettePulse 8s ease-in-out infinite;
+        }
+
+        @keyframes vignettePulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 0.9; }
+        }
+
+        /* Button Arming Effect */
+        .tactical-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .tactical-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(200, 168, 127, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .tactical-button:hover::before {
+            left: 100%;
+        }
+
+        .tactical-button::after {
+            content: 'ARMED';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10px;
+            font-family: 'IBM Plex Mono', monospace;
+            color: #c8a87f;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .tactical-button:hover::after {
+            opacity: 0.6;
+            animation: pulse 0.5s ease-in-out;
+        }
+
+        /* Bullet Point Hover Effect */
+        .bullet-hover {
+            position: relative;
+            padding-left: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .bullet-hover::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background: #c8a87f;
+            transition: width 0.3s ease;
+        }
+
+        .bullet-hover:hover::before {
+            width: 15px;
+        }
+
+        .bullet-hover::after {
+            content: '>>';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #c8a87f;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .bullet-hover:hover::after {
+            left: 0;
+            opacity: 1;
+        }
+
+        /* Transmission Wave Effect */
+        .transmit {
+            position: relative;
+        }
+
+        .transmit::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #c8a87f;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
+
+        .transmit.active::after {
+            animation: transmitWave 0.6s ease-out;
+        }
+
+        @keyframes transmitWave {
+            0% { 
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+            100% { 
+                transform: translate(-50%, -50%) scale(3);
+                opacity: 0;
+            }
+        }
+
+        /* Card Tilt Effect */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
+
+        /* Mobile Navigation Enhanced */
         .mobile-nav {
             position: fixed;
             bottom: 20px;
@@ -182,7 +724,7 @@
             padding: 20px;
         }
 
-        /* Tactical Grid Background */
+        /* Tactical Grid Background Enhanced */
         .hero-space::before {
             content: '';
             position: absolute;
@@ -199,8 +741,8 @@
         }
 
         @keyframes gridPulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.6; }
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.01); }
         }
 
         /* Floating Tactical Particles */
@@ -211,15 +753,6 @@
             width: 100%;
             height: 100%;
             z-index: 2;
-        }
-
-        .tactical-particle {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: rgba(200, 168, 127, 0.4);
-            clip-path: circle(50%);
-            animation: tacticalFloat 8s linear infinite;
         }
 
         @keyframes tacticalFloat {
@@ -288,7 +821,7 @@
             }
         }
 
-        /* Crosshair behind logo */
+        /* Crosshair behind logo Enhanced */
         .logo-section::before {
             content: '';
             position: absolute;
@@ -358,6 +891,12 @@
         @keyframes lineGrow {
             from { width: 0; opacity: 0; }
             to { width: 120px; opacity: 1; }
+        }
+
+        /* Decryption effect */
+        .decrypt {
+            display: inline-block;
+            position: relative;
         }
 
         /* SLIDESHOW SECTION */
@@ -947,6 +1486,7 @@
         .weather-section {
             padding: 80px 20px;
             background: #0a0a0a;
+            position: relative;
         }
 
         .weather-container {
@@ -1566,6 +2106,14 @@
 
         /* Touch device optimizations */
         @media (hover: none) and (pointer: coarse) {
+            body {
+                cursor: default;
+            }
+
+            body::after {
+                display: none;
+            }
+
             .nav-dot:hover::before,
             .slide-arrow:hover,
             .contact-item:hover,
@@ -1591,6 +2139,20 @@
 </head>
 
 <body>
+    <!-- Sound Toggle Button -->
+    <button class="sound-toggle muted" id="soundToggle" aria-label="Toggle sound">
+        <span class="material-icons">volume_off</span>
+    </button>
+
+    <!-- Static Transition Effect -->
+    <div class="static-transition" id="staticTransition"></div>
+
+    <!-- Vignette Overlay -->
+    <div class="vignette-overlay"></div>
+
+    <!-- Scanning Line -->
+    <div class="scanning-line"></div>
+
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-wolf">
@@ -1622,7 +2184,7 @@
 
     <!-- GPS Navigation Modal -->
     <div class="gps-modal" id="gpsModal">
-        <div class="gps-modal-content">
+        <div class="gps-modal-content tilt-card">
             <button class="gps-close" onclick="closeGpsModal()">
                 <span class="material-icons">close</span>
             </button>
@@ -1637,30 +2199,30 @@
             </div>
             
             <div class="gps-apps">
-                <a href="#" class="gps-app-btn" onclick="openGoogleMaps()">
+                <a href="#" class="gps-app-btn tactical-button" onclick="openGoogleMaps()">
                     <span class="material-icons">map</span>
                     Google Maps
                 </a>
-                <a href="#" class="gps-app-btn" onclick="openWaze()">
+                <a href="#" class="gps-app-btn tactical-button" onclick="openWaze()">
                     <span class="material-icons">navigation</span>
                     Waze
                 </a>
-                <a href="#" class="gps-app-btn" onclick="openAppleMaps()" id="appleMapsBtn" style="display: none;">
+                <a href="#" class="gps-app-btn tactical-button" onclick="openAppleMaps()" id="appleMapsBtn" style="display: none;">
                     <span class="material-icons">place</span>
                     Apple Maps
                 </a>
-                <a href="#" class="gps-app-btn" onclick="openMapsMe()">
+                <a href="#" class="gps-app-btn tactical-button" onclick="openMapsMe()">
                     <span class="material-icons">explore</span>
                     Maps.me
                 </a>
             </div>
             
             <div class="gps-actions">
-                <button class="gps-action-btn" onclick="copyCoordinates()">
+                <button class="gps-action-btn tactical-button" onclick="copyCoordinates()">
                     <span class="material-icons">content_copy</span>
                     Copiază Coordonate
                 </button>
-                <button class="gps-action-btn" onclick="window.open('tel:0765037584')">
+                <button class="gps-action-btn tactical-button" onclick="window.open('tel:0765037584')">
                     <span class="material-icons">phone</span>
                     Sună pentru Ghidare
                 </button>
@@ -1670,28 +2232,32 @@
 
     <!-- HERO SPACE SECTION -->
     <section class="hero-space" id="home">
+        <div class="topo-lines"></div>
         <div class="tactical-particles" id="tacticalParticles"></div>
         <div class="wolf-pack-parallax"></div>
+        <div class="fog-layer"></div>
         
         <!-- LOGO SECTION -->
-        <div class="logo-section">
+        <div class="logo-section tactical-frame">
             <img src="./images/logo.png" alt="Șacalii Logo" class="main-logo" 
                  onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 400 200%22%3E%3Cdefs%3E%3Cfilter id=%22glow%22%3E%3CfeGaussianBlur stdDeviation=%223%22 result=%22coloredBlur%22/%3E%3CfeMerge%3E%3CfeMergeNode in=%22coloredBlur%22/%3E%3CfeMergeNode in=%22SourceGraphic%22/%3E%3C/feMerge%3E%3C/filter%3E%3C/defs%3E%3Crect width=%22400%22 height=%22200%22 fill=%22%23001122%22 stroke=%22%23c8a87f%22 stroke-width=%222%22/%3E%3Ccircle cx=%22200%22 cy=%22100%22 r=%2260%22 fill=%22none%22 stroke=%22%23c8a87f%22 stroke-width=%223%22 filter=%22url(%23glow)%22/%3E%3Ctext x=%22200%22 y=%2290%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23c8a87f%22 font-family=%22IBM+Plex+Mono%22 font-size=%2228%22 font-weight=%22bold%22 filter=%22url(%23glow)%22%3EȘACALII%3C/text%3E%3Ctext x=%22200%22 y=%22115%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22 fill=%22%23aa1f12%22 font-family=%22IBM+Plex+Mono%22 font-size=%2220%22 font-weight=%22bold%22%3EGRUP AIRSOFT%3C/text%3E%3C/svg%3E'">
         </div>
 
         <!-- SUBTITLE SECTION -->
         <div class="subtitle-section">
-            <h1 class="main-subtitle">ȘACALII PE INTERNET</h1>
-            <p class="sub-subtitle">PRECIZIE TACTICĂ • FRĂȚIE • DISCIPLINĂ</p>
+            <h1 class="main-subtitle glitch" data-text="ȘACALII PE INTERNET">ȘACALII PE INTERNET</h1>
+            <p class="sub-subtitle decrypt">PRECIZIE TACTICĂ • FRĂȚIE • DISCIPLINĂ</p>
             <div class="accent-line"></div>
         </div>
+
+        <div class="section-divider">[ OPERATIONAL INTEL ]</div>
     </section>
 
     <!-- SLIDESHOW SECTION -->
     <section class="slideshow-section">
         <div class="slideshow-container">
             <div class="slide active">
-                <div class="slide-content">
+                <div class="slide-content tactical-frame tilt-card">
                     <div class="slide-icon">
                         <img src="./images/wolf.png" alt="Training Icon" 
                              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22/%3E%3C/svg%3E'">
@@ -1703,7 +2269,7 @@
             </div>
             
             <div class="slide">
-                <div class="slide-content">
+                <div class="slide-content tactical-frame tilt-card">
                     <div class="slide-icon">
                         <img src="./images/wolf.png" alt="Brotherhood Icon" 
                              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22/%3E%3C/svg%3E'">
@@ -1715,7 +2281,7 @@
             </div>
             
             <div class="slide">
-                <div class="slide-content">
+                <div class="slide-content tactical-frame tilt-card">
                     <div class="slide-icon">
                         <img src="./images/wolf.png" alt="Equipment Icon" 
                              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22/%3E%3C/svg%3E'">
@@ -1727,7 +2293,7 @@
             </div>
             
             <div class="slide">
-                <div class="slide-content">
+                <div class="slide-content tactical-frame tilt-card">
                     <div class="slide-icon">
                         <img src="./images/wolf.png" alt="Competition Icon" 
                              onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23c8a87f%22/%3E%3C/svg%3E'">
@@ -1748,10 +2314,10 @@
         </div>
 
         <!-- Arrow Controls -->
-        <div class="slide-arrow prev" id="prevSlide">
+        <div class="slide-arrow prev tactical-button" id="prevSlide">
             <span class="material-icons">chevron_left</span>
         </div>
-        <div class="slide-arrow next" id="nextSlide">
+        <div class="slide-arrow next tactical-button" id="nextSlide">
             <span class="material-icons">chevron_right</span>
         </div>
     </section>
@@ -1766,32 +2332,36 @@
         </div>
     </section>
 
+    <div class="section-divider">[ RECRUITMENT SECTOR ]</div>
+
     <!-- CONTACT AREA -->
     <section class="contact-section" id="contact">
+        <div class="topo-lines"></div>
         <div class="contact-tactical-particles" id="contactTacticalParticles"></div>
         <div class="contact-wolf-pack-parallax"></div>
+        <div class="fog-layer"></div>
         
         <div class="contact-container">
-            <div class="contact-info">
-                <h2 class="contact-title">ALĂTURĂ-TE GRUPULUI</h2>
+            <div class="contact-info tactical-frame tilt-card">
+                <h2 class="contact-title glitch" data-text="ALĂTURĂ-TE GRUPULUI">ALĂTURĂ-TE GRUPULUI</h2>
                 <p class="contact-description">Pentru membrii cu echipament propriu care doresc să se alăture grupului nostru și să participe la antrenamente și competiții profesionale.</p>
                 
-                <div class="contact-item" onclick="window.open('tel:0765037584')">
+                <div class="contact-item tactical-button transmit" onclick="window.open('tel:0765037584')">
                     <span class="material-icons">phone</span>
                     <span class="contact-text">0765037584</span>
                 </div>
                 
-                <div class="contact-item" onclick="window.open('mailto:sacaliiacs2023@gmail.com')">
+                <div class="contact-item tactical-button transmit" onclick="window.open('mailto:sacaliiacs2023@gmail.com')">
                     <span class="material-icons">email</span>
                     <span class="contact-text">sacaliiacs2023@gmail.com</span>
                 </div>
                 
-                <div class="contact-item">
+                <div class="contact-item tactical-button">
                     <span class="material-icons">place</span>
                     <span class="contact-text">Slobozia, Județul Ialomița<br><small style="opacity: 0.7;">centru de operare</small></span>
                 </div>
                 
-                <div class="contact-item" onclick="openGpsModal()">
+                <div class="contact-item tactical-button" onclick="openGpsModal()">
                     <span class="material-icons">terrain</span>
                     <span class="contact-text">Mărculești, Ialomița<br><small style="opacity: 0.7;">teren pentru jocuri</small></span>
                 </div>
@@ -1799,21 +2369,24 @@
         </div>
     </section>
 
+    <div class="section-divider">[ TACTICAL INTEL ]</div>
+
     <!-- WEATHER API SECTION -->
     <section class="weather-section" id="weather">
+        <div class="topo-lines"></div>
         <div class="weather-container">
-            <h2 class="weather-title">Informații Teren Bază</h2>
+            <h2 class="weather-title glitch" data-text="Informații Teren Bază">Informații Teren Bază</h2>
             <p class="weather-subtitle"><span class="material-icons">language</span> Date meteorologice LIVE de la Open-Meteo • Actualizare în timp real</p>
             
-            <div class="map-container">
+            <div class="map-container tactical-frame">
                 <div id="map"></div>
-                <button class="map-nav-button" onclick="openGpsModal()">
+                <button class="map-nav-button tactical-button" onclick="openGpsModal()">
                     <span class="material-icons">navigation</span>
                     Navigație
                 </button>
             </div>
             
-            <div class="weather-panel">
+            <div class="weather-panel tactical-frame tilt-card">
                 <div class="current-weather" id="currentWeather">
                     <div class="loading-weather">Se încarcă datele meteo...</div>
                 </div>
@@ -1821,19 +2394,19 @@
                 <div class="weather-details" id="weatherDetails" style="display: none;">
                     <div class="weather-detail" id="humidityDetail">
                         <div class="weather-detail-label">Umiditate</div>
-                        <div class="weather-detail-value" id="humidity">--%</div>
+                        <div class="weather-detail-value calibrating" id="humidity">--%</div>
                     </div>
                     <div class="weather-detail" id="pressureDetail">
                         <div class="weather-detail-label">Presiune</div>
-                        <div class="weather-detail-value" id="pressure">-- hPa</div>
+                        <div class="weather-detail-value calibrating" id="pressure">-- hPa</div>
                     </div>
                     <div class="weather-detail" id="windDetail">
                         <div class="weather-detail-label">Vânt</div>
-                        <div class="weather-detail-value" id="windSpeed">-- km/h</div>
+                        <div class="weather-detail-value calibrating" id="windSpeed">-- km/h</div>
                     </div>
                     <div class="weather-detail" id="visibilityDetail">
                         <div class="weather-detail-label">Vizibilitate</div>
-                        <div class="weather-detail-value" id="visibility">-- km</div>
+                        <div class="weather-detail-value calibrating" id="visibility">-- km</div>
                     </div>
                 </div>
                 
@@ -1873,6 +2446,8 @@
         </div>
     </section>
 
+    <div class="section-divider">[ END TRANSMISSION ]</div>
+
     <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-content">
@@ -1880,10 +2455,10 @@
                 <h3>Șacalii - Grup Airsoft</h3>
                 <p>Grup de airsoft dedicat preciziei tactice, frăției și disciplinei. Alătură-te grupului și descoperă ce înseamnă să fii parte din ceva mai mare decât tine.</p>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/profile.php?id=61570671082830" class="social-link" title="Facebook">
+                    <a href="https://www.facebook.com/profile.php?id=61570671082830" class="social-link tactical-button" title="Facebook">
                         <span class="material-icons">facebook</span>
                     </a>
-                    <a href="https://www.facebook.com/profile.php?id=61570671082830&sk=photos" class="social-link" title="Galerie foto">
+                    <a href="https://www.facebook.com/profile.php?id=61570671082830&sk=photos" class="social-link tactical-button" title="Galerie foto">
                         <span class="material-icons">photo_camera</span>
                     </a>
                 </div>
@@ -1891,19 +2466,19 @@
             
             <div class="footer-section">
                 <h3>Operațiuni Rapide</h3>
-                <p><a href="https://www.google.com/maps/@44.5771225,27.5032995,3a,75y,240.68h,95.76t/data=!3m7!1e1!3m5!1sD1ohAA3dSTWrF-XKllITqA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-5.761860973674828%26panoid%3DD1ohAA3dSTWrF-XKllITqA%26yaw%3D240.6773616352597!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI1MDUyMS4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D">
+                <p><a href="https://www.google.com/maps/@44.5771225,27.5032995,3a,75y,240.68h,95.76t/data=!3m7!1e1!3m5!1sD1ohAA3dSTWrF-XKllITqA!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-5.761860973674828%26panoid%3DD1ohAA3dSTWrF-XKllITqA%26yaw%3D240.6773616352597!7i16384!8i8192?entry=ttu&g_ep=EgoyMDI1MDUyMS4wIKXMDSoJLDEwMjExNDU1SAFQAw%3D%3D" class="bullet-hover">
                     <span class="material-icons">flash_on</span>
                     Baza Principală
                 </a></p>
-                <p><a href="#contact">
+                <p><a href="#contact" class="bullet-hover">
                     <span class="material-icons">radio</span>
                     Comunicații
                 </a></p>
-                <p><a href="#weather">
+                <p><a href="#weather" class="bullet-hover">
                     <span class="material-icons">wb_sunny</span>
                     Informații Meteo
                 </a></p>
-                <p><a href="https://www.facebook.com/profile.php?id=61570671082830&sk=photos">
+                <p><a href="https://www.facebook.com/profile.php?id=61570671082830&sk=photos" class="bullet-hover">
                     <span class="material-icons">military_tech</span>
                     Arhiva Misiuni
                 </a></p>
@@ -1911,10 +2486,10 @@
             
             <div class="footer-section">
                 <h3>Centru de Comandă</h3>
-                <p><a href="tel:0765037584">
+                <p><a href="tel:0765037584" class="transmit">
                     <span class="material-icons">phone</span> 0765037584
                 </a></p>
-                <p><a href="mailto:sacaliiacs2023@gmail.com">
+                <p><a href="mailto:sacaliiacs2023@gmail.com" class="transmit">
                     <span class="material-icons">email</span> sacaliiacs2023@gmail.com
                 </a></p>
                 <p><span class="material-icons">place</span> Slobozia, Județul Ialomița</p>
@@ -1928,7 +2503,7 @@
     </footer>
 
     <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop">
+    <button class="back-to-top tactical-button" id="backToTop">
         <span class="material-icons">keyboard_arrow_up</span>
     </button>
 
@@ -1941,22 +2516,367 @@
             console.log('🐺 Initializing Șacalii tactical systems...');
             console.log('🌐 Real-time weather data: Open-Meteo API');
             console.log('📍 Location: Slobozia, Ialomița County, Romania');
+            console.log('🎯 Enhanced tactical interface: ACTIVE');
             
             // Initialize the main tactical components
             const sacaliiSystem = new SacaliiTacticalSystem();
             
-            // Hide loading screen after 1 second
+            // Hide loading screen after animations
             setTimeout(function() {
                 const loadingScreen = document.getElementById('loadingScreen');
                 if (loadingScreen) {
                     loadingScreen.classList.add('hide');
                     console.log('Loading screen hidden');
                 }
-            }, 1000);
+            }, 1500);
 
             // Mobile navigation
             initializeMobileNav();
+            
+            // Initialize enhanced effects
+            initializeEnhancedEffects();
         });
+
+        // Sound System
+        let soundEnabled = false;
+        const sounds = {
+            click: 'data:audio/wav;base64,UklGRhwAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQgAAAA=', // Placeholder
+            hover: 'data:audio/wav;base64,UklGRhwAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQgAAAA=', // Placeholder
+            static: 'data:audio/wav;base64,UklGRhwAAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YQgAAAA=' // Placeholder
+        };
+
+        const audioCache = {};
+
+        function initializeSound() {
+            const soundToggle = document.getElementById('soundToggle');
+            if (soundToggle) {
+                soundToggle.addEventListener('click', function() {
+                    soundEnabled = !soundEnabled;
+                    this.classList.toggle('muted', !soundEnabled);
+                    const icon = this.querySelector('.material-icons');
+                    icon.textContent = soundEnabled ? 'volume_up' : 'volume_off';
+                    
+                    if (soundEnabled) {
+                        playSound('click');
+                    }
+                });
+            }
+        }
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+            
+            try {
+                if (!audioCache[type]) {
+                    audioCache[type] = new Audio(sounds[type]);
+                    audioCache[type].volume = 0.3;
+                }
+                const audio = audioCache[type].cloneNode();
+                audio.play().catch(() => {});
+            } catch (e) {
+                // Silently fail
+            }
+        }
+
+        // Enhanced Effects
+        function initializeEnhancedEffects() {
+            // Initialize sound system
+            initializeSound();
+            
+            // Tactical cursor (desktop only)
+            if (window.matchMedia('(hover: hover)').matches) {
+                initializeTacticalCursor();
+            }
+            
+            // Glitch effects
+            initializeGlitchEffects();
+            
+            // Static transitions
+            initializeStaticTransitions();
+            
+            // Spark effects on click
+            initializeSparkEffects();
+            
+            // Tracer particles
+            initializeTracerParticles();
+            
+            // Frame detection for important elements
+            initializeFrameDetection();
+            
+            // Decryption effects
+            initializeDecryptionEffects();
+            
+            // Calibrating numbers
+            initializeCalibratingNumbers();
+            
+            // Card tilt effects
+            initializeCardTiltEffects();
+            
+            // Transmission effects
+            initializeTransmissionEffects();
+        }
+
+        // Tactical Cursor
+        function initializeTacticalCursor() {
+            const cursor = document.createElement('div');
+            cursor.className = 'tactical-cursor';
+            cursor.style.cssText = `
+                position: fixed;
+                width: 40px;
+                height: 40px;
+                border: 2px solid rgba(200, 168, 127, 0.3);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                transition: all 0.1s ease;
+                mix-blend-mode: difference;
+                transform: translate(-50%, -50%);
+            `;
+            document.body.appendChild(cursor);
+
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animateCursor() {
+                cursorX += (mouseX - cursorX) * 0.1;
+                cursorY += (mouseY - cursorY) * 0.1;
+                
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            // Change cursor on hover
+            document.addEventListener('mouseover', (e) => {
+                if (e.target.matches('a, button, .contact-item, .forecast-day, .nav-dot, .slide-arrow')) {
+                    cursor.style.borderColor = 'rgba(170, 31, 18, 0.6)';
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1.2)';
+                }
+            });
+
+            document.addEventListener('mouseout', (e) => {
+                if (e.target.matches('a, button, .contact-item, .forecast-day, .nav-dot, .slide-arrow')) {
+                    cursor.style.borderColor = 'rgba(200, 168, 127, 0.3)';
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                }
+            });
+        }
+
+        // Glitch Effects
+        function initializeGlitchEffects() {
+            const glitchElements = document.querySelectorAll('.glitch');
+            glitchElements.forEach(el => {
+                setInterval(() => {
+                    if (Math.random() > 0.95) {
+                        el.style.animation = 'glitchAnimation 0.3s';
+                        setTimeout(() => {
+                            el.style.animation = '';
+                        }, 300);
+                    }
+                }, 3000);
+            });
+        }
+
+        // Static Transitions
+        function initializeStaticTransitions() {
+            const staticTransition = document.getElementById('staticTransition');
+            const sections = document.querySelectorAll('section');
+            let isTransitioning = false;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !isTransitioning) {
+                        isTransitioning = true;
+                        staticTransition.classList.add('active');
+                        playSound('static');
+                        
+                        setTimeout(() => {
+                            staticTransition.classList.remove('active');
+                            isTransitioning = false;
+                        }, 300);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            sections.forEach(section => observer.observe(section));
+        }
+
+        // Spark Effects
+        function initializeSparkEffects() {
+            document.addEventListener('click', (e) => {
+                if (e.target.matches('button, a, .contact-item')) {
+                    createSparks(e.clientX, e.clientY);
+                    playSound('click');
+                }
+            });
+        }
+
+        function createSparks(x, y) {
+            for (let i = 0; i < 6; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark';
+                spark.style.left = x + 'px';
+                spark.style.top = y + 'px';
+                
+                const angle = (Math.PI * 2 * i) / 6;
+                const distance = 30 + Math.random() * 30;
+                spark.style.setProperty('--dx', Math.cos(angle) * distance + 'px');
+                spark.style.setProperty('--dy', Math.sin(angle) * distance + 'px');
+                
+                document.body.appendChild(spark);
+                
+                setTimeout(() => spark.remove(), 500);
+            }
+        }
+
+        // Tracer Particles
+        function initializeTracerParticles() {
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    const tracer = document.createElement('div');
+                    tracer.className = 'tracer-particle';
+                    tracer.style.top = Math.random() * window.innerHeight + 'px';
+                    document.body.appendChild(tracer);
+                    
+                    setTimeout(() => tracer.remove(), 6000);
+                }
+            }, 3000);
+        }
+
+        // Frame Detection
+        function initializeFrameDetection() {
+            const frames = document.querySelectorAll('.tactical-frame');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                    } else {
+                        entry.target.classList.remove('in-view');
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            frames.forEach(frame => observer.observe(frame));
+        }
+
+        // Decryption Effects
+        function initializeDecryptionEffects() {
+            const decryptElements = document.querySelectorAll('.decrypt');
+            
+            decryptElements.forEach(el => {
+                const originalText = el.textContent;
+                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !el.dataset.decrypted) {
+                            el.dataset.decrypted = 'true';
+                            let iteration = 0;
+                            
+                            const interval = setInterval(() => {
+                                el.textContent = originalText
+                                    .split('')
+                                    .map((char, index) => {
+                                        if (index < iteration) {
+                                            return originalText[index];
+                                        }
+                                        if (char === ' ' || char === '•') return char;
+                                        return characters[Math.floor(Math.random() * characters.length)];
+                                    })
+                                    .join('');
+                                
+                                if (iteration >= originalText.length) {
+                                    clearInterval(interval);
+                                }
+                                
+                                iteration += 1;
+                            }, 30);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                observer.observe(el);
+            });
+        }
+
+        // Calibrating Numbers
+        function initializeCalibratingNumbers() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !entry.target.dataset.calibrated) {
+                        entry.target.dataset.calibrated = 'true';
+                        calibrateNumber(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            document.querySelectorAll('.calibrating').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        function calibrateNumber(element) {
+            const finalText = element.textContent;
+            let iteration = 0;
+            const duration = 1000;
+            const fps = 30;
+            const totalFrames = duration / (1000 / fps);
+            
+            const interval = setInterval(() => {
+                if (iteration < totalFrames) {
+                    element.textContent = Math.random().toString().substr(2, finalText.length);
+                    iteration++;
+                } else {
+                    element.textContent = finalText;
+                    clearInterval(interval);
+                }
+            }, 1000 / fps);
+        }
+
+        // Card Tilt Effects
+        function initializeCardTiltEffects() {
+            const tiltCards = document.querySelectorAll('.tilt-card');
+            
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+                });
+            });
+        }
+
+        // Transmission Effects
+        function initializeTransmissionEffects() {
+            document.querySelectorAll('.transmit').forEach(el => {
+                el.addEventListener('click', function() {
+                    this.classList.add('active');
+                    setTimeout(() => {
+                        this.classList.remove('active');
+                    }, 600);
+                });
+            });
+        }
 
         // Mobile Navigation Functions
         function initializeMobileNav() {
@@ -1971,6 +2891,7 @@
                     
                     const icon = navFab.querySelector('.material-icons');
                     icon.textContent = isMenuOpen ? 'close' : 'menu';
+                    playSound('click');
                 });
 
                 // Close menu when clicking nav items
@@ -2129,6 +3050,7 @@
                 this.navDots.forEach((dot, index) => {
                     dot.addEventListener('click', () => {
                         this.goToSlide(index);
+                        playSound('click');
                     });
                 });
 
@@ -2139,12 +3061,14 @@
                 if (prevButton) {
                     prevButton.addEventListener('click', () => {
                         this.prevSlide();
+                        playSound('click');
                     });
                 }
                 
                 if (nextButton) {
                     nextButton.addEventListener('click', () => {
                         this.nextSlide();
+                        playSound('click');
                     });
                 }
 
@@ -2246,7 +3170,7 @@
 
                     // Add custom tactical marker
                     const tacticalIcon = L.divIcon({
-                        html: '<div style="background: #c8a87f; width: 20px; height: 20px; border-radius: 50%; border: 3px solid #aa1f12; box-shadow: 0 0 20px rgba(200, 168, 127, 0.8);"></div>',
+                        html: '<div style="background: #c8a87f; width: 20px; height: 20px; border-radius: 50%; border: 3px solid #aa1f12; box-shadow: 0 0 20px rgba(200, 168, 127, 0.8); animation: pulse 2s infinite;"></div>',
                         className: 'tactical-marker',
                         iconSize: [26, 26],
                         iconAnchor: [13, 13]
@@ -2271,6 +3195,11 @@
                         .leaflet-popup-tip {
                             background: rgba(26, 26, 26, 0.95);
                             border: 2px solid #c8a87f;
+                        }
+                        @keyframes pulse {
+                            0% { transform: scale(1); }
+                            50% { transform: scale(1.1); }
+                            100% { transform: scale(1); }
                         }
                     `;
                     document.head.appendChild(mapStyle);
@@ -2457,7 +3386,7 @@
                     const rainProb = dailyData.precipitation_probability_max[i] || 0;
 
                     const forecastDay = document.createElement('div');
-                    forecastDay.className = 'forecast-day';
+                    forecastDay.className = 'forecast-day tactical-button';
                     forecastDay.innerHTML = `
                         <div class="forecast-date">${days[i]}</div>
                         <div class="forecast-temp" style="color: ${this.getTemperatureColor(maxTemp)}">${minTemp}°/${maxTemp}°C</div>
@@ -2492,6 +3421,9 @@
                 if (element) {
                     element.textContent = value + unit;
                     element.style.color = color;
+                    element.classList.remove('calibrating');
+                    element.dataset.calibrated = 'false';
+                    initializeCalibratingNumbers();
                 }
             }
 
@@ -2780,6 +3712,7 @@
                 if (backToTop) {
                     backToTop.addEventListener('click', () => {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
+                        playSound('click');
                     });
                 }
             }
@@ -2787,6 +3720,7 @@
             updateParallaxElements(scrolled) {
                 const wolfParallax = document.querySelector('.wolf-pack-parallax');
                 const tacticalParticles = document.querySelector('.tactical-particles');
+                const topoLines = document.querySelectorAll('.topo-lines');
                 
                 if (wolfParallax) {
                     wolfParallax.style.transform = 'scaleX(-1) translateY(' + (scrolled * 0.3) + 'px)';
@@ -2795,6 +3729,10 @@
                 if (tacticalParticles) {
                     tacticalParticles.style.transform = 'translateY(' + (scrolled * 0.1) + 'px)';
                 }
+                
+                topoLines.forEach(lines => {
+                    lines.style.transform = 'translateY(' + (scrolled * -0.05) + 'px)';
+                });
             }
 
             initializeParallaxEffects() {
@@ -2907,6 +3845,13 @@
                     window.sacaliiSystem.map.invalidateSize();
                 }
             }, 500);
+        });
+
+        // Add hover sound effects
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.matches('a, button, .contact-item, .forecast-day')) {
+                playSound('hover');
+            }
         });
     </script>
 </body>
